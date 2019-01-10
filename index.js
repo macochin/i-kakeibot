@@ -28,26 +28,23 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
 
     // イベントオブジェクトを順次処理。
     console.debug("req:" + Object.getOwnPropertyNames(req)); // TODO:
-    
+
     req.body.events.forEach((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
 
             console.debug("event:" + Object.getOwnPropertyNames(event)); // TODO:
-
-            events_processed.push((function (){
-                message_text = `毎度！ご注文は？`;
-                return bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: message_text
-                });
-            })());
-
-            // message_text = `毎度！ご注文は？`;
-            // return bot.replyMessage(event.replyToken, {
-            //     type: "text",
-            //     text: message_text
-            // });
+            console.debug("event.replyToken:" + event.replyToken); // TODO:
+            console.debug("event.type:" + event.type); // TODO:
+            console.debug("event.timestamp:" + event.timestamp); // TODO:
+            console.debug("event.source:" + event.source); // TODO:
+            console.debug("event.message:" + event.message); // TODO:
+        
+            message_text = `毎度！ご注文は？`;
+            return bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: message_text
+            });
         }
     });
 
