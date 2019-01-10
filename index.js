@@ -39,7 +39,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             console.debug("event.timestamp:" + event.timestamp); // TODO:
             console.debug("event.source:" + event.source); // TODO:
             console.debug("event.message:" + event.message); // TODO:
-        
+
             message_text = `毎度！ご注文は？`;
             return bot.replyMessage(event.replyToken, {
                 type: "text",
@@ -49,9 +49,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     });
 
     // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
-    Promise.all(events_processed).then(
-        (response) => {
-            console.log(`${response.length} event(s) processed.`);
-        }
-    );
+    // Promise.all(events_processed).then(
+    //     (response) => {
+    //         console.log(`${response.length} event(s) processed.`);
+    //     }
+    // );
 });
