@@ -33,13 +33,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
             events_processed.push(function (event, bot) {
-                console.debug("event:" + Object.getOwnPropertyNames(event)); // TODO:
+                // console.debug("event:" + Object.getOwnPropertyNames(event)); // TODO:
                 console.debug("event.replyToken:" + event.replyToken); // TODO:
                 console.debug("event.type:" + event.type); // TODO:
-                console.debug("event.timestamp:" + event.timestamp); // TODO:
-                console.debug("event.source:" + event.source); // TODO:
-                console.debug("event.message:" + event.message); // TODO:
-    
+                // console.debug("event.timestamp:" + event.timestamp); // TODO:
+
+                console.debug("event.source:" + Object.getOwnPropertyNames(event.source)); // TODO:
+                console.debug("event.message:" + Object.getOwnPropertyNames(event.message)); // TODO:
+
                 message_text = `毎度！ご注文は？`;
                 return bot.replyMessage(event.replyToken, {
                     type: "text",
