@@ -28,6 +28,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
 
     // イベントオブジェクトを順次処理。
     console.debug("req:" + Object.getOwnPropertyNames(req)); // TODO:
+    console.debug("req.params:" + Object.getOwnPropertyNames(req.params)); // TODO:
 
     req.body.events.forEach((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
