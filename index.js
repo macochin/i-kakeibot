@@ -38,8 +38,13 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 console.debug("event.type:" + event.type); // TODO:
                 // console.debug("event.timestamp:" + event.timestamp); // TODO:
 
-                console.debug("event.source:" + Object.getOwnPropertyNames(event.source)); // TODO:
-                console.debug("event.message:" + Object.getOwnPropertyNames(event.message)); // TODO:
+                // console.debug("event.source:" + Object.getOwnPropertyNames(event.source)); // TODO:
+                console.debug("event.source.userId:" + event.source.userId); // TODO:
+                console.debug("event.source.type:" + event.source.type); // TODO:
+                // console.debug("event.message:" + Object.getOwnPropertyNames(event.message)); // TODO:
+                console.debug("event.message.type:" + event.message.type); // TODO:
+                console.debug("event.message.id:" + event.message.id); // TODO:
+                console.debug("event.message.text:" + event.message.text); // TODO:
 
                 message_text = `毎度！ご注文は？`;
                 return bot.replyMessage(event.replyToken, {
