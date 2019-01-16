@@ -2,7 +2,7 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const memory = require("./service/memory-cache");
+const memory = require("./service/memory-cache")();
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -32,7 +32,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
             console.log(memory.get(event.source.userId));// TODO:
-            
+
             events_processed.push(function (event, bot) {
                 message_text = `毎度！ご注文は？`;
                 return bot.replyMessage(event.replyToken, {
