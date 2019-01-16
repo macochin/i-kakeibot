@@ -33,7 +33,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         if (event.type == "message" && event.message.type == "text"){
             let exec_client = memory.get(event.source.userId);
             if (exec_client == null) {
-                console.log("exec_client:" + );// TODO:
+                console.log("exec_client:" + exec_client);// TODO:
                 exec_client = require("./skill/BuyList");// TODO:
             }
             console.log("exec_client2:" + exec_client.constructor.name);// TODO:
