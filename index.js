@@ -33,9 +33,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         if (event.type == "message" && event.message.type == "text"){
             let exec_client = memory.get(event.source.userId);
             if (exec_client == null) {
-                exec_client = require("./skill/BuyList");
+                console.log("exec_client:" + );// TODO:
+                exec_client = require("./skill/BuyList");// TODO:
             }
-            console.log("exec_client:" + exec_client.constructor.name);// TODO:
+            console.log("exec_client2:" + exec_client.constructor.name);// TODO:
 
             events_processed.push(function (event, bot) {
                 message_text = `毎度！ご注文は？`;
