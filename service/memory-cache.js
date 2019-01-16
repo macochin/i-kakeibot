@@ -8,6 +8,7 @@ class ServiceMemoryCache {
   }
 
   get(key) {
+    console.debug("memory.get");// TODO:
     return this.client.get(key);
   }
 
