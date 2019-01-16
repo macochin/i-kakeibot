@@ -2,7 +2,7 @@
 
 const memory_cache = require("memory-cache");
 
-class MemoryCache {
+class ServiceMemoryCache {
   constructor() {
     this.client = memory_cache;
   }
@@ -20,4 +20,4 @@ class MemoryCache {
   }
 }
 
-module.exports = MemoryCache;
+module.exports = new ServiceMemoryCache();
