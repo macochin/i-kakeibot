@@ -2,6 +2,7 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
+const memory = require("./service/memory-cache");
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -27,26 +28,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     let events_processed = [];
 
     // イベントオブジェクトを順次処理。
-    console.debug("req:" + Object.getOwnPropertyNames(req)); // TODO:
-    console.debug("req.params:" + Object.getOwnPropertyNames(req.params)); // TODO:
-
     req.body.events.forEach((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
+            console.log(memory.get(event.source.userId));// TODO:
+            
             events_processed.push(function (event, bot) {
-                // console.debug("event:" + Object.getOwnPropertyNames(event)); // TODO:
-                console.debug("event.replyToken:" + event.replyToken); // TODO:
-                console.debug("event.type:" + event.type); // TODO:
-                // console.debug("event.timestamp:" + event.timestamp); // TODO:
-
-                // console.debug("event.source:" + Object.getOwnPropertyNames(event.source)); // TODO:
-                console.debug("event.source.userId:" + event.source.userId); // TODO:
-                console.debug("event.source.type:" + event.source.type); // TODO:
-                // console.debug("event.message:" + Object.getOwnPropertyNames(event.message)); // TODO:
-                console.debug("event.message.type:" + event.message.type); // TODO:
-                console.debug("event.message.id:" + event.message.id); // TODO:
-                console.debug("event.message.text:" + event.message.text); // TODO:
-
                 message_text = `毎度！ご注文は？`;
                 return bot.replyMessage(event.replyToken, {
                     type: "text",
