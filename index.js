@@ -31,7 +31,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.forEach((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
-            console.log("memory:" + memory.get(event.source.userId));// TODO:
+            console.log("memory:" + memory.get(event.source.userId).getOwnPropertyNames());// TODO:
 
             events_processed.push(function (event, bot) {
                 message_text = `毎度！ご注文は？`;
