@@ -4,7 +4,7 @@
 // モジュールのインポート
 const express = require("express");
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const Memory = require("../service/memory-cache");
+const MemoryCache = require("../service/memory-cache");
 
 const router = express.Router();
 
@@ -16,7 +16,7 @@ const line_config = {
 };
 
 module.exports = (memory) => {
-  const memory = new Memory();
+  const memory = new MemoryCache();
 
   // APIコールのためのクライアントインスタンスを作成
   const bot = new line.Client(line_config);
