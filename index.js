@@ -3,7 +3,7 @@
 const server = require("express")();
 const serverService = require("./service/server")
 // const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-// const memory = require("./service/memory-cache");
+const memory = require("./service/memory-cache");
 
 // // -----------------------------------------------------------------------------
 // // パラメータ設定
@@ -15,7 +15,7 @@ const serverService = require("./service/server")
 // -----------------------------------------------------------------------------
 // Webサーバー設定
 server.listen(process.env.PORT || 3000);
-server.use("/webhook", serverService());
+server.use("/webhook", serverService(memory));
 
 // // APIコールのためのクライアントインスタンスを作成
 // const bot = new line.Client(line_config);

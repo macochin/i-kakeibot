@@ -15,8 +15,8 @@ const line_config = {
     channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセットしています
 };
 
-module.exports = () => {
-  const memory = new Memory();
+module.exports = (memory) => {
+  // const memory = new Memory();
 
   // APIコールのためのクライアントインスタンスを作成
   const bot = new line.Client(line_config);
