@@ -16,7 +16,7 @@ const line_config = {
 };
 
 module.exports = (memory) => {
-  memory = Memory;
+  const memory = new Memory();
 
   // APIコールのためのクライアントインスタンスを作成
   const bot = new line.Client(line_config);
