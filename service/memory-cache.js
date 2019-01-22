@@ -20,4 +20,5 @@ class ServiceMemoryCache {
   }
 }
 
-module.exports = new ServiceMemoryCache();
+export default new ServiceMemoryCache();
+// module.exports = new ServiceMemoryCache();
