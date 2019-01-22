@@ -18,7 +18,10 @@ class ServiceMemoryCache {
   del(key) {
     return this.client.del(key);
   }
+
+  getInstance() {
+    return this;
+  }
 }
 
-export default new ServiceMemoryCache();
-// module.exports = new ServiceMemoryCache();
+module.exports = new ServiceMemoryCache();
