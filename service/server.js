@@ -17,7 +17,7 @@ const line_config = {
 
 module.exports = (memory) => {
   memory = Memory;
-  
+
   // APIコールのためのクライアントインスタンスを作成
   const bot = new line.Client(line_config);
 
@@ -42,7 +42,7 @@ module.exports = (memory) => {
               console.log("exec_client2:" + exec_client.constructor.name);// TODO:
 
               events_processed.push(function (event, bot) {
-                  message_text = `毎度！ご注文は？`;
+                  let message_text = `毎度！ご注文は？`;
                   return bot.replyMessage(event.replyToken, {
                       type: "text",
                       text: message_text
