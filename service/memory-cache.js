@@ -3,13 +3,7 @@
 const memory_cache = require("memory-cache");
 
 class ServiceMemoryCache {
-
-  instance;
-
   constructor() {
-    if (instance == null) {
-      instance = new ServiceMemoryCache();
-    }
     this.client = memory_cache;
   }
 
@@ -24,11 +18,6 @@ class ServiceMemoryCache {
   del(key) {
     return this.client.del(key);
   }
-
-  static getInstance() {
-    return instance;
-  }
 }
 
-module.exports = ServiceMemoryCache
-// module.exports = new ServiceMemoryCache();
+module.exports = new ServiceMemoryCache();

@@ -2,7 +2,7 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const memory = require("./service/memory-cache").getInstance();
+const memory = require("./service/memory-cache");
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
