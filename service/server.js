@@ -31,7 +31,7 @@ module.exports = () => {
       let events_processed = [];
 
       // イベントオブジェクトを順次処理。
-      req.body.events.forEach((event) => {
+      req.body.events.forEach(async (event) => {
           // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
           if (event.type == "message" && event.message.type == "text"){
               let exec_client = memory.get(event.source.userId);
