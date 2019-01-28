@@ -23,7 +23,7 @@ module.exports = () => {
 
   // -----------------------------------------------------------------------------
   // ルーター設定
-  router.post('/', line.middleware(line_config), (req, res, next) => {
+  router.post('/', line.middleware(line_config), async (req, res, next) => {
       // 先行してLINE側にステータスコード200でレスポンスする。
       res.sendStatus(200);
 
