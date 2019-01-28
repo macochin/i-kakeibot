@@ -6,15 +6,15 @@ class Memory {
     this.store = new Store();
   }
 
-  get(key) {
+  async get(key) {
     return this.store.get(key);
   }
 
-  put(key, content) {
+  async put(key, content) {
     this.store.put(key, content);
   }
 
-  del(key) {
+  async del(key) {
     this.store.del(key);
   }
 }
