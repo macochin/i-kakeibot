@@ -34,7 +34,7 @@ module.exports = () => {
       req.body.events.forEach(async (event) => {
           // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
           if (event.type == "message" && event.message.type == "text"){
-              let exec_client = memory.get(event.source.userId);
+              let exec_client = await memory.get(event.source.userId);
               if (exec_client == null) {
                   console.log("exec_client:" + exec_client);// TODO:
                   exec_client = require("../skill/BuyList");// TODO:
