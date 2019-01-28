@@ -35,9 +35,11 @@ module.exports = () => {
           // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
           if (event.type == "message" && event.message.type == "text"){
               let exec_client = await memory.get(event.source.userId);
+              console.log("event.message:" + event.message);// TODO:
+
               if (event.message == "買い物リスト") {
                 console.log("exec_client:" + exec_client);// TODO:
-                
+
                 if (exec_client == null || exec_client.constructor.name != "CreateShoppingList") {
                     exec_client = require("../skill/CreateShoppingList");
                     memory.put(event.source.userId, exec_client);
