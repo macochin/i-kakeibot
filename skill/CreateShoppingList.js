@@ -1,6 +1,6 @@
 "use strict";
 
-class ServiceCreateShoppingList {
+class SkillCreateShoppingList {
 }
 
-module.exports = new ServiceCreateShoppingList();
+module.exports = new SkillCreateShoppingList();
