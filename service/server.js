@@ -34,29 +34,31 @@ module.exports = () => {
       req.body.events.forEach(async (event) => {
           // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
           if (event.type == "message" && event.message.type == "text"){
-              let exec_client = await memory.get(event.source.userId);
+            let exec_client = await memory.get(event.source.userId);
+            let skill_name = "";
 
-              if (event.message.text == "買い物リスト"
-                && (exec_client == null || exec_client.constructor.name != "SkillCreateShoppingList")) {
-                console.log("exec_client:" + exec_client);// TODO:
+            if (event.message.text == "買い物リスト") skill_name = "CreateShoppingList";
 
-                exec_client = require("../skill/CreateShoppingList");
+            if (exec_client == null || exec_client.constructor.name != `Skill${skill_name}`) {
+                exec_client = require('../skill/${skill_name}');
                 memory.put(event.source.userId, exec_client);
+            }
+            console.log("exec_client:" + exec_client);// TODO:
+            console.log("exec_client2:" + exec_client.constructor.name);// TODO:
+            
+            // if (event.message.text == "買い物リスト"
+            //   && (exec_client == null || exec_client.constructor.name != "SkillCreateShoppingList")) {
+            //   exec_client = require("../skill/CreateShoppingList");
+            //   memory.put(event.source.userId, exec_client);
+            // }
 
-                console.log("exec_client3:" + exec_client.constructor.name);// TODO:
-              }
-
-              if (exec_client != null) {
-                console.log("exec_client2:" + exec_client.constructor.name);// TODO:
-              }
-
-              events_processed.push(function (event, bot) {
-                  let message_text = `毎度！ご注文は？`;
-                  return bot.replyMessage(event.replyToken, {
-                      type: "text",
-                      text: message_text
-                  });
-              }(event, bot));
+            events_processed.push(function (event, bot) {
+                let message_text = `毎度！ご注文は？`;
+                return bot.replyMessage(event.replyToken, {
+                    type: "text",
+                    text: message_text
+                });
+            }(event, bot));
           }
       });
 
