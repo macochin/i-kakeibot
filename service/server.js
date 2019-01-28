@@ -41,7 +41,8 @@ module.exports = () => {
 
             let class_name = `Skill${skill_name}`;
             if (exec_client == null || exec_client.constructor.name != class_name) {
-                exec_client = new require(`../skill/${skill_name}`)();
+                let Skill = require(`../skill/${skill_name}`);
+                exec_client = new Skill();
                 memory.put(event.source.userId, exec_client);
             }
 
