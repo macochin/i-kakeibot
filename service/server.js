@@ -16,46 +16,46 @@ const line_config = {
 };
 
 module.exports = () => {
-  const memory = new Memory();
+    const memory = new Memory();
 
-  // APIコールのためのクライアントインスタンスを作成
-  const bot = new line.Client(line_config);
+    // APIコールのためのクライアントインスタンスを作成
+    const bot = new line.Client(line_config);
 
-  // -----------------------------------------------------------------------------
-  // ルーター設定
-  router.post('/', line.middleware(line_config), async (req, res, next) => {
-      // 先行してLINE側にステータスコード200でレスポンスする。
-      res.sendStatus(200);
+    // -----------------------------------------------------------------------------
+    // ルーター設定
+    router.post('/', line.middleware(line_config), async (req, res, next) => {
+        // 先行してLINE側にステータスコード200でレスポンスする。
+        res.sendStatus(200);
 
-      // すべてのイベント処理のプロミスを格納する配列。
-      let events_processed = [];
+        // すべてのイベント処理のプロミスを格納する配列。
+        let events_processed = [];
 
-      // イベントオブジェクトを順次処理。
-      req.body.events.forEach(async (event) => {
-          // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
-          if (event.type == "message" && event.message.type == "text"){
-            let exec_client = await memory.get(event.source.userId);
-            let skill_name = "";
+        // イベントオブジェクトを順次処理。
+        req.body.events.forEach(async (event) => {
+            // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
+            if (event.type == "message" && event.message.type == "text") {
+                let exec_client = await memory.get(event.source.userId);
+                let skill_name = "";
 
-            if (event.message.text == "買い物リスト") skill_name = "CreateShoppingList";
+                if (event.message.text == "買い物リスト") skill_name = "CreateShoppingList";
 
-            let class_name = `Skill${skill_name}`;
-            if (exec_client == null || exec_client.constructor.name != class_name) {
-                exec_client = require(`../skill/${skill_name}`);
-                memory.put(event.source.userId, exec_client);
+                let class_name = `Skill${skill_name}`;
+                if (exec_client == null || exec_client.constructor.name != class_name) {
+                    exec_client = require(`../skill/${skill_name}`);
+                    memory.put(event.source.userId, exec_client);
+                }
+
+                events_processed.push(exec_client.run(event, bot));
             }
+        });
 
-            events_processed.push(exec_client.run(event, bot));
-          }
-      });
+        // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
+        Promise.all(events_processed).then(
+            (response) => {
+                console.log(`${response.length} event(s) processed.`);
+            }
+        );
+    });
 
-      // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
-      Promise.all(events_processed).then(
-          (response) => {
-              console.log(`${response.length} event(s) processed.`);
-          }
-      );
-  });
-
-  return router;
+    return router;
 }
