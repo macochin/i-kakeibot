@@ -42,7 +42,8 @@ module.exports = () => {
                 if (exec_client == null || exec_client.constructor.name != "CreateShoppingList") {
                     exec_client = require("../skill/CreateShoppingList");
                     memory.put(event.source.userId, exec_client);
-                    console.log("exec_client3:" + exec_client);// TODO:
+
+                    console.log("exec_client3:" + exec_client.constructor.name);// TODO:
                 }
               }
 
