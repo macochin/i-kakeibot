@@ -36,15 +36,14 @@ module.exports = () => {
           if (event.type == "message" && event.message.type == "text"){
               let exec_client = await memory.get(event.source.userId);
 
-              if (event.message.text == "買い物リスト") {
+              if (event.message.text == "買い物リスト"
+                && (exec_client == null || exec_client.constructor.name != "SkillCreateShoppingList")) {
                 console.log("exec_client:" + exec_client);// TODO:
 
-                if (exec_client == null || exec_client.constructor.name != "SkillCreateShoppingList") {
-                    exec_client = require("../skill/CreateShoppingList");
-                    memory.put(event.source.userId, exec_client);
+                exec_client = require("../skill/CreateShoppingList");
+                memory.put(event.source.userId, exec_client);
 
-                    console.log("exec_client3:" + exec_client.constructor.name);// TODO:
-                }
+                console.log("exec_client3:" + exec_client.constructor.name);// TODO:
               }
 
               if (exec_client != null) {
