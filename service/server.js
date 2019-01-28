@@ -38,7 +38,7 @@ module.exports = () => {
               if (exec_client == null) {
                   console.log("exec_client:" + exec_client);// TODO:
                   exec_client = require("../skill/BuyList");// TODO:
-                  memory.push(event.source.userId, exec_client);
+                  memory.put(event.source.userId, exec_client);
               }
               console.log("exec_client2:" + exec_client.constructor.name);// TODO:
 
