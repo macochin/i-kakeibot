@@ -3,4 +3,4 @@
 class SkillCreateShoppingList {
 }
 
-module.exports = new SkillCreateShoppingList();
+module.exports = SkillCreateShoppingList;

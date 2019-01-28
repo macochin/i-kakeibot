@@ -35,24 +35,15 @@ module.exports = () => {
           // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
           if (event.type == "message" && event.message.type == "text"){
             let exec_client = await memory.get(event.source.userId);
-            console.log("exec_client:" + exec_client);// TODO:
-            
             let skill_name = "";
 
             if (event.message.text == "買い物リスト") skill_name = "CreateShoppingList";
 
             let class_name = `Skill${skill_name}`;
             if (exec_client == null || exec_client.constructor.name != class_name) {
-                exec_client = require(`../skill/${skill_name}`);
+                exec_client = require(`../skill/${skill_name}`)();
                 memory.put(event.source.userId, exec_client);
             }
-            console.log("exec_client2:" + exec_client.constructor.name);// TODO:
-            
-            // if (event.message.text == "買い物リスト"
-            //   && (exec_client == null || exec_client.constructor.name != "SkillCreateShoppingList")) {
-            //   exec_client = require("../skill/CreateShoppingList");
-            //   memory.put(event.source.userId, exec_client);
-            // }
 
             events_processed.push(function (event, bot) {
                 let message_text = `毎度！ご注文は？`;
