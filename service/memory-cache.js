@@ -12,7 +12,7 @@ class ServiceMemoryCache {
   }
 
   async put(key, value, retention = 600) {
-    return this.client.put(key, value, retention * 1000, (key, value));
+    return this.client.put(key, value, retention * 1000);
   }
 
   async del(key) {
