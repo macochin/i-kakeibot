@@ -39,8 +39,9 @@ module.exports = () => {
 
             if (event.message.text == "買い物リスト") skill_name = "CreateShoppingList";
 
-            if (exec_client == null || exec_client.constructor.name != `Skill${skill_name}`) {
-                exec_client = require('../skill/${skill_name}');
+            let class_name = `Skill${skill_name}`;
+            if (exec_client == null || exec_client.constructor.name != class_name) {
+                exec_client = require(`../skill/${skill_name}`);
                 memory.put(event.source.userId, exec_client);
             }
             console.log("exec_client:" + exec_client);// TODO:
