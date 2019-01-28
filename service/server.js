@@ -45,13 +45,7 @@ module.exports = () => {
                 memory.put(event.source.userId, exec_client);
             }
 
-            events_processed.push(function (event, bot) {
-                let message_text = `毎度！ご注文は？`;
-                return bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: message_text
-                });
-            }(event, bot));
+            events_processed.push(exec_client.run(event, bot));
           }
       });
 
