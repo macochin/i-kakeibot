@@ -36,13 +36,15 @@ module.exports = () => {
           if (event.type == "message" && event.message.type == "text"){
               let exec_client = await memory.get(event.source.userId);
               if (event.message == "買い物リスト") {
-                  if (exec_client == null || exec_client.constructor.name != "CreateShoppingList") {
+                console.log("exec_client:" + exec_client);// TODO:
+                
+                if (exec_client == null || exec_client.constructor.name != "CreateShoppingList") {
                     exec_client = require("../skill/CreateShoppingList");
                     memory.put(event.source.userId, exec_client);
                   }
               }
 
-              console.log("exec_client:" + exec_client.constructor.name);// TODO:
+              console.log("exec_client2:" + exec_client.constructor.name);// TODO:
 
               events_processed.push(function (event, bot) {
                   let message_text = `毎度！ご注文は？`;
