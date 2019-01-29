@@ -1,6 +1,6 @@
 "use strict";
 
-class SkillCreateShoppingList {
+class SkillAddShoppingList {
   constructor() {
     // TODO:
   }
@@ -14,4 +14,4 @@ class SkillCreateShoppingList {
   }
 }
 
-module.exports = new SkillCreateShoppingList();
+module.exports = new SkillAddShoppingList();
