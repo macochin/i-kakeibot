@@ -27,7 +27,7 @@ class SkillRegistExpenceToday {
                 "type": "action",
                 "action": {
                   "type": "message",
-                  "label": "メッセージ",
+                  "label": "ランチ",
                   "text": "ランチ"
                 }
               }, 
@@ -46,10 +46,18 @@ class SkillRegistExpenceToday {
       }
     }
 
-    if (this.category == null) {
+    if (this.category == null && message_text != "") {
+      this.category = message_text;
+    }
+
+    if (this.money != null && this.category != null) {
+      let return_message = `以下で登録します。\n${this.money}円\n${message_text}`;
+      this.money = null;
+      this.category = null;
+
       return bot.replyMessage(event.replyToken, {
         type: "text",
-        text: `以下で登録します。\n${this.money}円\n${this.message_text}`
+        text: return_message
       });
     }
   }
