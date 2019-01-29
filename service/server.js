@@ -44,7 +44,8 @@ module.exports = () => {
                 if (event.message.text == "買い物リスト表示") skill_name = "DispShoppingList";
 
                 let class_name = `Skill${skill_name}`;
-                if (exec_client == null || exec_client.constructor.name != class_name) {
+                if (exec_client == null
+                    || (skill_name != "" && exec_client.constructor.name != class_name)) {
                     exec_client = require(`../skill/${skill_name}`);
                     memory.put(event.source.userId, exec_client);
                 }
