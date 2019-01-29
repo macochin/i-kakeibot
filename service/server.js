@@ -1,38 +1,28 @@
 "use strict";
 
-// -----------------------------------------------------------------------------
-// モジュールのインポート
 const express = require("express");
-const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
+const line = require("@line/bot-sdk");
 const Memory = require("../service/memory");
 
 const router = express.Router();
 
-// -----------------------------------------------------------------------------
-// パラメータ設定
 const line_config = {
-    channelAccessToken: process.env.LINE_ACCESS_TOKEN, // 環境変数からアクセストークンをセットしています
-    channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセットしています
+    channelAccessToken: process.env.LINE_ACCESS_TOKEN,
+    channelSecret: process.env.LINE_CHANNEL_SECRET
 };
 
 module.exports = () => {
     const memory = new Memory();
-
-    // APIコールのためのクライアントインスタンスを作成
     const bot = new line.Client(line_config);
 
-    // -----------------------------------------------------------------------------
-    // ルーター設定
     router.post('/', line.middleware(line_config), async (req, res, next) => {
         // 先行してLINE側にステータスコード200でレスポンスする。
         res.sendStatus(200);
 
-        // すべてのイベント処理のプロミスを格納する配列。
         let events_processed = [];
 
-        // イベントオブジェクトを順次処理。
         req.body.events.forEach(async (event) => {
-            // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
+            console.debug("event.message.type:" + event.message.type);
             if (event.type == "message" && event.message.type == "text") {
                 let exec_client = await memory.get(event.source.userId);
                 let skill_name = "";
