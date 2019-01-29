@@ -53,7 +53,7 @@ class SkillRegistExpenceToday {
     }
 
     if (this.money != null && this.category != null) {
-      console.debug("today:" + db.getNowYMD); // TODO:
+      console.debug("today:" + db.getNowYMD()); // TODO:
       let return_message = `以下で登録します。\n${this.money}円\n${message_text}`;
       this.money = null;
       this.category = null;
