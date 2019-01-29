@@ -1,5 +1,7 @@
 "use strict";
 
+const db = require("../service/postgres");
+
 class SkillRegistExpenceToday {
   constructor() {
     this.money = null;
@@ -23,6 +25,7 @@ class SkillRegistExpenceToday {
           text: "カテゴリは？",
           quickReply: {
             "items": [
+              // TODO:DBから取得したカテゴリをセットs
               {
                 "type": "action",
                 "action": {
@@ -30,14 +33,13 @@ class SkillRegistExpenceToday {
                   "label": "ランチ",
                   "text": "ランチ"
                 }
-              }, 
+              },
               {
                 "type": "action",
                 "action": {
-                  "type": "datetimepicker",
-                  "label": "日時選択",
-                  "data": "datetime",
-                  "mode": "datetime"
+                  "type": "message",
+                  "label": "漫画",
+                  "text": "漫画"
                 }
               }
             ]
@@ -51,9 +53,11 @@ class SkillRegistExpenceToday {
     }
 
     if (this.money != null && this.category != null) {
+      console.debug("today:" + db.getNowYMD); // TODO:
       let return_message = `以下で登録します。\n${this.money}円\n${message_text}`;
       this.money = null;
       this.category = null;
+      // TODO:DBに登録
 
       return bot.replyMessage(event.replyToken, {
         type: "text",

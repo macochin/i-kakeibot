@@ -22,7 +22,6 @@ module.exports = () => {
         let events_processed = [];
 
         req.body.events.forEach(async (event) => {
-            console.debug("event.message.type:" + event.message.type);
             if (event.type == "message" && event.message.type == "text") {
                 let exec_client = await memory.get(event.source.userId);
                 let skill_name = "";

@@ -58,6 +58,14 @@ class ServicePostgres {
     })
   }
 
+  getNowYMD(){
+    let dt = new Date();
+    let result = dt.getFullYear()
+                 + ("00" + (dt.getMonth()+1)).slice(-2)
+                 + ("00" + dt.getDate()).slice(-2);
+    // return result;
+    return dt;
+  }
 }
 
 module.exports = new ServicePostgres();
