@@ -20,9 +20,37 @@ class SkillRegistExpenceToday {
         this.money = message_text;
         return bot.replyMessage(event.replyToken, {
           type: "text",
-          text: "カテゴリは？"
+          text: "カテゴリは？",
+          quickReply: {
+            "items": [
+              {
+                "type": "action",
+                "action": {
+                  "type": "message",
+                  "label": "メッセージ",
+                  "text": "ランチ"
+                }
+              }, 
+              {
+                "type": "action",
+                "action": {
+                  "type": "datetimepicker",
+                  "label": "日時選択",
+                  "data": "datetime",
+                  "mode": "datetime"
+                }
+              }
+            ]
+          }
         });
       }
+    }
+
+    if (this.category == null) {
+      return bot.replyMessage(event.replyToken, {
+        type: "text",
+        text: `以下で登録します。\n${this.money}円\n${this.message_text}`
+      });
     }
   }
 }
