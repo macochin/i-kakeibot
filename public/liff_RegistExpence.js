@@ -1,16 +1,14 @@
 window.onload = function (e) {
     liff.init();
 
-    let dt = new Date();
-    dt.setFullYear(dt.getFullYear() - 6);
-    document.getElementById('birthday').value = formatDate(dt);
+    document.getElementById('expenceDate').value = formatDate(new Date());
 
     // メッセージの送信
     document.getElementById('sendmessagebutton').addEventListener('click', function () {
-        let message = "";
+        let message = "【支出登録】\n";
 
-        message += "名前:" + document.getElementById('childname').value + "\n";
-        message += "誕生日:" + document.getElementById('birthday').value;
+        message += "日にち:" + document.getElementById('expenceDate').value + "\n";
+        message += "金額:" + document.getElementById('expence').value;
 
         liff.sendMessages([{
             type: 'text',
