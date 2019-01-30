@@ -2,7 +2,7 @@
 
 const db = require("../service/postgres");
 
-class SkillRegistExpenceToday {
+class SkillRegistExpence {
   constructor() {
     this.money = null;
     this.category = null;
@@ -66,4 +66,4 @@ class SkillRegistExpenceToday {
   }
 }
 
-module.exports = new SkillRegistExpenceToday();
+module.exports = new SkillRegistExpence();

@@ -26,8 +26,7 @@ module.exports = () => {
                 let exec_client = await memory.get(event.source.userId);
                 let skill_name = "";
 
-                if (event.message.text == "登録（本日）") skill_name = "RegistExpenceToday";
-                if (event.message.text == "登録（日にち指定）") skill_name = "RegistExpencePointing";
+                if (event.message.text == "登録（本日）") skill_name = "SRegistExpence";
                 if (event.message.text == "支出一覧表示") skill_name = "DispExpenceList";
                 if (event.message.text == "買い物リスト追加") skill_name = "AddShoppingList";
                 if (event.message.text == "買い物リスト表示") skill_name = "DispShoppingList";
