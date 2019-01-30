@@ -1,6 +1,7 @@
 "use strict";
 
 const db = require("../service/postgres");
+const sql_insert_expence = "INSERT INTO accountBook (sender_id, useDate, money, category, insert_date, update_date) VALUES ($1, $2, $3, $4, $5, $6)";
 
 class SkillRegistExpence {
   constructor() {
@@ -58,6 +59,8 @@ class SkillRegistExpence {
       this.money = null;
       this.category = null;
       // TODO:DBに登録
+      let sqlParam = [event.source.userId, this.date, this.money, this.category, db.getNowDate, db.getNowDate];
+      db.asyncUpdate(sql_insert_expence, sqlParam);
 
       return bot.replyMessage(event.replyToken, {
         type: "text",
