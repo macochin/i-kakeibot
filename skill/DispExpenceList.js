@@ -2,14 +2,16 @@
 
 const db = require("../service/postgres");
 const sql_select_useDateYM = "select distinct to_char(usedate, 'yyyy/mm') as usedateYM from accountBook where sender_id = $1 order by usedateYM desc";
+const sql_select_expence_list = "select usedate, category ,money from accountBook where sender_id = $1 and  to_char(usedate, 'yyyy/mm') = $2 order by usedate, update_date";
 
 class SkillDispExpenceList {
   constructor() {
-    this.ym = null;
   }
 
   async run(event, bot) {
-    if (this.ym == null) {
+    let message_text = event.message.text;
+
+    if (message_text == "支出一覧表示") {
       let sqlParam = [event.source.userId];
       let useDate_list = await db.asyncSelect(sql_select_useDateYM, sqlParam);
 
@@ -41,6 +43,20 @@ class SkillDispExpenceList {
 
       return bot.replyMessage(event.replyToken, replyMessage);
     }
+
+    let sqlParam = [event.source.userId, message_text];
+    let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
+
+    let return_message = "";
+
+    expnece_list.rows.forEach(element => {
+      return_message += `${element.usedate} ${element.category} ${element.money}\n`
+    });
+
+    return bot.replyMessage(event.replyToken, {
+      type: "text",
+      text: return_message
+    });
   }
 }
 
