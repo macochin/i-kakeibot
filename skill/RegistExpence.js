@@ -1,6 +1,7 @@
 "use strict";
 
 const db = require("../service/postgres");
+const sql_select_category = "select distinct category accountBook where sender_id = $1 order by update_date desc";
 const sql_insert_expence = "INSERT INTO accountBook (sender_id, useDate, money, category, insert_date, update_date) VALUES ($1, $2, $3, $4, $5, $6)";
 
 class SkillRegistExpence {
@@ -22,31 +23,31 @@ class SkillRegistExpence {
       this.date = registValue[1];
       this.money = registValue[2];
 
-      return bot.replyMessage(event.replyToken, {
+      let replyMessage = {
         type: "text",
         text: "カテゴリは？",
         quickReply: {
-          "items": [
-            // TODO:DBから取得したカテゴリをセットs
-            {
-              "type": "action",
-              "action": {
-                "type": "message",
-                "label": "ランチ",
-                "text": "ランチ"
-              }
-            },
-            {
-              "type": "action",
-              "action": {
-                "type": "message",
-                "label": "漫画",
-                "text": "漫画"
-              }
-            }
-          ]
+          "items": []
         }
+      };
+
+      // TODO:DBから取得したカテゴリをセット(最近使用したもの順にソート)
+      let sqlParam = [event.source.userId];
+      let category_list = db.asyncSelect(sql_select_category, sqlParam);
+      category_list.rows.forEach(element => {
+        replyMessage.quickReply.items.push({
+          "type": "action",
+          "action": {
+            "type": "message",
+            "label": `${element.category}`,
+            "text": `${element.category}`
+          }
+        });
       });
+
+      // TODO:DBから取得できない場有はデフォルト値をセット
+
+      return bot.replyMessage(event.replyToken, replyMessage);
     }
 
     if (this.category == null && message_text != "") {

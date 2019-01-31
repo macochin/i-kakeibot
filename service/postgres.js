@@ -13,7 +13,6 @@ class ServicePostgres {
     return result;
   }
 
-
   async asyncSelect(sql, param) {
     let client = new pg.Client(conString);
     client.connect();
@@ -62,14 +61,6 @@ class ServicePostgres {
     let dt = new Date();
     dt.setHours(dt.getHours() + 9);
     return dt;
-  }
-
-  getNowYMD() {
-    let dt = getNowDate();
-    let result = dt.getFullYear()
-                 + "/" + ("00" + (dt.getMonth()+1)).slice(-2)
-                 + "/" + ("00" + dt.getDate()).slice(-2);
-    return result;
   }
 }
 
