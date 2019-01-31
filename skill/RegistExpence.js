@@ -33,7 +33,7 @@ class SkillRegistExpence {
 
       // TODO:DBから取得したカテゴリをセット(最近使用したもの順にソート)
       let sqlParam = [event.source.userId];
-      let category_list = db.asyncSelect(sql_select_category, sqlParam);
+      let category_list = await db.asyncSelect(sql_select_category, sqlParam);
       category_list.rows.forEach(element => {
         replyMessage.quickReply.items.push({
           "type": "action",
