@@ -35,12 +35,12 @@ class SkillRegistExpence {
 
       // TODO:DBから取得したカテゴリをセット(最近使用したもの順にソート)
       let sqlParam = [event.source.userId];
-      let sql_select = sql_select_category1;
+      let sql_select = sql_select_category2;
 
-      let category_count = await db.asyncSelectCount(sql_select_category_count, sqlParam);
-      console.debug("category_count:"+category_count);// TODO:
-      if (category_count == 1) {
-        sql_select = sql_select_category2;
+      let category_count = await db.asyncSelect(sql_select_category_count, sqlParam);
+      console.debug("category_count.rows[0]:"+category_count.rows[0]);// TODO:
+      if (category_count.rows[0] == 1) {
+        sql_select = sql_select_category1;
       }
 
       let category_list = await db.asyncSelect(sql_select, sqlParam);
