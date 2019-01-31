@@ -1,7 +1,9 @@
 "use strict";
 
 const db = require("../service/postgres");
-const sql_select_category = "select distinct category from accountBook where sender_id = $1 order by update_date desc";
+const sql_select_category_count = "select count(distinct category) from accountBook where sender_id = $1";
+const sql_select_category1 = "select distinct category from accountBook where sender_id = $1";
+const sql_select_category2 = "select distinct category from accountBook where sender_id = $1 order by update_date desc";
 const sql_insert_expence = "INSERT INTO accountBook (sender_id, useDate, money, category, insert_date, update_date) VALUES ($1, $2, $3, $4, $5, $6)";
 
 class SkillRegistExpence {
@@ -33,7 +35,14 @@ class SkillRegistExpence {
 
       // TODO:DBから取得したカテゴリをセット(最近使用したもの順にソート)
       let sqlParam = [event.source.userId];
-      let category_list = await db.asyncSelect(sql_select_category, sqlParam);
+      let sql_select = sql_select_category2;
+
+      let category_count = await db.asyncSelectCount(sql_select_category_count, sqlParam);
+      if (category_count == 1) {
+        sql_select = sql_select_category1;
+      }
+      
+      let category_list = await db.asyncSelect(sql_select, sqlParam);
       category_list.rows.forEach(element => {
         replyMessage.quickReply.items.push({
           "type": "action",

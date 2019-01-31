@@ -13,6 +13,14 @@ class ServicePostgres {
     return result;
   }
 
+  async asyncSelectCount(sql, param) {
+    let client = new pg.Client(conString);
+    client.connect();
+    let list = await this.querySelect(client, sql, param);
+    client.end();
+    return list[0];
+  }
+
   async asyncSelect(sql, param) {
     let client = new pg.Client(conString);
     client.connect();
