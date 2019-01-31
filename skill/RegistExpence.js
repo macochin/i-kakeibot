@@ -38,8 +38,8 @@ class SkillRegistExpence {
       let sql_select = sql_select_category2;
 
       let category_count = await db.asyncSelect(sql_select_category_count, sqlParam);
-      console.debug("category_count.rows[0]:"+category_count.rows[0]);// TODO:
-      if (category_count.rows[0] == 1) {
+      console.debug("category_count.rows[0].count:"+category_count.rows[0].count);// TODO:
+      if (category_count.rows[0].count == 1) {
         sql_select = sql_select_category1;
       }
 
