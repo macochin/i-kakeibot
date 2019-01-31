@@ -54,13 +54,13 @@ class SkillRegistExpence {
     }
 
     if (this.date != null && this.money != null && this.category != null) {
-      let return_message = `以下で登録します。\n${this.date}\n${this.money}円\n${message_text}`;
+      let sqlParam = [event.source.userId, this.date, this.money, this.category, db.getNowDate(), db.getNowDate()];
+      db.asyncUpdate(sql_insert_expence, sqlParam);
+
       this.date = null;
       this.money = null;
       this.category = null;
-      // TODO:DBに登録
-      let sqlParam = [event.source.userId, this.date, this.money, this.category, db.getNowDate(), db.getNowDate()];
-      db.asyncUpdate(sql_insert_expence, sqlParam);
+      let return_message = `以下で登録します。\n${this.date}\n${this.money}円\n${message_text}`;
 
       return bot.replyMessage(event.replyToken, {
         type: "text",
