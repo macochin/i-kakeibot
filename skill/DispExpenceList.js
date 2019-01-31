@@ -1,8 +1,8 @@
 "use strict";
 
 const db = require("../service/postgres");
-const sql_select_useDateYM = "select distinct to_char(usedate, 'yyyy/mm') as usedateYM from accountBook where sender_id = $1 order by usedateYM desc";
-const sql_select_expence_list = "select usedate, category ,money from accountBook where sender_id = $1 and  to_char(usedate, 'yyyy/mm') = $2 order by usedate, update_date";
+const sql_select_useDateYM = "select distinct to_char(usedate, 'yyyy/mm') as usedate_ym from accountBook where sender_id = $1 order by usedate_ym desc";
+const sql_select_expence_list = "select to_char(usedate, 'yyyy/mm/dd') as usedate_ymd, category ,money from accountBook where sender_id = $1 and  to_char(usedate, 'yyyy/mm') = $2 order by usedate, update_date";
 
 class SkillDispExpenceList {
   constructor() {
@@ -35,8 +35,8 @@ class SkillDispExpenceList {
           "type": "action",
           "action": {
             "type": "message",
-            "label": `${element.usedateym}`,
-            "text": `${element.usedateym}`
+            "label": `${element.usedate_ym}`,
+            "text": `${element.usedate_ym}`
           }
         });
       });
@@ -50,7 +50,7 @@ class SkillDispExpenceList {
     let return_message = "";
 
     expnece_list.rows.forEach(element => {
-      return_message += `${element.usedate} ${element.category} ${element.money}\n`
+      return_message += `${element.usedate_ymd} ${element.category} ${element.money}\n`
     });
 
     return bot.replyMessage(event.replyToken, {
