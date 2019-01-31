@@ -59,7 +59,7 @@ class SkillRegistExpence {
       this.money = null;
       this.category = null;
       // TODO:DBに登録
-      let sqlParam = [event.source.userId, this.date, this.money, this.category, db.getNowDate, db.getNowDate];
+      let sqlParam = [event.source.userId, this.date, this.money, this.category, db.getNowDate(), db.getNowDate()];
       db.asyncUpdate(sql_insert_expence, sqlParam);
 
       return bot.replyMessage(event.replyToken, {

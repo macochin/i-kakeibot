@@ -58,13 +58,13 @@ class ServicePostgres {
     })
   }
 
-  getNowDate(){
+  getNowDate() {
     let dt = new Date();
     dt.setHours(dt.getHours() + 9);
     return dt;
   }
 
-  getNowYMD(){
+  getNowYMD() {
     let dt = getNowDate();
     let result = dt.getFullYear()
                  + "/" + ("00" + (dt.getMonth()+1)).slice(-2)
