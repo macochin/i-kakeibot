@@ -23,7 +23,7 @@ class ServicePostgres {
   }
 
   querySelect(client, sql, param) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       client.query(sql, sqlParam, function (err, result) {
         if (err) {
           console.error('error running query', err)
@@ -46,7 +46,7 @@ class ServicePostgres {
   }
 
   queryUpdate(client, sql, param) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       client.query(sql, param, function (err, result) {
         if (err) {
           console.error('error running query', err)
