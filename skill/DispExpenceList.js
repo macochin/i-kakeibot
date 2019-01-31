@@ -33,8 +33,8 @@ class SkillDispExpenceList {
           "type": "action",
           "action": {
             "type": "message",
-            "label": `${element.usedateYM}`,
-            "text": `${element.usedateYM}`
+            "label": `${element.usedateym}`,
+            "text": `${element.usedateym}`
           }
         });
       });
