@@ -25,5 +25,5 @@ function formatDate(dt) {
     let month = ("0" + (dt.getMonth() + 1)).slice(-2)
     let date = ("0" + dt.getDate()).slice(-2)
 
-    return dt.getFullYear() + "-" + month + "-" + date;
+    return dt.getFullYear() + "/" + month + "/" + date;
 }
