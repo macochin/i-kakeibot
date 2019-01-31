@@ -50,7 +50,7 @@ class SkillDispExpenceList {
     let return_message = "";
 
     expnece_list.rows.forEach(element => {
-      return_message += `${element.usedate_ymd} ${element.category} ${element.money}\n`
+      return_message += `${element.usedate_ymd} ${element.category} ${element.money}円\n`
     });
 
     return bot.replyMessage(event.replyToken, {
