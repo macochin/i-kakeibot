@@ -7,7 +7,7 @@ window.onload = function (e) {
     document.getElementById('sendmessagebutton').addEventListener('click', function () {
         let message = "【支出登録】\n";
 
-        message += "日にち:" + document.getElementById('expenceDate').value + "\n";
+        message += "日にち:" + document.getElementById('expenceDate').value.replace('-', '/') + "\n";
         message += "金額:" + document.getElementById('expence').value;
 
         liff.sendMessages([{
@@ -25,5 +25,5 @@ function formatDate(dt) {
     let month = ("0" + (dt.getMonth() + 1)).slice(-2)
     let date = ("0" + dt.getDate()).slice(-2)
 
-    return dt.getFullYear() + "/" + month + "/" + date;
+    return dt.getFullYear() + "-" + month + "-" + date;
 }
