@@ -2,7 +2,7 @@
 
 const db = require("../service/postgres");
 const sql_select_useDateYM = "select distinct to_char(usedate, 'yyyy/mm') as usedate_ym from accountBook where sender_id = $1 order by usedate_ym desc";
-const sql_select_expence_list = "select to_char(usedate, 'yyyy/mm/dd') as usedate_ymd, category ,money from accountBook where sender_id = $1 and  to_char(usedate, 'yyyy/mm') = $2 order by usedate, update_date";
+const sql_select_expence_list = "select to_char(usedate, 'mm/dd') as usedate_md, category ,money from accountBook where sender_id = $1 and  to_char(usedate, 'yyyy/mm') = $2 order by usedate, update_date";
 
 class SkillDispExpenceList {
   constructor() {
@@ -47,10 +47,10 @@ class SkillDispExpenceList {
     let sqlParam = [event.source.userId, message_text];
     let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
 
-    let return_message = "";
+    let return_message = "【支出一覧】";
 
     expnece_list.rows.forEach(element => {
-      return_message += `${element.usedate_ymd} ${element.category} ${element.money}円\n`
+      return_message += `\n${element.usedate_md} ${element.category} ${element.money}円`
     });
 
     return bot.replyMessage(event.replyToken, {
