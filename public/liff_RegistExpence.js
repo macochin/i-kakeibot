@@ -8,7 +8,7 @@ window.onload = function (e) {
         let message = "【支出登録】\n";
 
         message += "日にち:" + document.getElementById('expenceDate').value.replace(/-/g, '/') + "\n";
-        message += "金額:" + document.getElementById('expence').value.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+        message += "金額:" + document.getElementById('expence').value.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') + "円";
 
         liff.sendMessages([{
             type: 'text',
