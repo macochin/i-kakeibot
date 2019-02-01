@@ -2,7 +2,7 @@
 
 const db = require("../service/postgres");
 const sql_select_useDateYM = "select distinct to_char(usedate, 'yyyy/mm') as usedate_ym from accountBook where sender_id = $1 order by usedate_ym desc";
-const sql_select_expence_list = "select to_char(usedate, 'mm/dd') as usedate_md, category ,money from accountBook where sender_id = $1 and  to_char(usedate, 'yyyy/mm') = $2 order by usedate, update_date";
+const sql_select_expence_list = "select account_book_id, to_char(usedate, 'mm/dd') as usedate_md, category ,money from accountBook where sender_id = $1 and  to_char(usedate, 'yyyy/mm') = $2 order by usedate, update_date";
 
 class SkillDispExpenceList {
   constructor() {
@@ -50,6 +50,31 @@ class SkillDispExpenceList {
         });
       });
 
+      return bot.replyMessage(event.replyToken, replyMessage);
+    }
+
+    if (this.target_ym != null && message_text == "支出削除") {
+      let replyMessage = {
+        type: "text",
+        text: "どれを削除する？",
+        quickReply: {
+          "items": []
+        }
+      };
+
+      let sqlParam = [event.source.userId, this.target_ym];
+      let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
+
+      expnece_list.rows.forEach(element => {
+        replyMessage.quickReply.items.push({
+          "type": "action",
+          "action": {
+            "type": "message",
+            "label": `${element.usedate_md} ${element.category} ${element.money}円`,
+            "text": `${element.account_book_id}`
+          }
+        });
+      });
       return bot.replyMessage(event.replyToken, replyMessage);
     }
 
