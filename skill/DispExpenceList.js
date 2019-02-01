@@ -53,10 +53,32 @@ class SkillDispExpenceList {
       return_message += `\n${element.usedate_md} ${element.category} ${element.money}円`
     });
 
-    return bot.replyMessage(event.replyToken, {
+    let replyMessage = {
       type: "text",
-      text: return_message
-    });
+      text: return_message,
+      quickReply: {
+        "items": [
+          {
+            "type": "action",
+            "action": {
+              "type": "message",
+              "label": `終了`,
+              "text": `終了`
+            }
+          },
+          {
+            "type": "action",
+            "action": {
+              "type": "message",
+              "label": `支出削除`,
+              "text": `支出削除`
+            }
+          }
+        ]
+      }
+    };
+
+    return bot.replyMessage(event.replyToken, replyMessage);
   }
 }
 
