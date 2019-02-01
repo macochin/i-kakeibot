@@ -3,10 +3,12 @@
 const db = require("../service/postgres");
 const sql_select_useDateYM = "select distinct to_char(usedate, 'yyyy/mm') as usedate_ym from accountBook where sender_id = $1 order by usedate_ym desc";
 const sql_select_expence_list = "select account_book_id, to_char(usedate, 'mm/dd') as usedate_md, category ,money from accountBook where sender_id = $1 and  to_char(usedate, 'yyyy/mm') = $2 order by usedate, update_date";
+const sql_delete_expence = "delete from accountBook where sender_id = $1 and account_book_id = $2";
 
 class SkillDispExpenceList {
   constructor() {
     this.target_ym = null;
+    this.delete_flg = false;
   }
 
   async run(event, bot) {
@@ -14,9 +16,22 @@ class SkillDispExpenceList {
 
     if (message_text == "終了") {
       this.target_ym = null;
+      this.delete_flg = false;
       return bot.replyMessage(event.replyToken, {
         type: "text",
         text: "終了します"
+      });
+    }
+
+    if (this.delete_flg && message_text != "") {
+      let sqlParam = [event.source.userId, message_text];
+      db.asyncUpdate(sql_delete_expence, sqlParam);
+
+      this.target_ym = null;
+      this.delete_flg = false;
+      return bot.replyMessage(event.replyToken, {
+        type: "text",
+        text: "削除しました。\n終了します"
       });
     }
 
@@ -54,6 +69,7 @@ class SkillDispExpenceList {
     }
 
     if (this.target_ym != null && message_text == "支出削除") {
+      this.delete_flg = true;
       let replyMessage = {
         type: "text",
         text: "どれを削除する？",
