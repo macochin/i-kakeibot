@@ -24,7 +24,7 @@ class SkillDispExpenceList {
     }
 
     if (this.delete_flg && message_text != "") {
-      let str = message_text.split(":");
+      let str = message_text.split(") ");
       let sqlParam = [event.source.userId, str[0]];
       db.asyncUpdate(sql_delete_expence, sqlParam);
 
@@ -87,8 +87,8 @@ class SkillDispExpenceList {
           "type": "action",
           "action": {
             "type": "message",
-            "label": `${element.account_book_id}:${element.usedate_md} ${element.category} ${element.money}円`,
-            "text": `${element.account_book_id}:${element.usedate_md} ${element.category} ${element.money}円`
+            "label": `${element.account_book_id}) ${element.usedate_md} ${element.category} ${element.money}円`,
+            "text": `${element.account_book_id}) ${element.usedate_md} ${element.category} ${element.money}円`
           }
         });
       });
