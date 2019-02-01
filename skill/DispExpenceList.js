@@ -87,8 +87,8 @@ class SkillDispExpenceList {
           "type": "action",
           "action": {
             "type": "message",
-            "label": `${element.account_book_id}) ${element.usedate_md} ${element.category} ${element.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
-            "text": `${element.account_book_id}) ${element.usedate_md} ${element.category} ${element.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
+            "label": `${element.account_book_id}) ${element.usedate_md} ${element.category} ${String(element.money).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
+            "text": `${element.account_book_id}) ${element.usedate_md} ${element.category} ${String(element.money).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
           }
         });
       });
@@ -102,7 +102,7 @@ class SkillDispExpenceList {
     let return_message = "【支出一覧】";
 
     expnece_list.rows.forEach(element => {
-      return_message += `\n${element.usedate_md} ${element.category} ${element.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
+      return_message += `\n${element.usedate_md} ${element.category} ${String(element.money).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
     });
 
     let replyMessage = {
