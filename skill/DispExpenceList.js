@@ -6,10 +6,19 @@ const sql_select_expence_list = "select to_char(usedate, 'mm/dd') as usedate_md,
 
 class SkillDispExpenceList {
   constructor() {
+    this.target_ym = null;
   }
 
   async run(event, bot) {
     let message_text = event.message.text;
+
+    if (message_text == "終了") {
+      this.target_ym = null;
+      return bot.replyMessage(event.replyToken, {
+        type: "text",
+        text: "終了します"
+      });
+    }
 
     if (message_text == "支出一覧表示") {
       let sqlParam = [event.source.userId];
@@ -44,6 +53,7 @@ class SkillDispExpenceList {
       return bot.replyMessage(event.replyToken, replyMessage);
     }
 
+    this.target_ym = message_text;
     let sqlParam = [event.source.userId, message_text];
     let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
 
