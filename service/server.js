@@ -19,6 +19,8 @@ module.exports = () => {
         // 先行してLINE側にステータスコード200でレスポンスする。
         res.sendStatus(200);
 
+        console.debug("process.env.SENDER_ID:" + process.env.SENDER_ID);// TODO:
+
         let events_processed = [];
 
         req.body.events.forEach(async (event) => {
