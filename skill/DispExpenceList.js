@@ -74,14 +74,6 @@ class SkillDispExpenceList {
 
     let return_message = "【支出一覧】";
 
-    if (expnece_list.rows.length == 0) {
-      return_message += `\n${this.target_ym}はまだ登録されていません。`
-    }
-
-    expnece_list.rows.forEach(element => {
-      return_message += `\n${element.usedate_md} ${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
-    });
-
     let replyMessage = {
       type: "text",
       text: return_message,
@@ -94,18 +86,27 @@ class SkillDispExpenceList {
               "label": `終了`,
               "text": `終了`
             }
-          },
-          {
-            "type": "action",
-            "action": {
-              "type": "message",
-              "label": `支出削除`,
-              "text": `支出削除`
-            }
           }
         ]
       }
     };
+
+    if (expnece_list.rows.length == 0) {
+      replyMessage.return_message += `\n${this.target_ym}はまだ登録されていません。`
+    } else {
+      replyMessage.quickReply.items.push({
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": `支出削除`,
+          "text": `支出削除`
+        }
+      });
+    }
+
+    expnece_list.rows.forEach(element => {
+      replyMessage.return_message += `\n${element.usedate_md} ${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
+    });
 
     let useDate_list = await db.asyncSelect(sql_select_useDateYM, sqlParam);
     useDate_list.rows.forEach(element => {
