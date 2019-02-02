@@ -64,7 +64,7 @@ class ServicePostgres {
   }
 
   getNowYYYYMM() {
-    let dt = getNowDate();
+    let dt = this.getNowDate();
     return dt.getFullYear() + "/" + ("00" + (dt.getMonth()+1)).slice(-2);
   }
 }
