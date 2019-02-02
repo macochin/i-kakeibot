@@ -26,7 +26,7 @@ class SkillDispExpenceList {
     var regex = /^\d{4}\/\d{1,2}$/;
     if (message_text == "支出一覧表示") {
       this.target_ym = db.getNowYYYYMM();
-    } else if (regex.text(message_text)) {
+    } else if (regex.test(message_text)) {
       this.target_ym = message_text;
     }
 
