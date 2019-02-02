@@ -19,7 +19,12 @@ module.exports = () => {
         // 先行してLINE側にステータスコード200でレスポンスする。
         res.sendStatus(200);
 
-        console.debug("process.env.SENDER_ID:" + process.env.SENDER_ID);// TODO:
+        if (process.env.SENDER_ID != undefined && process.env.SENDER_ID != event.source.userId) {
+            return bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: "個人専用botとなっておりますので、申し訳ありませんがアクセスできません。"
+              });
+        }
 
         let events_processed = [];
 
