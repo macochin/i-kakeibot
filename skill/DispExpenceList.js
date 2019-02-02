@@ -92,7 +92,7 @@ class SkillDispExpenceList {
     };
 
     if (expnece_list.rows.length == 0) {
-      replyMessage.return_message += `\n${this.target_ym}はまだ登録されていません。`
+      replyMessage.text.return_message += `\n${this.target_ym}はまだ登録されていません。`
     } else {
       replyMessage.quickReply.items.push({
         "type": "action",
@@ -105,7 +105,7 @@ class SkillDispExpenceList {
     }
 
     expnece_list.rows.forEach(element => {
-      replyMessage.return_message += `\n${element.usedate_md} ${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
+      replyMessage.text.return_message += `\n${element.usedate_md} ${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
     });
 
     let useDate_list = await db.asyncSelect(sql_select_useDateYM, sqlParam);
