@@ -62,6 +62,11 @@ class ServicePostgres {
     dt.setHours(dt.getHours() + 9);
     return dt;
   }
+
+  getNowYYYYMM() {
+    let dt = getNowDate();
+    return dt.getFullYear() + "/" + ("00" + (dt.getMonth()+1)).slice(-2);
+  }
 }
 
 module.exports = new ServicePostgres();

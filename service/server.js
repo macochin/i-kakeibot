@@ -28,7 +28,7 @@ module.exports = () => {
                     text: "個人専用botとなっておりますので、申し訳ありませんがアクセスできません。"
                 });
             }
-    
+
             if (event.type == "message" && event.message.type == "text") {
                 let exec_client = await memory.get(event.source.userId);
                 let skill_name = "";
