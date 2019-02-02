@@ -75,7 +75,7 @@ class SkillDispExpenceList {
     let return_message = "【支出一覧】";
 
     if (expnece_list.rows.length == 0) {
-      return_message += `${this.target_ym}はまだ登録されていません。`
+      return_message += `\n${this.target_ym}はまだ登録されていません。`
     }
 
     expnece_list.rows.forEach(element => {
