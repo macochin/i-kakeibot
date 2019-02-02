@@ -23,60 +23,64 @@ class SkillDispExpenceList {
       });
     }
 
+    var regex = /^\d{4}\/\d{1,2}$/;
     if (message_text == "支出一覧表示") {
       this.target_ym = db.getNowYYYYMM();
-      let sqlParam = [event.source.userId, this.target_ym];
-      let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
-
-      let return_message = "【支出一覧】";
-
-      if (expnece_list.rows.length == 0) {
-        return_message += "今月はまだ登録されていません。"
-      }
-  
-      expnece_list.rows.forEach(element => {
-        return_message += `\n${element.usedate_md} ${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
-      });
-  
-      let replyMessage = {
-        type: "text",
-        text: return_message,
-        quickReply: {
-          "items": [
-            {
-              "type": "action",
-              "action": {
-                "type": "message",
-                "label": `終了`,
-                "text": `終了`
-              }
-            },
-            {
-              "type": "action",
-              "action": {
-                "type": "message",
-                "label": `支出削除`,
-                "text": `支出削除`
-              }
-            }
-          ]
-        }
-      };
-
-      let useDate_list = await db.asyncSelect(sql_select_useDateYM, sqlParam);
-      useDate_list.rows.forEach(element => {
-        replyMessage.quickReply.items.push({
-          "type": "action",
-          "action": {
-            "type": "message",
-            "label": `${element.usedate_ym}`,
-            "text": `${element.usedate_ym}`
-          }
-        });
-      });
-
-      return bot.replyMessage(event.replyToken, replyMessage);
+    } else if (regex.text(message_text)) {
+      this.target_ym = message_text;
     }
+
+    let sqlParam = [event.source.userId, this.target_ym];
+    let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
+
+    let return_message = "【支出一覧】";
+
+    if (expnece_list.rows.length == 0) {
+      return_message += `${this.target_ym}はまだ登録されていません。`
+    }
+
+    expnece_list.rows.forEach(element => {
+      return_message += `\n${element.usedate_md} ${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
+    });
+
+    let replyMessage = {
+      type: "text",
+      text: return_message,
+      quickReply: {
+        "items": [
+          {
+            "type": "action",
+            "action": {
+              "type": "message",
+              "label": `終了`,
+              "text": `終了`
+            }
+          },
+          {
+            "type": "action",
+            "action": {
+              "type": "message",
+              "label": `支出削除`,
+              "text": `支出削除`
+            }
+          }
+        ]
+      }
+    };
+
+    let useDate_list = await db.asyncSelect(sql_select_useDateYM, sqlParam);
+    useDate_list.rows.forEach(element => {
+      replyMessage.quickReply.items.push({
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": `${element.usedate_ym}`,
+          "text": `${element.usedate_ym}`
+        }
+      });
+    });
+
+    return bot.replyMessage(event.replyToken, replyMessage);
 
 
     if (this.delete_flg && message_text != "") {
