@@ -13,6 +13,14 @@ class SkillDispExpenceList {
 
   async run(event, bot) {
     let message_text = event.message.text;
+    if (message_text == "終了" || message_text == "キャンセル") {
+      this.target_ym = null;
+      this.delete_flg = false;
+      return bot.replyMessage(event.replyToken, {
+        type: "text",
+        text: "終了します"
+      });
+    }
 
     if (this.target_ym != null && message_text == "支出削除") {
       this.delete_flg = true;

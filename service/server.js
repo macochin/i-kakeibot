@@ -31,15 +31,6 @@ module.exports = () => {
 
             if (event.type == "message" && event.message.type == "text") {
                 let message_text = event.message.text;
-                if (message_text == "終了" || message_text == "キャンセル") {
-                    await memory.del(event.source.userId);
-                    console.debug("event.source.userId:" + memory.get(event.source.userId));// TODO:
-                    return bot.replyMessage(event.replyToken, {
-                      type: "text",
-                      text: "終了します"
-                    });
-                }
-
                 let exec_client = await memory.get(event.source.userId);
                 let skill_name = "";
 
