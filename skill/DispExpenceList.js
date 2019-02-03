@@ -80,11 +80,9 @@ class SkillDispExpenceList {
     let sqlParam = [event.source.userId, this.target_ym];
     let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
 
-    let return_message = "【支出一覧】";
-
     let replyMessage = {
       type: "text",
-      text: return_message,
+      text: `【支出一覧(${this.target_ym})】`,
       quickReply: {
         "items": [
           {
