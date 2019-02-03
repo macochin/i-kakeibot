@@ -82,7 +82,7 @@ class SkillDispExpenceList {
 
     let replyMessage = {
       type: "text",
-      text: `【支出一覧(${this.target_ym})】`,
+      text: `【支出一覧】`,
       quickReply: {
         "items": [
           {
