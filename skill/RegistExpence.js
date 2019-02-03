@@ -1,7 +1,7 @@
 "use strict";
 
 const db = require("../service/postgres");
-const sql_select_category = "select distinct category from accountBook where sender_id = $1";
+const sql_select_category = "select category, max(update_date) as max_update_date from accountBook where sender_id = $1 group by category order by max_update_date desc";
 const sql_insert_expence = "INSERT INTO accountBook (sender_id, useDate, money, category, insert_date, update_date) VALUES ($1, $2, $3, $4, $5, $6)";
 
 class SkillRegistExpence {
