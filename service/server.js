@@ -30,13 +30,23 @@ module.exports = () => {
             }
 
             if (event.type == "message" && event.message.type == "text") {
+                let message_text = event.message.text;
+                if (message_text == "終了" || message_text == "キャンセル") {
+                    this.target_ym = null;
+                    this.delete_flg = false;
+                    return bot.replyMessage(event.replyToken, {
+                      type: "text",
+                      text: "終了します"
+                    });
+                }
+
                 let exec_client = await memory.get(event.source.userId);
                 let skill_name = "";
 
-                if (event.message.text.startsWith("【支出登録】")) skill_name = "RegistExpence";
-                if (event.message.text == "支出一覧表示") skill_name = "DispExpenceList";
-                if (event.message.text == "買い物リスト追加") skill_name = "AddShoppingList";
-                if (event.message.text == "買い物リスト表示") skill_name = "DispShoppingList";
+                if (message_text.startsWith("【支出登録】")) skill_name = "RegistExpence";
+                if (message_text == "支出一覧表示") skill_name = "DispExpenceList";
+                if (message_text == "買い物リスト追加") skill_name = "AddShoppingList";
+                if (message_text == "買い物リスト表示") skill_name = "DispShoppingList";
 
                 let class_name = `Skill${skill_name}`;
                 if (exec_client == null
