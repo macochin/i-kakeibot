@@ -20,7 +20,16 @@ class SkillDispExpenceList {
         type: "text",
         text: "どれを削除する？",
         quickReply: {
-          "items": []
+          "items": [
+            {
+              "type": "action",
+              "action": {
+                "type": "message",
+                "label": `キャンセル`,
+                "text": `キャンセル`
+              }
+            }
+          ]
         }
       };
 
@@ -32,8 +41,8 @@ class SkillDispExpenceList {
           "type": "action",
           "action": {
             "type": "message",
-            "label": `${element.account_book_id}) ${element.usedate_md} ${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
-            "text": `${element.account_book_id}) ${element.usedate_md} ${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
+            "label": `${element.account_book_id})\n${element.usedate_md} ${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
+            "text": `${element.account_book_id})\n${element.usedate_md} ${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
           }
         });
       });
