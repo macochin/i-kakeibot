@@ -8,7 +8,7 @@ const sql_select_expence_list = "select to_char(usedate, 'mm/dd') as usedate_md,
 
 module.exports = () => {
 
-  router.get('/expenceList', function(req, res, next) {
+  router.get('/expenceList', async function(req, res, next) {
     let target_ym = req.params.ym;
 
     let sqlParam = [process.env.SENDER_ID, target_ym];
