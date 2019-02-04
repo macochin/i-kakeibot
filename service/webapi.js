@@ -16,7 +16,7 @@ module.exports = () => {
     let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
 
     let ret = {};
-    Object.assign(ret, expnece_list.rows);
+    Object.assign(ret, expnece_list);
     // expnece_list.rows.forEach(element => {
     //   ret.push({
     //     "usedate_md" : element.usedate_md,
@@ -25,8 +25,9 @@ module.exports = () => {
     //   });
     // });
 
-    res.header('Content-Type', 'application/json; charset=utf-8')
-    res.send(ret);
+    // res.header('Content-Type', 'application/json; charset=utf-8')
+    // res.send(ret);
+    res.json(ret);
   });
 
   return router;
