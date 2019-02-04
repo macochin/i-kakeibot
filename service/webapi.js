@@ -11,21 +11,11 @@ const sql_select_expence_list = "select to_char(usedate, 'mm/dd') as usedate, ca
 module.exports = () => {
 
   router.get('/expenceList/:ym/:senderId', async function(req, res, next) {
-    // TODO: start
-    let crypt_key = "minority0304";
+    let decipher = crypto.createDecipher('aes192', process.env.CRYPT_KEY);
+    let sender_id = decipher.update(req.params.senderId, 'hex', 'utf8');
+    sender_id += decipher.final('utf8');
 
-    let cipher = crypto.createCipher('aes192', crypt_key);
-    let cipheredText = cipher.update(process.env.SENDER_ID, 'utf8', 'hex');
-    cipheredText += cipher.final('hex');
-    console.debug("cipheredText:" + cipheredText);// TODO:
-
-    var decipher = crypto.createDecipher('aes192', crypt_key);
-    let dec = decipher.update(cipheredText, 'hex', 'utf8');
-    dec += decipher.final('utf8');
-    console.debug("dec:" + dec);// TODO:
-    // TODO:
-
-    let sqlParam = [process.env.SENDER_ID, req.params.ym];
+    let sqlParam = [sender_id, req.params.ym];
     let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
 
     let ret = {};
