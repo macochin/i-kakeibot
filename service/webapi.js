@@ -15,13 +15,13 @@ module.exports = () => {
     let crypt_key = "minority0304";
 
     let cipher = crypto.createCipher('aes192', crypt_key);
-    cipher.update(process.env.SENDER_ID, 'utf8', 'hex');
-    let cipheredText = cipher.final('hex');
+    let cipheredText = cipher.update(process.env.SENDER_ID, 'utf8', 'hex');
+    cipheredText += cipher.final('hex');
     console.debug("cipheredText:" + cipheredText);// TODO:
 
     var decipher = crypto.createDecipher('aes192', crypt_key);
-    decipher.update(cipheredText, 'hex', 'utf8');
-    var dec = decipher.final('utf8');
+    let dec = decipher.update(cipheredText, 'hex', 'utf8');
+    dec += decipher.final('utf8');
     console.debug("dec:" + dec);// TODO:
     // TODO:
 
