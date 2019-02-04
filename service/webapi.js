@@ -27,5 +27,5 @@ module.exports = () => {
     res.send(ret);
   });
 
-  return ret;
+  return router;
 }
