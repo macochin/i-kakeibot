@@ -14,16 +14,6 @@ module.exports = () => {
 
     let ret = {};
     Object.assign(ret, expnece_list.rows);
-    // expnece_list.rows.forEach(element => {
-    //   ret.push({
-    //     "usedate_md" : element.usedate_md,
-    //     "category" : element.category,
-    //     "money" : element.money
-    //   });
-    // });
-
-    // res.header('Content-Type', 'application/json; charset=utf-8')
-    // res.send(ret);
     res.json(ret);
   });
 
