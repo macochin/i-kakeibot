@@ -24,7 +24,7 @@ module.exports = () => {
     });
 
     res.header('Content-Type', 'application/json; charset=utf-8')
-    res.send(param);
+    res.send(ret);
   });
 
   return ret;
