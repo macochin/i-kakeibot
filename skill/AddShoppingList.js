@@ -3,7 +3,7 @@
 const db = require("../service/postgres");
 
 const sql_select_shopping_name_list = "select shopping_name, max(update_date) as max_update_date from shoppingList where sender_id = $1 and plan_to_buy_flg = false group by shopping_name order by max_update_date desc";
-const sql_exit_shopping_name = "select count(shopping_name) as shopping_name_count from shoppingList where sender_id = $1 and shopping_name = $2";
+const sql_exit_shopping_name = "select shopping_name from shoppingList where sender_id = $1 and shopping_name = $2";
 const sql_insert_shoppingList = "INSERT INTO shoppingList (sender_id, shopping_name, plan_to_buy_flg, insert_date, update_date) VALUES ($1, $2, true, $3, $4)";
 const sql_update_shoppingList = "update shoppingList set plan_to_buy_flg = true, update_date = $1 where sender_id = $2 and shopping_name = $3";
 
