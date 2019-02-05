@@ -69,10 +69,10 @@ class SkillAddShoppingList {
 
     if (message_text != "") {
       let sqlPamam_exit = [event.source.userId, message_text];
-      let exitFlg = db.asyncSelect(sql_exit_shopping_name, sqlPamam_exit);
-      if (exitFlg > 0) {
+      let retExit = db.asyncSelect(sql_exit_shopping_name, sqlPamam_exit);
+      if (retExit.rows.shopping_name_count > 0) {
         let sqlParam_update = [db.getNowDate(), event.source.userId, message_text];
-        db.asyncUpdate(sqlParam_update, sqlParam_update);
+        db.asyncUpdate(sql_update_shoppingList, sqlParam_update);
       } else {
         let sqlParam_insert = [event.source.userId, message_text, db.getNowDate(), db.getNowDate()];
         db.asyncUpdate(sql_insert_shoppingList, sqlParam_insert);
