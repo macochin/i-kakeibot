@@ -1,8 +1,8 @@
 "use strict";
 
 const express = require('express');
-const db = require("./postgres");
 const crypto = require("crypto");
+const db = require("./postgres");
 
 const router = express.Router();
 
