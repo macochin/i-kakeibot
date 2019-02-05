@@ -32,33 +32,6 @@ class SkillAddShoppingList {
       // DBから取得したカテゴリをセット(最近使用したもの順にソート)
       let sqlParam = [event.source.userId];
       let shopping_name_list = await db.asyncSelect(sql_select_shopping_name, sqlParam);
-      if (shopping_name_list.rows.length == 0) {
-        // DBから取得できない場有はデフォルト値をセット
-        replyMessage.quickReply.items.push({
-          "type": "action",
-          "action": {
-            "type": "message",
-            "label": `お米`,
-            "text": `お米`
-          }
-        });
-        replyMessage.quickReply.items.push({
-          "type": "action",
-          "action": {
-            "type": "message",
-            "label": `食パン`,
-            "text": `食パン`
-          }
-        });
-        replyMessage.quickReply.items.push({
-          "type": "action",
-          "action": {
-            "type": "message",
-            "label": `野菜ジュース`,
-            "text": `野菜ジュース`
-          }
-        });
-      }
 
       shopping_name_list.rows.forEach(element => {
         replyMessage.quickReply.items.push({
