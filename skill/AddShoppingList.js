@@ -69,13 +69,13 @@ class SkillAddShoppingList {
 
     if (message_text != "") {
       let sqlPamam_exit = [event.source.userId, message_text];
-      let retExit = db.asyncSelect(sql_exit_shopping_name, sqlPamam_exit);
-      if (retExit.rows == undefined) {
+      let retExit = await db.asyncSelect(sql_exit_shopping_name, sqlPamam_exit);
+      if (retExit.rows.length == 0) {
         let sqlParam_insert = [event.source.userId, message_text, db.getNowDate(), db.getNowDate()];
-        db.asyncUpdate(sql_insert_shoppingList, sqlParam_insert);
+        await db.asyncUpdate(sql_insert_shoppingList, sqlParam_insert);
       } else {
         let sqlParam_update = [db.getNowDate(), event.source.userId, message_text];
-        db.asyncUpdate(sql_update_shoppingList, sqlParam_update);
+        await db.asyncUpdate(sql_update_shoppingList, sqlParam_update);
       }
 
       let return_message = `${message_text}\nを買い物リストに追加しました`;

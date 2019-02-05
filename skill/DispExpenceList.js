@@ -60,7 +60,7 @@ class SkillDispExpenceList {
     if (this.delete_flg && message_text != "") {
       let str = message_text.split(") ");
       let sqlParam = [event.source.userId, str[0]];
-      db.asyncUpdate(sql_delete_expence, sqlParam);
+      await db.asyncUpdate(sql_delete_expence, sqlParam);
 
       this.target_ym = null;
       this.delete_flg = false;

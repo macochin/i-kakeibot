@@ -82,7 +82,7 @@ class SkillRegistExpence {
 
     if (this.date != null && this.money != null && this.category != null) {
       let sqlParam = [event.source.userId, this.date.replace(/\//g, '-'), this.money, this.category, db.getNowDate(), db.getNowDate()];
-      db.asyncUpdate(sql_insert_expence, sqlParam);
+      await db.asyncUpdate(sql_insert_expence, sqlParam);
 
       let return_message = `以下で登録します。\n${this.date.replace(/-/g, '/')}\n${this.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円\n${this.category}`;
       this.date = null;
