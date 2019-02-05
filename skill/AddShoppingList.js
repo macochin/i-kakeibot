@@ -70,7 +70,8 @@ class SkillAddShoppingList {
     if (message_text != "") {
       let sqlPamam_exit = [event.source.userId, message_text];
       let retExit = db.asyncSelect(sql_exit_shopping_name, sqlPamam_exit);
-      if (retExit.rows.length > 0) {
+      console.debug("retExit:" + retExit);// TODO:
+      if (retExit != null) {
         let sqlParam_update = [db.getNowDate(), event.source.userId, message_text];
         db.asyncUpdate(sql_update_shoppingList, sqlParam_update);
       } else {
