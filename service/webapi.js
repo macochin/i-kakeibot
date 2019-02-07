@@ -23,5 +23,12 @@ module.exports = () => {
     res.json(ret);
   });
 
+  router.get('/shoppingList/:senderId', async function(req, res, next) {
+    let decipher = crypto.createDecipher('aes192', process.env.CRYPT_KEY);
+    let sender_id = decipher.update(req.params.senderId, 'hex', 'utf8');
+    sender_id += decipher.final('utf8');
+    
+  });
+
   return router;
 }
