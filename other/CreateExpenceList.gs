@@ -1,8 +1,8 @@
 var GOOGLE_DRIVE_FILE_NAME = "支出一覧";
 
-//var SENDER_ID = "暗号化したLINEユーザID";
-//var SEARCH_BASE_URL = "https://xxxx/webapi/expenceList/";
-//var GOOGLE_DRIVE_FOLDER = "スプレッドシートを出力するフォルダID";
+var SENDER_ID = "暗号化したLINEユーザID";
+var SEARCH_BASE_URL = "https://xxxx/webapi/expenceList/";
+var GOOGLE_DRIVE_FOLDER = "スプレッドシートを出力するフォルダID";
 
 function createExpenceList() {
   // 今月の支出リスト検索
@@ -23,8 +23,8 @@ function createExpenceList() {
   var count = 0;
   while(json[count] != undefined) {
     _setValue(masterSheet, count + 1, 1, json[count].usedate);
-    _setValue(masterSheet, count + 1, 2, json[count].category);
-    _setValue(masterSheet, count + 1, 3, json[count].money);
+    _setValue(masterSheet, count + 1, 2, json[count].money);
+    _setValue(masterSheet, count + 1, 3, json[count].category);
     count++;
   }
 }
