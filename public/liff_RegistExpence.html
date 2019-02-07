@@ -8,45 +8,30 @@
     <title>支出登録</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                日にち：<input type="date" id="expenceDate" name="expenceDate" value="" placeholder="日にち">
-            </div>
-            <div class="col">
-                金額：<input type="tel" id="expence" name="expence"" value="" placeholder="金額">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-            </div>
-            <div class="col">
-                <button id="sendmessagebutton" class="btn btn-outline-primary">登録</button>
-            </div>
-            <div class="col">
-            </div>
-        </div>
-    </div>
-<!--
-    <div id="childinfo">
+    <div>
         <table>
             <tr>
                 <th>日にち</th>
                 <td>
-                    <input type="date" id="expenceDate" name="expenceDate" value="">
+                    <input type="date" id="expenceDate" name="expenceDate" value="" placeholder="日にち">
                 </td>
             </tr>
             <tr>
                 <th>金額</th>
                 <td>
-                    <input type="tel" id="expence" name="expence"" value="">
+                    <input type="tel" id="expence" name="expence"" value="" placeholder="金額">
                 </td>
             </tr>
         </table>
     </div>
     <br>
-    <button id="sendmessagebutton" class="btn btn-outline-primary">登録</button>
--->
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"><button id="sendmessagebutton" class="btn btn-outline-primary">登録</button></div>
+        </div>
+    </div>
+    <!-- <button id="sendmessagebutton" class="btn btn-outline-primary">登録</button> -->
 
     <!-- LIFF SDK の読み込み -->
     <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
