@@ -9,10 +9,9 @@ window.onload = function (e) {
     let ret = $.ajax({
         "url" : url,
         "method" : "POST",
+    }).done( (data) => {
+        $('#shopping_list').html(data);
     });
-    ret.then(function(data){
-        alert(data);
-    },function(err){});
 
     // メッセージの送信
     document.getElementById('sendmessagebutton').addEventListener('click', function () {
