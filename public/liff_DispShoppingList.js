@@ -7,7 +7,7 @@ window.onload = function (e) {
                 method : "POST",
                 async : false,
                 success: function(data){
-                    $("#shopping_list").append(data);
+                    $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ data + "</label>");
                 }
             });
         }
