@@ -2,7 +2,7 @@ window.onload = function (e) {
     liff.init(
         data => {
             $.ajax({
-                url : "/webapi/shoppingList/" + data.context.userId,
+                url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/" + data.context.userId,
                 cache : false,
                 method : "GET",
                 async : false,
