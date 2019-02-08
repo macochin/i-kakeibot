@@ -24,7 +24,7 @@ module.exports = () => {
     res.json(ret);
   });
 
-  router.get('/shoppingList/:senderId', async function(req, res, next) {
+  router.post('/shoppingList/:senderId', async function(req, res, next) {
     let sqlParam = [req.params.senderId];
     let shopping_list = await db.asyncSelect(sql_select_shopping_list, sqlParam);
 
