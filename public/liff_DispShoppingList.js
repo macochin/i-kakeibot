@@ -2,7 +2,8 @@ window.onload = function (e) {
     liff.init(
         data => {
             $.ajax({
-                url : "/webapi/shoppingList/" + data.context.userId,
+                // url : "/webapi/shoppingList/" + data.context.userId,
+                url : "/webapi/shoppingList/U0550a86daff0d2d7b9bbdd11f7c0297d",
                 cache : false,
                 method : "GET",
                 async : false,
@@ -13,7 +14,6 @@ window.onload = function (e) {
                         $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ json[count].shopping_name + "</label>");
                         count++;
                     }
-
                 }
             });
         }
