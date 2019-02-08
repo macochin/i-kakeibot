@@ -6,11 +6,13 @@ window.onload = function (e) {
         }
     );
 
-    let ret = $.ajax({
-        "url" : url,
+    $.ajax({
+        "url": url,
+        "cache": false,
         "method" : "POST",
-    }).done( (data) => {
-        $('#shopping_list').html(data);
+        success: function(data){
+          $("#shopping_list").append(data);
+        }
     });
 
     // メッセージの送信
