@@ -1,8 +1,16 @@
 window.onload = function (e) {
-    liff.init();
+    let url = "/webapi/shoppingList/";
+    liff.init(
+        data => {
+            url += data.context.userId;
+        },
+        err => {
+            console.log('error', err);
+        }
+    );
 
-    var ret = $.ajax({
-        "url" : "/webapi/shoppingList/" + liff.init().userId,
+    let ret = $.ajax({
+        "url" : url,
         "method" : "POST",
     });
     ret.then(function(data){
