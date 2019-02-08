@@ -1,21 +1,17 @@
 window.onload = function (e) {
-    let url = "/webapi/shoppingList/";
     liff.init(
         data => {
-            url += data.context.userId;
-            $("#shopping_list").append(data.context.userId);
+            $.ajax({
+                url : "/webapi/shoppingList/" + data.context.userId,
+                cache : false,
+                method : "POST",
+                async : false,
+                success: function(data){
+                    $("#shopping_list").append(data);
+                }
+            });
         }
     );
-
-    $.ajax({
-        url : url,
-        cache : false,
-        method : "POST",
-        async : false,
-        success: function(data){
-            $("#shopping_list").append(data);
-        }
-    });
 
     // メッセージの送信
     document.getElementById('sendmessagebutton').addEventListener('click', function () {
