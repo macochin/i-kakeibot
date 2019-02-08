@@ -7,7 +7,13 @@ window.onload = function (e) {
                 method : "POST",
                 async : false,
                 success: function(data){
-                    $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ data + "</label>");
+                    let json = JSON.parse(data);
+                    var count = 0;
+                    while(json[count] != undefined) {
+                        $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ json[count].shopping_name + "</label>");
+                        count++;
+                    }
+
                 }
             });
         }
