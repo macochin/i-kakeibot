@@ -2,14 +2,15 @@ window.onload = function (e) {
     liff.init(
         data => {
             $.ajax({
-                // url : "/webapi/shoppingList/" + data.context.userId,
-                url : "/webapi/shoppingList/U0550a86daff0d2d7b9bbdd11f7c0297d",
+                url : "/webapi/shoppingList/" + data.context.userId,
                 cache : false,
                 method : "GET",
                 async : false,
                 success: function(data){
                     let json = JSON.parse(data);
                     var count = 0;
+                    alert(data);
+                    console.debug(data);
                     while(json[count] != undefined) {
                         $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ json[count].shopping_name + "</label>");
                         count++;
