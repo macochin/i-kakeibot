@@ -3,9 +3,6 @@ window.onload = function (e) {
     liff.init(
         data => {
             url += data.context.userId;
-        },
-        err => {
-            console.log('error', err);
         }
     );
 
