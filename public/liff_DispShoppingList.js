@@ -1,20 +1,5 @@
 window.onload = function (e) {
-    let url = "/webapi/shoppingList/";
-    liff.init(
-        data => {
-            url += data.context.userId;
-        }
-    );
-
-    $.ajax({
-        url : url,
-        cache : false,
-        method : "POST",
-        async : false,
-        success: function(data){
-          $("#shopping_list").append(data);
-        }
-    });
+    liff.init();
 
     // メッセージの送信
     document.getElementById('sendmessagebutton').addEventListener('click', function () {
