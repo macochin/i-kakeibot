@@ -4,7 +4,7 @@ window.onload = function (e) {
             $.ajax({
                 url : "/webapi/shoppingList/" + data.context.userId,
                 cache : false,
-                method : "POST",
+                method : "GET",
                 async : false,
                 success: function(data){
                     let json = JSON.parse(data);
