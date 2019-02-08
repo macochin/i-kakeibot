@@ -2,7 +2,7 @@ window.onload = function (e) {
     liff.init();
 
     var ret = $.ajax({
-        "url" : "/webapi/shoppingList/" + liff.init().context.userId,
+        "url" : "/webapi/shoppingList/" + liff.init().userId,
         "method" : "POST",
     });
     ret.then(function(data){
