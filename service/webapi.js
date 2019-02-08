@@ -25,6 +25,7 @@ module.exports = () => {
   });
 
   router.get('/shoppingList/:senderId', async function(req, res, next) {
+    console.debug("shoppingList:" + req.params.senderId);// TODO:
     let sqlParam = [req.params.senderId];
     let shopping_list = await db.asyncSelect(sql_select_shopping_list, sqlParam);
 

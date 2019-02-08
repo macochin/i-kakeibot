@@ -9,8 +9,6 @@ window.onload = function (e) {
                 success: function(data){
                     let json = JSON.parse(data);
                     var count = 0;
-                    alert(data);
-                    console.debug(data);
                     while(json[count] != undefined) {
                         $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ json[count].shopping_name + "</label>");
                         count++;
