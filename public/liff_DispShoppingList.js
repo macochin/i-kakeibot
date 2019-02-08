@@ -7,9 +7,10 @@ window.onload = function (e) {
     );
 
     $.ajax({
-        "url": url,
-        "cache": false,
-        "method" : "POST",
+        url : url,
+        cache : false,
+        method : "POST",
+        async : false,
         success: function(data){
           $("#shopping_list").append(data);
         }
