@@ -3,6 +3,7 @@ window.onload = function (e) {
     liff.init(
         data => {
             url += data.context.userId;
+            $("#shopping_list").append(data.context.userId);
         }
     );
 
