@@ -70,8 +70,8 @@ class SkillDispExpenceList {
         "type": "action",
         "action": {
           "type": "message",
-          "label": `${expnece_list.rows[4].account_book_id}) ${expnece_list.rows[4].usedate_md}\n${expnece_list.rows[4].category} ${expnece_list.rows[4].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
-          "text": `${expnece_list.rows[4].account_book_id}) ${expnece_list.rows[4].usedate_md}\n${expnece_list.rows[4].category} ${expnece_list.rows[4].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
+          "label": `${expnece_list.rows[7].account_book_id}) ${expnece_list.rows[7].usedate_md}\n${expnece_list.rows[7].category} ${expnece_list.rows[7].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
+          "text": `${expnece_list.rows[7].account_book_id}) ${expnece_list.rows[7].usedate_md}\n${expnece_list.rows[7].category} ${expnece_list.rows[7].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
         }
       });
 
