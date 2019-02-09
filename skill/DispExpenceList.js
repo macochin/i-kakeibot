@@ -44,35 +44,15 @@ class SkillDispExpenceList {
       let sqlParam = [event.source.userId, this.target_ym];
       let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
 
-      // expnece_list.rows.forEach(element => {
-      //   replyMessage.quickReply.items.push({
-      //     "type": "action",
-      //     "action": {
-      //       "type": "message",
-      //       "label": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
-      //       "text": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
-      //     }
-      //   });
-      // });
-
-      // TODO:
-      // for (let index = 0; index < 5; index++) {
-      //   replyMessage.quickReply.items.push({
-      //     "type": "action",
-      //     "action": {
-      //       "type": "message",
-      //       "label": `${expnece_list.rows[index].account_book_id}) ${expnece_list.rows[index].usedate_md}\n${expnece_list.rows[index].category} ${expnece_list.rows[index].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
-      //       "text": `${expnece_list.rows[index].account_book_id}) ${expnece_list.rows[index].usedate_md}\n${expnece_list.rows[index].category} ${expnece_list.rows[index].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
-      //     }
-      //   });
-      // }
-      replyMessage.quickReply.items.push({
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": `${expnece_list.rows[7].account_book_id}) ${expnece_list.rows[7].usedate_md}\n${expnece_list.rows[7].category} ${expnece_list.rows[7].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
-          "text": `${expnece_list.rows[7].account_book_id}) ${expnece_list.rows[7].usedate_md}\n${expnece_list.rows[7].category} ${expnece_list.rows[7].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
-        }
+      expnece_list.rows.forEach(element => {
+        replyMessage.quickReply.items.push({
+          "type": "action",
+          "action": {
+            "type": "message",
+            "label": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
+            "text": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
+          }
+        });
       });
 
       return bot.replyMessage(event.replyToken, replyMessage);
