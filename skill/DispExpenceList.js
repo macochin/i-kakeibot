@@ -55,7 +55,7 @@ class SkillDispExpenceList {
           }
         });
         count++;
-        if (count == 3) {
+        if (count == 1) {
           break;
         }
       });
