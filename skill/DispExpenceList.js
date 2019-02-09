@@ -56,16 +56,24 @@ class SkillDispExpenceList {
       // });
 
       // TODO:
-      for (let index = 0; index < 5; index++) {
-        replyMessage.quickReply.items.push({
-          "type": "action",
-          "action": {
-            "type": "message",
-            "label": `${expnece_list.rows[index].account_book_id}) ${expnece_list.rows[index].usedate_md}\n${expnece_list.rows[index].category} ${expnece_list.rows[index].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
-            "text": `${expnece_list.rows[index].account_book_id}) ${expnece_list.rows[index].usedate_md}\n${expnece_list.rows[index].category} ${expnece_list.rows[index].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
-          }
-        });
-      }
+      // for (let index = 0; index < 5; index++) {
+      //   replyMessage.quickReply.items.push({
+      //     "type": "action",
+      //     "action": {
+      //       "type": "message",
+      //       "label": `${expnece_list.rows[index].account_book_id}) ${expnece_list.rows[index].usedate_md}\n${expnece_list.rows[index].category} ${expnece_list.rows[index].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
+      //       "text": `${expnece_list.rows[index].account_book_id}) ${expnece_list.rows[index].usedate_md}\n${expnece_list.rows[index].category} ${expnece_list.rows[index].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
+      //     }
+      //   });
+      // }
+      replyMessage.quickReply.items.push({
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": `${expnece_list.rows[4].account_book_id}) ${expnece_list.rows[4].usedate_md}\n${expnece_list.rows[4].category} ${expnece_list.rows[4].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
+          "text": `${expnece_list.rows[4].account_book_id}) ${expnece_list.rows[4].usedate_md}\n${expnece_list.rows[4].category} ${expnece_list.rows[4].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
+        }
+      });
 
       return bot.replyMessage(event.replyToken, replyMessage);
     }
