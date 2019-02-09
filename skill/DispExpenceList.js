@@ -23,7 +23,9 @@ class SkillDispExpenceList {
     }
 
     if (this.target_ym != null && message_text == "支出削除") {
+      console.debug("支出削除:1");// TODO:
       this.delete_flg = true;
+      console.debug("支出削除:2");// TODO:
       let replyMessage = {
         type: "text",
         text: "どれを削除する？",
@@ -41,8 +43,10 @@ class SkillDispExpenceList {
         }
       };
 
+      console.debug("支出削除:3");// TODO:
       let sqlParam = [event.source.userId, this.target_ym];
       let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
+      console.debug("支出削除:4" + expnece_list.rows.length);// TODO:
 
       expnece_list.rows.forEach(element => {
         replyMessage.quickReply.items.push({
@@ -54,6 +58,7 @@ class SkillDispExpenceList {
           }
         });
       });
+      console.debug("支出削除:5");// TODO:
       return bot.replyMessage(event.replyToken, replyMessage);
     }
 
