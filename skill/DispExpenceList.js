@@ -44,7 +44,6 @@ class SkillDispExpenceList {
       let sqlParam = [event.source.userId, this.target_ym];
       let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
 
-      let count = 0;
       expnece_list.rows.forEach(element => {
         replyMessage.quickReply.items.push({
           "type": "action",
@@ -54,10 +53,6 @@ class SkillDispExpenceList {
             "text": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
           }
         });
-        count++;
-        if (count == 1) {
-          break;
-        }
       });
       return bot.replyMessage(event.replyToken, replyMessage);
     }
