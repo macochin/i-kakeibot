@@ -13,6 +13,15 @@ class SkillAddShoppingList {
 
   async run(event, bot) {
     let message_text = event.message.text;
+    if (message_text == "終了" || message_text == "キャンセル") {
+      this.target_ym = null;
+      this.delete_flg = false;
+      return bot.replyMessage(event.replyToken, {
+        type: "text",
+        text: "終了します"
+      });
+    }
+
     if (message_text == "買い物リスト追加") {
       let replyMessage = {
         type: "text",
@@ -27,6 +36,14 @@ class SkillAddShoppingList {
       let shopping_name_list = await db.asyncSelect(sql_select_shopping_name_list, sqlParam);
       if (shopping_name_list.rows.length == 0) {
         // DBから取得できない場有はデフォルト値をセット
+        replyMessage.quickReply.items.push({
+          "type": "action",
+          "action": {
+            "type": "message",
+            "label": `キャンセル`,
+            "text": `キャンセル`
+          }
+        });
         replyMessage.quickReply.items.push({
           "type": "action",
           "action": {
