@@ -44,24 +44,21 @@ class SkillDispExpenceList {
       let sqlParam = [event.source.userId, this.target_ym];
       let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
 
-      // expnece_list.rows.forEach(element => {
-      //   replyMessage.quickReply.items.push({
-      //     "type": "action",
-      //     "action": {
-      //       "type": "message",
-      //       "label": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
-      //       "text": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
-      //     }
-      //   });
-      // });
+      let count = 0;
+      expnece_list.rows.forEach(element => {
         replyMessage.quickReply.items.push({
           "type": "action",
           "action": {
             "type": "message",
-            "label": `${expnece_list.rows[0].account_book_id}) ${expnece_list.rows[0].usedate_md}\n${expnece_list.rows[0].category} ${expnece_list.rows[0].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
-            "text": `${expnece_list.rows[0].account_book_id}) ${expnece_list.rows[0].usedate_md}\n${expnece_list.rows[0].category} ${expnece_list.rows[0].money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
+            "label": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
+            "text": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
           }
         });
+        count++;
+        if (count == 3) {
+          break;
+        }
+      });
       return bot.replyMessage(event.replyToken, replyMessage);
     }
 
