@@ -1,37 +1,21 @@
 window.onload = function (e) {
     liff.init(
         data => {
-            // $.ajax({
-            //     url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/" + data.context.userId,
-            //     cache : false,
-            //     type: "GET",
-            //     async : false,
-            //     success: function(data){
-            //         let json = JSON.parse(data);
-            //         var count = 0;
-            //         while(json[count] != undefined) {
-            //             $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ json[count].shopping_name + "</label>");
-            //             count++;
-            //         }
-            //     }
-            // });
+            $.ajax({
+                url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/" + data.context.userId,
+                cache : false,
+                type: "GET",
+                async : false,
+                success: function(ret){
+                    var count = 0;
+                    while(ret[count] != undefined) {
+                        $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ ret[count].shopping_name + "</label>");
+                        count++;
+                    }
+                }
+            });
         }
     );
-
-    $.ajax({
-        url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/U0550a86daff0d2d7b9bbdd11f7c0297d",
-        cache : false,
-        type: "GET",
-        async : false,
-        success: function(data){
-            // let json = JSON.parse(data);
-            var count = 0;
-            while(data[count] != undefined) {
-                $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ data[count].shopping_name + "</label>");
-                count++;
-            }
-        }
-    });
 
     // メッセージの送信
     document.getElementById('sendmessagebutton').addEventListener('click', function () {
