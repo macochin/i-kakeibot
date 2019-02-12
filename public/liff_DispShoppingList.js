@@ -1,20 +1,20 @@
 window.onload = function (e) {
     liff.init(
         data => {
-            document.getElementById('userId').value = data.context.userId;
-
-            $.ajax({
-                url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/" + document.getElementById('userId').value,
-                cache : false,
-                type: "GET",
-                async : false,
-                success: function(ret){
-                    var count = 0;
-                    while(ret[count] != undefined) {
-                        $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ ret[count].shopping_name + "</label><br>");
-                        count++;
+            liff.getProfile().then(function (profile) {
+                $.ajax({
+                    url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/" + profile.userId,
+                    cache : false,
+                    type: "GET",
+                    async : false,
+                    success: function(ret){
+                        var count = 0;
+                        while(ret[count] != undefined) {
+                            $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ ret[count].shopping_name + "</label><br>");
+                            count++;
+                        }
                     }
-                }
+                });
             });
         }
     );
