@@ -59,7 +59,7 @@ class SkillDispExpenceList {
           "type": "action",
           "action": {
             "type": "message",
-            "label": `${label})`,
+            "label": `${label}`,
             "text": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
           }
         });
