@@ -1,21 +1,19 @@
 window.onload = function (e) {
-    liff.init(
-        data => {
-            $.ajax({
-                url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/" + data.context.userId,
-                cache : false,
-                type: "GET",
-                async : false,
-                success: function(ret){
-                    var count = 0;
-                    while(ret[count] != undefined) {
-                        $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ ret[count].shopping_name + "</label>");
-                        count++;
-                    }
-                }
-            });
+    liff.init(function (data) {});
+    alert(liff.getProfile());
+    $.ajax({
+        url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/" + liff.getProfile().userId,
+        cache : false,
+        type: "GET",
+        async : false,
+        success: function(ret){
+            var count = 0;
+            while(ret[count] != undefined) {
+                $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ ret[count].shopping_name + "</label><br>");
+                count++;
+            }
         }
-    );
+    });
 
     // メッセージの送信
     document.getElementById('sendmessagebutton').addEventListener('click', function () {
