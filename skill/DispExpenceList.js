@@ -44,15 +44,26 @@ class SkillDispExpenceList {
       let sqlParam = [event.source.userId, this.target_ym];
       let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
 
+      let pre_md = "";
+      let count = 1;
       expnece_list.rows.forEach(element => {
+        let label = element.usedate_md;
+        if (element.usedate_md == pre_md) {
+          count++;
+          label += `\(${count}\)`
+        } else {
+          count = 1;
+        }
+
         replyMessage.quickReply.items.push({
           "type": "action",
           "action": {
             "type": "message",
-            "label": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
+            "label": `${label})`,
             "text": `${element.account_book_id}) ${element.usedate_md}\n${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
           }
         });
+        pre_md = element.usedate_md;
       });
 
       return bot.replyMessage(event.replyToken, replyMessage);
