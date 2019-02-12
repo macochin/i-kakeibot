@@ -24,9 +24,9 @@ window.onload = function (e) {
         type: "GET",
         async : false,
         success: function(data){
-            let json = JSON.parse(data);
+            // let json = JSON.parse(data);
             var count = 0;
-            while(json[count] != undefined) {
+            while(data[count] != undefined) {
                 $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ json[count].shopping_name + "</label>");
                 count++;
             }
