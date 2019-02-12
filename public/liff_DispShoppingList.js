@@ -5,7 +5,6 @@ window.onload = function (e) {
         }
     );
 
-    alert(liff.getProfile());
     $.ajax({
         url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/" + document.getElementById('userId').value,
         cache : false,
