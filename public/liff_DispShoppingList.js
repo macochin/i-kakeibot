@@ -1,8 +1,13 @@
 window.onload = function (e) {
-    liff.init(function (data) {});
+    liff.init(
+        data => {
+            document.getElementById('userId').value = data.context.userId;
+        }
+    );
+
     alert(liff.getProfile());
     $.ajax({
-        url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/" + liff.getProfile().userId,
+        url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/" + document.getElementById('userId').value,
         cache : false,
         type: "GET",
         async : false,
