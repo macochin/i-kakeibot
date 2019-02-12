@@ -27,7 +27,7 @@ window.onload = function (e) {
             // let json = JSON.parse(data);
             var count = 0;
             while(data[count] != undefined) {
-                $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ json[count].shopping_name + "</label>");
+                $("#shopping_list").append("<label class='btn btn-secondary active'><input type='checkbox' checked autocomplete='off'>"+ data[count].shopping_name + "</label>");
                 count++;
             }
         }
