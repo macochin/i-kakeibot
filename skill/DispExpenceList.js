@@ -112,14 +112,14 @@ class SkillDispExpenceList {
     }
 
     let pre_md = "";
-    let count = 0;
+    let count = 1;
     expnece_list.rows.forEach(element => {
       replyMessage.text += `\n${element.usedate_md}`;
       if (element.usedate_md == pre_md) {
         count++;
         replyMessage.text += `\(${count}\)`
       } else {
-        count = 0;
+        count = 1;
       }
       replyMessage.text += ` ${element.category} ${element.money.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
       pre_md = element.usedate_md;
