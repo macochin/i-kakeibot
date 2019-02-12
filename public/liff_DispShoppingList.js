@@ -5,6 +5,7 @@ window.onload = function (e) {
 };
 
 function initializeApp(data) {
+    document.getElementById('useridfield').textContent = data.context.userId;
     $.ajax({
         url : "https://i-kakeibot.herokuapp.com/webapi/shoppingList/" + data.context.userId,
         cache : false,
