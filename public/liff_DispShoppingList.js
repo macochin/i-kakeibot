@@ -8,7 +8,13 @@ window.onload = function (e) {
             success: function(ret){
                 var count = 0;
                 while(ret[count] != undefined) {
-                    $("#shopping_list").append("<li><input type='checkbox' checked><label>" + ret[count].shopping_name + "</label></li>");
+                    $("#shopping_list").append("<li><input type='checkbox'");
+                    $("#shopping_list").append(" checked");
+                    if (ret[count].plan_to_buy_flg == false) {
+                        $("#shopping_list").append("><label>");
+                    }
+                    $("#shopping_list").append(ret[count].shopping_name);
+                    $("#shopping_list").append("</label></li>");
                     count++;
                 }
             }
