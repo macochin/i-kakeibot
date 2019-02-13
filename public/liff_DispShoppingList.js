@@ -8,13 +8,14 @@ window.onload = function (e) {
             success: function(ret){
                 var count = 0;
                 while(ret[count] != undefined) {
-                    $("#shopping_list").append("<li><input type='checkbox' id='" + ret[count].shopping_name + "'");
+                    let strTag = "<li><input type='checkbox'";
                     if (ret[count].plan_to_buy_flg == false) {
-                        $("#shopping_list").append(" checked");
+                        strTag += " checked";
                     }
-                    $("#shopping_list").append("><label for='>" + ret[count].shopping_name + "'");
-                    $("#shopping_list").append(ret[count].shopping_name);
-                    $("#shopping_list").append("</label></li>");
+                    strTag += "><label>";
+                    strTag += ret[count].shopping_name;
+                    strTag += "</label></li>";
+                    $("#shopping_list").append(strTag);
                     count++;
                 }
             }
