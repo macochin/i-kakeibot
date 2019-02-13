@@ -5,18 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="liff_DispShoppingList.css">
     <title>買い物リスト</title>
 </head>
 <body>
-    <div id="shopping_list">
-    </div>
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col"><button id="sendmessagebutton" class="btn btn-outline-primary">更新</button></div>
+    <form id="infoForm">
+        <fieldset>
+            <legend>Place</legend>
+            <ul class="list_view">
+                <li><input type="checkbox" name="test2" id="tokyo" checked><label for="tokyo">TOKYO</label></li>
+                <li><input type="checkbox" name="test2" id="osaka" checked><label for="osaka">OSAKA</label></li>
+                <li><input type="checkbox" name="test2" id="hokkaido"><label for="hokkaido">HOKKAIDO</label></li>
+            </ul>
+        </fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col"><button id="sendmessagebutton" class="btn btn-outline-primary">更新</button></div>
+            </div>
         </div>
-    </div>
+    </form>
 
     <!-- LIFF SDK の読み込み -->
     <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
