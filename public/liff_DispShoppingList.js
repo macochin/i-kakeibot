@@ -8,7 +8,7 @@ window.onload = function (e) {
             success: function(ret){
                 var count = 0;
                 while(ret[count] != undefined) {
-                    $("#shopping_list").append("<input type='checkbox' checked><label>" + ret[count].shopping_name + "</label>");
+                    $("#shopping_list").append("<li><input type='checkbox' checked><label>" + ret[count].shopping_name + "</label></li>");
                     count++;
                 }
             }
