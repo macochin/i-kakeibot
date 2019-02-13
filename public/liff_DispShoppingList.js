@@ -9,10 +9,10 @@ window.onload = function (e) {
                 var count = 0;
                 while(ret[count] != undefined) {
                     $("#shopping_list").append("<li><input type='checkbox'");
-                    $("#shopping_list").append(" checked");
                     if (ret[count].plan_to_buy_flg == false) {
-                        $("#shopping_list").append("><label>");
+                        $("#shopping_list").append(" checked");
                     }
+                    $("#shopping_list").append("><label>");
                     $("#shopping_list").append(ret[count].shopping_name);
                     $("#shopping_list").append("</label></li>");
                     count++;
