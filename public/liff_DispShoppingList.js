@@ -8,7 +8,7 @@ window.onload = function (e) {
             success: function(ret){
                 var count = 0;
                 while(ret[count] != undefined) {
-                    let strTag = "<li><input type='checkbox'";
+                    let strTag = "<li><input type='checkbox' value='" + ret[count].shopping_name + ":" + ret[count].shopping_id + "'";
                     if (ret[count].plan_to_buy_flg == true) {
                         strTag += " checked";
                     }
@@ -21,13 +21,23 @@ window.onload = function (e) {
             }
         });
 
-        // メッセージの送信
-        document.getElementById('sendmessagebutton').addEventListener('click', function () {
+        document.getElementById('btn_update').addEventListener('click', function () {
             // TODO:未実装
-            let message = "【支出登録】\n";
-
-            message += "日にち:" + document.getElementById('expenceDate').value.replace(/-/g, '/') + "\n";
+            let message = "【買い物リスト更新】\n";
             message += "金額:" + document.getElementById('expence').value;
+
+            liff.sendMessages([{
+                type: 'text',
+                text: message
+            }]).then(function () {
+                liff.closeWindow();
+            }).catch(function (error) {
+                window.alert("Error sending message: " + error);
+            });
+        });
+
+        document.getElementById('btn_addList').addEventListener('click', function () {
+            let message = "買い物リスト追加";
 
             liff.sendMessages([{
                 type: 'text',

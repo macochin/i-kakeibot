@@ -12,6 +12,7 @@ const sql_select_shopping_list = "select shopping_id, shopping_name, plan_to_buy
 module.exports = () => {
 
   router.get('/expenceList/:ym/:senderId', async function(req, res, next) {
+    // TODO:リクエストパラメータで暗号化フラグをもらう
     let decipher = crypto.createDecipher('aes192', process.env.CRYPT_KEY);
     let sender_id = decipher.update(req.params.senderId, 'hex', 'utf8');
     sender_id += decipher.final('utf8');
@@ -25,7 +26,8 @@ module.exports = () => {
   });
 
   router.get('/shoppingList/:senderId', async function(req, res, next) {
-    console.debug("shoppingList:" + req.params.senderId);// TODO:
+    // TODO:リクエストパラメータで暗号化フラグをもらう
+    console.debug("shoppingList:" + req.params.senderId);
     let sqlParam = [req.params.senderId];
     let shopping_list = await db.asyncSelect(sql_select_shopping_list, sqlParam);
 
