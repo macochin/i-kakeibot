@@ -13,7 +13,7 @@ class SkillUpdateShoppingList {
     let registValue = [];
     let str = message_text.split("\n");
     str.forEach(element => {
-      registValue.push(element.split(":")[1]);
+      registValue.push(parseInt(element.split(":")[1]));
     });
     registValue.shift();
 
