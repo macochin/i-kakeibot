@@ -12,7 +12,9 @@ class SkillUpdateShoppingList {
     let message_text = event.message.text;
     let str = message_text.split("\n");
     str.shift();
+    // TODO:trueゼロ対応
 
+    // TODO:配列をSQLに渡すと文字列に見なされてしまったため、下記の通り暫定対応
     let str_shopping_id = "";
     let count = 0;
     str.forEach(element => {
@@ -23,7 +25,6 @@ class SkillUpdateShoppingList {
       count++;
     });
     str_shopping_id += ")"
-    console.debug("sql:" + sql_update_shoppingList_true + str_shopping_id);// TODO:
 
     let sqlParam_update = [db.getNowDate(), event.source.userId];
     await db.asyncUpdate(sql_update_shoppingList_true + str_shopping_id, sqlParam_update);
