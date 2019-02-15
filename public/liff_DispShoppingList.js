@@ -20,34 +20,34 @@ window.onload = function (e) {
                 }
             }
         });
+    });
 
-        document.getElementById('btn_update').addEventListener('click', function () {
-            let message = "【買い物リスト更新】";
-            $("#shopping_list :checkbox:checked").each(function(index, element) {
-                message += "\n" + element.value;
-            });
-
-            liff.sendMessages([{
-                type: 'text',
-                text: message
-            }]).then(function () {
-                liff.closeWindow();
-            }).catch(function (error) {
-                window.alert("Error sending message: " + error);
-            });
+    document.getElementById('btn_update').addEventListener('click', function () {
+        let message = "【買い物リスト更新】";
+        $("#shopping_list :checkbox:checked").each(function(index, element) {
+            message += "\n" + element.value;
         });
 
-        document.getElementById('btn_addList').addEventListener('click', function () {
-            let message = "買い物リスト追加";
+        liff.sendMessages([{
+            type: 'text',
+            text: message
+        }]).then(function () {
+            liff.closeWindow();
+        }).catch(function (error) {
+            window.alert("Error sending message: " + error);
+        });
+    });
 
-            liff.sendMessages([{
-                type: 'text',
-                text: message
-            }]).then(function () {
-                liff.closeWindow();
-            }).catch(function (error) {
-                window.alert("Error sending message: " + error);
-            });
+    document.getElementById('btn_addList').addEventListener('click', function () {
+        let message = "買い物リスト追加";
+
+        liff.sendMessages([{
+            type: 'text',
+            text: message
+        }]).then(function () {
+            liff.closeWindow();
+        }).catch(function (error) {
+            window.alert("Error sending message: " + error);
         });
     });
 };
