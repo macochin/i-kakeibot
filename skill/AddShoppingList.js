@@ -85,8 +85,8 @@ class SkillAddShoppingList {
     }
 
     if (message_text != "") {
-      let sqlPamam_exit = [event.source.userId, message_text];
-      let retExit = await db.asyncSelect(sql_exit_shopping_name, sqlPamam_exit);
+      let sqlParam_exit = [event.source.userId, message_text];
+      let retExit = await db.asyncSelect(sql_exit_shopping_name, sqlParam_exit);
       if (retExit.rows.length == 0) {
         let sqlParam_insert = [event.source.userId, message_text, db.getNowDate(), db.getNowDate()];
         await db.asyncUpdate(sql_insert_shoppingList, sqlParam_insert);

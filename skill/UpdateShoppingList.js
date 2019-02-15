@@ -1,6 +1,8 @@
 "use strict";
 
 const db = require("../service/postgres");
+const sql_update_shoppingList_true = "update shoppingList set plan_to_buy_flg = true, update_date = $1 where sender_id = $2 and shopping_id in ($3)";
+const sql_update_shoppingList_false = "update shoppingList set plan_to_buy_flg = false, update_date = $1 where sender_id = $2 and shopping_id not in ($3)";
 
 class SkillUpdateShoppingList {
   constructor() {
@@ -15,10 +17,14 @@ class SkillUpdateShoppingList {
     });
     registValue.shift();
 
+    let sqlParam_update = [db.getNowDate(), event.source.userId, message_text];
+    await db.asyncUpdate(sql_update_shoppingList_true, sqlParam_update);
+    await db.asyncUpdate(sql_update_shoppingList_false, sqlParam_update);
+
     console.debug("registValue:" + registValue);// TODO:
     return bot.replyMessage(event.replyToken, {
       type: "text",
-      text: "テスト中..."
+      text: "更新しました"
     });
 }
 }
