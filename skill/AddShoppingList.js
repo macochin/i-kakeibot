@@ -30,20 +30,20 @@ class SkillAddShoppingList {
           "items": []
         }
       };
+      replyMessage.quickReply.items.push({
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": `キャンセル`,
+          "text": `キャンセル`
+        }
+      });
 
       // DBから取得したカテゴリをセット(最近使用したもの順にソート)
       let sqlParam = [event.source.userId];
       let shopping_name_list = await db.asyncSelect(sql_select_shopping_name_list, sqlParam);
       if (shopping_name_list.rows.length == 0) {
         // DBから取得できない場有はデフォルト値をセット
-        replyMessage.quickReply.items.push({
-          "type": "action",
-          "action": {
-            "type": "message",
-            "label": `キャンセル`,
-            "text": `キャンセル`
-          }
-        });
         replyMessage.quickReply.items.push({
           "type": "action",
           "action": {
