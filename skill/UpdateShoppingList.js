@@ -11,7 +11,9 @@ class SkillUpdateShoppingList {
   async run(event, bot) {
     let message_text = event.message.text;
     let str = message_text.split("\n");
+    console.debug("str1:" + str);// TODO:
     str.shift();
+    console.debug("str2:" + str);// TODO:
 
     let str_shopping_id = "";
     let count = 0;
@@ -23,6 +25,7 @@ class SkillUpdateShoppingList {
       count++;
     });
     str_shopping_id += ")"
+    console.debug("sql:" + sql_update_shoppingList_true + str_shopping_id);// TODO:
 
     let sqlParam_update = [db.getNowDate(), event.source.userId];
     await db.asyncUpdate(sql_update_shoppingList_true + str_shopping_id, sqlParam_update);
