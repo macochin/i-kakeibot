@@ -17,7 +17,7 @@ class SkillUpdateShoppingList {
     });
     registValue.shift();
 
-    let sqlParam_update = [db.getNowDate(), event.source.userId, message_text];
+    let sqlParam_update = [db.getNowDate(), event.source.userId, registValue];
     await db.asyncUpdate(sql_update_shoppingList_true, sqlParam_update);
     await db.asyncUpdate(sql_update_shoppingList_false, sqlParam_update);
 
