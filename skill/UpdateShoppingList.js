@@ -11,12 +11,12 @@ class SkillUpdateShoppingList {
   async run(event, bot) {
     let message_text = event.message.text;
     let str = message_text.split("\n");
+    str.shift();
+
     let str_shopping_id = "";
     let count = 0;
     str.forEach(element => {
-      if (count == 0) {
-        continue;
-      } else if (count > 1) {
+      if (count > 1) {
         str_shopping_id += ",";
       }
       str_shopping_id += Number(element.split(":")[1]);
