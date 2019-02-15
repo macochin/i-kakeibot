@@ -22,9 +22,10 @@ window.onload = function (e) {
         });
 
         document.getElementById('btn_update').addEventListener('click', function () {
-            // TODO:未実装
-            let message = "【買い物リスト更新】\n";
-            message += "金額:" + document.getElementById('expence').value;
+            let message = "【買い物リスト更新】";
+            $("#shopping_list :checkbox:checked").each(function(index, val) {
+                message += "\n" + val;
+            });
 
             liff.sendMessages([{
                 type: 'text',
