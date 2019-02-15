@@ -23,8 +23,8 @@ window.onload = function (e) {
 
         document.getElementById('btn_update').addEventListener('click', function () {
             let message = "【買い物リスト更新】";
-            $("#shopping_list :checkbox:checked").each(function(index, val) {
-                message += "\n" + val;
+            $("#shopping_list :checkbox:checked").each(function(index, element) {
+                message += "\n" + element.value;
             });
 
             liff.sendMessages([{
