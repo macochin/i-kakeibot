@@ -13,6 +13,7 @@ class SkillUpdateShoppingList {
     str.forEach(element => {
       registValue.push(element.split(":")[1]);
     });
+    registValue.shift();
 
     console.debug("registValue:" + registValue);// TODO:
     return bot.replyMessage(event.replyToken, {
