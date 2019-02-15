@@ -14,7 +14,9 @@ class SkillUpdateShoppingList {
     let str_shopping_id = "";
     let count = 0;
     str.forEach(element => {
-      if (count > 0) {
+      if (count == 0) {
+        continue;
+      } else if (count > 1) {
         str_shopping_id += ",";
       }
       str_shopping_id += Number(element.split(":")[1]);
