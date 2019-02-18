@@ -31,13 +31,21 @@ module.exports = () => {
 
             if (event.type == "message" && event.message.type == "text") {
                 let message_text = event.message.text;
+
+                if (message_text == "準備中...") {
+                    return bot.replyMessage(event.replyToken, {
+                        type: "text",
+                        text: "準備中です..."
+                    });
+                }
+
                 let exec_client = await memory.get(event.source.userId);
                 let skill_name = "";
 
                 if (message_text.startsWith("【支出登録】")) skill_name = "RegistExpence";
                 if (message_text == "支出一覧表示") skill_name = "DispExpenceList";
-                if (message_text == "買い物リスト追加") skill_name = "AddShoppingList";
-                if (message_text.startsWith("【買い物リスト更新】")) skill_name = "UpdateShoppingList";
+                if (message_text == "買い物リスト追加") skill_name = "AddShoppingList";//TODO:
+                if (message_text.startsWith("【買い物リスト更新】")) skill_name = "UpdateShoppingList";// TODO:
 
                 let class_name = `Skill${skill_name}`;
                 if (exec_client == null
@@ -45,8 +53,6 @@ module.exports = () => {
                     exec_client = require(`../skill/${skill_name}`);
                     memory.put(event.source.userId, exec_client);
                 }
-
-                // TODO:準備中返信
 
                 events_processed.push(exec_client.run(event, bot));
             }
