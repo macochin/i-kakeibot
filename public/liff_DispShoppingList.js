@@ -24,6 +24,7 @@ window.onload = function (e) {
 
     document.getElementById('btn_update').addEventListener('click', function () {
         let message = "【買い物リスト更新】";
+        // TODO:チェック無し対応
         $("#shopping_list :checkbox:checked").each(function(index, element) {
             message += "\n" + element.value;
         });
