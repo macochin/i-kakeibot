@@ -63,10 +63,7 @@ module.exports = () => {
             (response) => {
                 console.log(`${response.length} event(s) processed.`);
             }
-        ).catch(async function(e, event) {
-            console.debug(e);
-            await memory.put(event.source.userId, null);
-        });
+        );
     });
 
     return router;
