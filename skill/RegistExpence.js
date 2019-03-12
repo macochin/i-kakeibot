@@ -23,7 +23,7 @@ class SkillRegistExpence {
         });
         this.date = registValue[1];
         this.money = registValue[2];
-  
+
         let replyMessage = {
           type: "text",
           text: "カテゴリは？",
@@ -31,7 +31,7 @@ class SkillRegistExpence {
             "items": []
           }
         };
-  
+
         // DBから取得したカテゴリをセット(最近使用したもの順にソート)
         let sqlParam = [event.source.userId];
         let category_list = await db.asyncSelect(sql_select_category, sqlParam);
@@ -62,7 +62,7 @@ class SkillRegistExpence {
             }
           });
         }
-  
+
         category_list.rows.forEach(element => {
           replyMessage.quickReply.items.push({
             "type": "action",
@@ -73,29 +73,30 @@ class SkillRegistExpence {
             }
           });
         });
-  
+
         return bot.replyMessage(event.replyToken, replyMessage);
       }
-  
+
       if (this.category == null && message_text != "") {
         this.category = message_text;
       }
-  
+
       if (this.date != null && this.money != null && this.category != null) {
         let sqlParam = [event.source.userId, this.date.replace(/\//g, '-'), this.money, this.category, db.getNowDate(), db.getNowDate()];
         await db.asyncUpdate(sql_insert_expence, sqlParam);
-  
+
         let return_message = `以下で登録します。\n${this.date.replace(/-/g, '/')}\n${this.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円\n${this.category}`;
         this.date = null;
         this.money = null;
         this.category = null;
-  
+
         return bot.replyMessage(event.replyToken, {
           type: "text",
           text: return_message
         });
       }
     } catch (e) {
+      console.debug("error:" + e);// TODO:
       console.error(e);
       throw e;
     }
