@@ -15,7 +15,11 @@ class SkillRegistExpence {
     try {
       let message_text = event.message.text;
 
+      console.debug("SkillRegistExpence1");// TODO:
+      
       if (this.date == null && this.money == null) {
+        console.debug("SkillRegistExpence2");// TODO:
+        
         let registValue = [];
         let str = message_text.split("\n");
         str.forEach(element => {
@@ -32,9 +36,14 @@ class SkillRegistExpence {
           }
         };
 
+        console.debug("SkillRegistExpence3");// TODO:
+
         // DBから取得したカテゴリをセット(最近使用したもの順にソート)
         let sqlParam = [event.source.userId];
         let category_list = await db.asyncSelect(sql_select_category, sqlParam);
+
+        console.debug("SkillRegistExpence4");// TODO:
+
         if (category_list.rows.length == 0) {
           // DBから取得できない場有はデフォルト値をセット
           replyMessage.quickReply.items.push({
@@ -63,7 +72,12 @@ class SkillRegistExpence {
           });
         }
 
+        console.debug("SkillRegistExpence5");// TODO:
+        let count = 1;// TODO:
         category_list.rows.forEach(element => {
+
+          console.debug("SkillRegistExpence6:" + count);// TODO:
+
           replyMessage.quickReply.items.push({
             "type": "action",
             "action": {
@@ -72,7 +86,11 @@ class SkillRegistExpence {
               "text": `${element.category}`
             }
           });
+          
+          count++;// TODO:
         });
+
+        console.debug("SkillRegistExpence7");// TODO:
 
         return bot.replyMessage(event.replyToken, replyMessage);
       }
