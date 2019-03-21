@@ -63,6 +63,7 @@ class SkillRegistExpence {
           });
         }
 
+        // TODO:Quick Replyの数に制限あり？
         for (let index = 0; index < 10; index++) {
           replyMessage.quickReply.items.push({
             "type": "action",
