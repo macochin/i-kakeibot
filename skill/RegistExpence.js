@@ -63,7 +63,7 @@ class SkillRegistExpence {
           });
         }
 
-        for (let index = 0; index < 5; index++) {
+        for (let index = 0; index < 10; index++) {
           replyMessage.quickReply.items.push({
             "type": "action",
             "action": {
