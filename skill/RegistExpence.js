@@ -63,18 +63,27 @@ class SkillRegistExpence {
           });
         }
 
-        category_list.rows.forEach(element => {
-          console.debug("category_list:" + element.category);// TODO:
-
+        for (let index = 0; index < 5; index++) {
           replyMessage.quickReply.items.push({
             "type": "action",
             "action": {
               "type": "message",
-              "label": `${element.category}`,
-              "text": `${element.category}`
+              "label": `${category_list.rows[index].category}`,
+              "text": `${category_list.rows[index].category}`
             }
           });
-        });
+        }
+
+        // category_list.rows.forEach(element => {
+        //   replyMessage.quickReply.items.push({
+        //     "type": "action",
+        //     "action": {
+        //       "type": "message",
+        //       "label": `${element.category}`,
+        //       "text": `${element.category}`
+        //     }
+        //   });
+        // });
 
         // TODO:14
         return bot.replyMessage(event.replyToken, replyMessage);
