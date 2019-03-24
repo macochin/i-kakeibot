@@ -2,7 +2,7 @@
 
 const db = require("../service/postgres");
 const sql_select_useDateYM = "select distinct to_char(usedate, 'yyyy/mm') as usedate_ym from accountBook where sender_id = $1 and to_char(usedate, 'yyyy/mm') != $2 order by usedate_ym desc";
-const sql_select_expence_list = "select account_book_id, to_char(usedate, 'mm/dd') as usedate_md, category, money from accountBook where sender_id = $1 and to_char(usedate, 'yyyy/mm') = $2 order by usedate, update_date";
+const sql_select_expence_list = "select account_book_id, to_char(usedate, 'mm/dd') as usedate_md, category, money from accountBook where sender_id = $1 and to_char(usedate, 'yyyy/mm') = $2 order by usedate desc, update_date";
 const sql_delete_expence = "delete from accountBook where sender_id = $1 and account_book_id = $2";
 
 class SkillDispExpenceList {
