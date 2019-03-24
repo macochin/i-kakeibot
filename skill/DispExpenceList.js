@@ -46,7 +46,8 @@ class SkillDispExpenceList {
 
       let pre_md = "";
       let count = 1;
-      expnece_list.rows.forEach(element => {
+      for (let index = 0; index < expnece_list.rows.length; index++) {
+        let element = expnece_list.rows[index];
         let label = element.usedate_md;
         if (element.usedate_md == pre_md) {
           count++;
@@ -64,7 +65,9 @@ class SkillDispExpenceList {
           }
         });
         pre_md = element.usedate_md;
-      });
+
+        if (index > 10) break;
+      }
 
       return bot.replyMessage(event.replyToken, replyMessage);
     }
@@ -138,8 +141,8 @@ class SkillDispExpenceList {
 
     let useDate_list = await db.asyncSelect(sql_select_useDateYM, sqlParam);
 
-    let count = 0;
-    useDate_list.rows.forEach(element => {
+    for (let index = 0; index < useDate_list.rows.length; index++) {
+      let element = useDate_list.rows[index];
       replyMessage.quickReply.items.push({
         "type": "action",
         "action": {
@@ -149,9 +152,8 @@ class SkillDispExpenceList {
         }
       });
 
-      if (count > 10) break;
-      count++;
-    });
+      if (index > 10) break;
+    }
 
     return bot.replyMessage(event.replyToken, replyMessage);
   }
