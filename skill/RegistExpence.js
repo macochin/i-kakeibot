@@ -63,20 +63,29 @@ class SkillRegistExpence {
       }
 
       // TODO:Quick Replyの数に制限あり？
-      let count = 0;
-      category_list.rows.forEach(element => {
+      for (let index = 0; index < category_list.rows.length; index++) {
         replyMessage.quickReply.items.push({
           "type": "action",
           "action": {
             "type": "message",
-            "label": `${element.category}`,
-            "text": `${element.category}`
+            "label": `${category_list.rows[index].category}`,
+            "text": `${category_list.rows[index].category}`
           }
         });
 
-        if (count > 10) break;
-        count++;
-      });
+        if (index > 10) break;
+      }
+
+      // category_list.rows.forEach(element => {
+      //   replyMessage.quickReply.items.push({
+      //     "type": "action",
+      //     "action": {
+      //       "type": "message",
+      //       "label": `${element.category}`,
+      //       "text": `${element.category}`
+      //     }
+      //   });
+      // });
 
       // TODO:14
       return bot.replyMessage(event.replyToken, replyMessage);

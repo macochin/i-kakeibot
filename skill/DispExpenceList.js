@@ -138,7 +138,6 @@ class SkillDispExpenceList {
 
     let useDate_list = await db.asyncSelect(sql_select_useDateYM, sqlParam);
 
-    // TODO:Quick Replyの数に制限あり？
     let count = 0;
     useDate_list.rows.forEach(element => {
       replyMessage.quickReply.items.push({
