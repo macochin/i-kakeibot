@@ -39,6 +39,49 @@ module.exports = () => {
                     });
                 }
 
+                if (message_text == "強制リセット") {
+                    let replyMessage = {
+                        type: "text",
+                        text: "リセットしますか？",
+                        quickReply: {
+                          "items": [
+                            {
+                                "type": "action",
+                                "action": {
+                                  "type": "message",
+                                  "label": `リセット`,
+                                  "text": `リセット`
+                                }
+                            },
+                            {
+                              "type": "action",
+                              "action": {
+                                "type": "message",
+                                "label": `キャンセル`,
+                                "text": `キャンセル`
+                              }
+                            }
+                          ]
+                        }
+                    };
+                    return bot.replyMessage(event.replyToken, replyMessage);
+                }
+
+                if (message_text == "リセット") {
+                    await memory.put(event.source.userId, null);
+                    return bot.replyMessage(event.replyToken, {
+                      type: "text",
+                      text: "リセットしました"
+                    });
+                }
+
+                if (message_text == "終了" || message_text == "キャンセル") {
+                    return bot.replyMessage(event.replyToken, {
+                      type: "text",
+                      text: "終了します"
+                    });
+                }
+
                 let exec_client = await memory.get(event.source.userId);
                 let skill_name = "";
 
