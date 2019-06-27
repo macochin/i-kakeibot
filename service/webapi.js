@@ -2,7 +2,7 @@
 
 const express = require('express');
 const crypto = require("crypto");
-const db = require("./postgres");
+const db = require("./db");
 
 const router = express.Router();
 

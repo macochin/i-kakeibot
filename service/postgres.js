@@ -34,21 +34,6 @@ class ServicePostgres {
   async asyncSelectExpenceListWebAPI(sqlParam) {
     return await db.asyncSelect(sql_select_expence_list_webapi, sqlParam);
   }
-
-  getNowDate() {
-    let dt = new Date();
-    dt.setHours(dt.getHours() + 9);
-    return dt;
-  }
-
-  getNowYYYYMM() {
-    let dt = this.getNowDate();
-    return dt.getFullYear() + "/" + ("00" + (dt.getMonth()+1)).slice(-2);
-  }
-
-  getYYYYMM(dt) {
-    return dt.getFullYear() + "/" + ("00" + (dt.getMonth()+1)).slice(-2);
-  }
 }
 
 module.exports = new ServicePostgres();
