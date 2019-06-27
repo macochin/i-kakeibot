@@ -4,7 +4,7 @@ const dao = "postgres";
 
 class DB {
   constructor() {
-    let Store = require("./" + this.dao);
+    let Store = require("./" + dao);
     this.db = new Store();
   }
 
