@@ -44,8 +44,6 @@ module.exports = () => {
 
                 if (message_text.startsWith("【支出登録】")) skill_name = "RegistExpence";
                 if (message_text == "支出一覧表示") skill_name = "DispExpenceList";
-                if (message_text == "買い物リスト追加") skill_name = "AddShoppingList";//TODO:
-                if (message_text.startsWith("【買い物リスト更新】")) skill_name = "UpdateShoppingList";// TODO:
 
                 let class_name = `Skill${skill_name}`;
                 if (exec_client == null

@@ -1,9 +1,6 @@
 "use strict";
 
 const db = require("../service/postgres");
-const sql_select_useDateYM = "select distinct to_char(usedate, 'yyyy/mm') as usedate_ym from accountBook where sender_id = $1 and to_char(usedate, 'yyyy/mm') != $2 order by usedate_ym desc";
-const sql_select_expence_list = "select account_book_id, to_char(usedate, 'mm/dd') as usedate_md, category, money from accountBook where sender_id = $1 and to_char(usedate, 'yyyy/mm') = $2 order by usedate desc, update_date";
-const sql_delete_expence = "delete from accountBook where sender_id = $1 and account_book_id = $2";
 
 class SkillDispExpenceList {
   constructor() {
@@ -42,7 +39,7 @@ class SkillDispExpenceList {
       };
 
       let sqlParam = [event.source.userId, this.target_ym];
-      let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
+      let expnece_list = await db.asyncSelectExpenceList(sqlParam);
 
       let pre_md = "";
       let count = 1;
@@ -75,7 +72,7 @@ class SkillDispExpenceList {
     if (this.delete_flg && message_text != "") {
       let str = message_text.split(") ");
       let sqlParam = [event.source.userId, str[0]];
-      await db.asyncUpdate(sql_delete_expence, sqlParam);
+      await db.asyncDeleteExpence(sqlParam);
 
       this.target_ym = null;
       this.delete_flg = false;
@@ -93,7 +90,7 @@ class SkillDispExpenceList {
     }
 
     let sqlParam = [event.source.userId, this.target_ym];
-    let expnece_list = await db.asyncSelect(sql_select_expence_list, sqlParam);
+    let expnece_list = await db.asyncSelectExpenceList(sqlParam);
 
     let replyMessage = {
       type: "text",
@@ -139,7 +136,7 @@ class SkillDispExpenceList {
       pre_md = element.usedate_md;
     });
 
-    let useDate_list = await db.asyncSelect(sql_select_useDateYM, sqlParam);
+    let useDate_list = await db.asyncSelectUseDateYM(sqlParam);
 
     for (let index = 0; index < useDate_list.rows.length; index++) {
       let element = useDate_list.rows[index];
