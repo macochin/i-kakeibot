@@ -4,8 +4,7 @@ const dao = "postgres";
 
 class DB {
   constructor() {
-    let Store = require("./" + dao);
-    this.db = new Store();
+    this.db = require("./" + dao);
   }
 
   async asyncSelectCategory(sqlParam) {
@@ -48,4 +47,4 @@ class DB {
   }
 }
 
-module.exports = new DB();
+module.exports = DB();
