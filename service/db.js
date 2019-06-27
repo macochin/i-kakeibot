@@ -1,34 +1,31 @@
 "use strict";
 
 const dao = "postgres";
+const db = require("./" + dao);
 
 class DB {
-  constructor() {
-    this.db = require("./" + dao);
-  }
-
   async asyncSelectCategory(sqlParam) {
-    return await this.db.asyncSelect(sqlParam);
+    return await db.asyncSelect(sqlParam);
   }
 
   async asyncInsertExpence(sqlParam) {
-    await this.db.asyncUpdate(sqlParam);
+    await db.asyncUpdate(sqlParam);
   }
 
   async asyncSelectUseDateYM(sqlParam) {
-    return await this.db.asyncSelect(sqlParam);
+    return await db.asyncSelect(sqlParam);
   }
 
   async asyncSelectExpenceList(sqlParam) {
-    return await this.db.asyncSelect(sqlParam);
+    return await db.asyncSelect(sqlParam);
   }
 
   async asyncDeleteExpence(sqlParam) {
-    await this.db.asyncUpdate(sqlParam);
+    await db.asyncUpdate(sqlParam);
   }
 
   async asyncSelectExpenceListWebAPI(sqlParam) {
-    return await this.db.asyncSelect(sqlParam);
+    return await db.asyncSelect(sqlParam);
   }
 
   getNowDate() {
@@ -47,4 +44,4 @@ class DB {
   }
 }
 
-module.exports = new DB();
+module.exports = DB();
