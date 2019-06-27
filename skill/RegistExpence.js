@@ -1,8 +1,6 @@
 "use strict";
 
 const db = require("../service/postgres");
-const sql_select_category = "select category, max(update_date) as max_update_date from accountBook where sender_id = $1 group by category order by max_update_date desc";
-const sql_insert_expence = "INSERT INTO accountBook (sender_id, useDate, money, category, insert_date, update_date) VALUES ($1, $2, $3, $4, $5, $6)";
 
 class SkillRegistExpence {
   constructor() {
@@ -33,7 +31,7 @@ class SkillRegistExpence {
 
       // DBから取得したカテゴリをセット(最近使用したもの順にソート)
       let sqlParam = [event.source.userId];
-      let category_list = await db.asyncSelect(sql_select_category, sqlParam);
+      let category_list = await db.asyncSelectCategory(sqlParam);
       if (category_list.rows.length == 0) {
         // DBから取得できない場有はデフォルト値をセット
         replyMessage.quickReply.items.push({
@@ -97,7 +95,7 @@ class SkillRegistExpence {
 
     if (this.date != null && this.money != null && this.category != null) {
       let sqlParam = [event.source.userId, this.date.replace(/\//g, '-'), this.money, this.category, db.getNowDate(), db.getNowDate()];
-      await db.asyncUpdate(sql_insert_expence, sqlParam);
+      await db.asyncInsertExpence(sqlParam);
 
       let return_message = `以下で登録します。\n${this.date.replace(/-/g, '/')}\n${this.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円\n${this.category}`;
       this.date = null;

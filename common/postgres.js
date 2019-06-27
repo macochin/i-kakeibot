@@ -1,23 +1,9 @@
 'use strict';
 
-const db = require('../common/postgres');
-const sql_select_category = "select category, max(update_date) as max_update_date from accountBook where sender_id = $1 group by category order by max_update_date desc";
-const sql_insert_expence = "INSERT INTO accountBook (sender_id, useDate, money, category, insert_date, update_date) VALUES ($1, $2, $3, $4, $5, $6)";
-
 const pg = require('pg');
 const conString = process.env.DATABASE_URL;
 
-class ServicePostgres {
-
-  async asyncSelectCategory(sqlParam) {
-    return await db.asyncSelect(sql_select_category, sqlParam);
-  }
-
-  async asyncInsertExpence(sqlParam) {
-    await db.asyncUpdate(sql_insert_expence, sqlParam);
-  }
-
-  // TODO:以下削除予定
+class Postgres {
   async select(sql, param) {
     let client = new pg.Client(conString);
     client.connect();
@@ -87,4 +73,4 @@ class ServicePostgres {
   }
 }
 
-module.exports = new ServicePostgres();
+module.exports = new Postgres();
