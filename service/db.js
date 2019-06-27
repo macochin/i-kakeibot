@@ -5,27 +5,27 @@ const db = require("./" + dao);
 
 class DB {
   async asyncSelectCategory(sqlParam) {
-    return await db.asyncSelect(sqlParam);
+    return await db.asyncSelectCategory(sqlParam);
   }
 
   async asyncInsertExpence(sqlParam) {
-    await db.asyncUpdate(sqlParam);
+    await db.asyncInsertExpence(sqlParam);
   }
 
   async asyncSelectUseDateYM(sqlParam) {
-    return await db.asyncSelect(sqlParam);
+    return await db.asyncSelectUseDateYM(sqlParam);
   }
 
   async asyncSelectExpenceList(sqlParam) {
-    return await db.asyncSelect(sqlParam);
+    return await db.asyncSelectExpenceList(sqlParam);
   }
 
   async asyncDeleteExpence(sqlParam) {
-    await db.asyncUpdate(sqlParam);
+    await db.asyncDeleteExpence(sqlParam);
   }
 
   async asyncSelectExpenceListWebAPI(sqlParam) {
-    return await db.asyncSelect(sqlParam);
+    return await db.asyncSelectExpenceListWebAPI(sqlParam);
   }
 
   getNowDate() {
