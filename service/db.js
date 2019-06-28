@@ -1,15 +1,9 @@
 "use strict";
 
+const dao = "postgres";// TODO:
+const db = require("./" + dao);
+
 class DB {
-  constructor() {
-    let dao = "postgres";
-    if (process.env.DAO != "" && process.env.DAO != undefined) {
-      dao = process.env.DAO;
-    }
-
-    const db = require("./" + dao);
-  }
-
   async asyncSelectCategory(sqlParam) {
     return await db.asyncSelectCategory(sqlParam);
   }
