@@ -3,7 +3,7 @@
 class DB {
   constructor() {
     let dao = "postgres";
-    if (process.env.DAO != "" || process.env.DAO != undefined) {
+    if (process.env.DAO != "" && process.env.DAO != undefined) {
       dao = process.env.DAO;
     }
 
