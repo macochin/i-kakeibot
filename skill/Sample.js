@@ -14,7 +14,7 @@ class SkillSample {
     var spreadsheet; //スプレッドシート
 
     //認証を通しスプレッドシートの情報取得して外部スコープの変数に保存
-    await book.useServiceAccountAuth(creds, function(error) {
+    book.useServiceAccountAuth(creds, function(error) {
       if (error !== null) {
         throw new Error(error);
       }
@@ -23,22 +23,38 @@ class SkillSample {
           throw new Error(error);
         }
         spreadsheet = data;
+
+        // TODO:
+        for (let rcnt1 in spreadsheet.worksheets) {
+          spreadsheet.worksheets[rcnt1].getRows({
+            offset: 1, //何も指定しなければ2行目から読み込むので1を指定すると3行目から読み込む
+            limit: 20, //途中で空白行が現れれば20行以下でも読み込み中止
+          }, function(error, rows) {
+            if (error !== null) {
+              throw new Error(error);
+            }
+            // TODO:書き込み
+            rows[0].colname = 'new val';
+            rows[0].save();
+          });
+        }
+    
       });
     });
 
-    for (let rcnt1 in spreadsheet.worksheets) {
-      spreadsheet.worksheets[rcnt1].getRows({
-        offset: 1, //何も指定しなければ2行目から読み込むので1を指定すると3行目から読み込む
-        limit: 20, //途中で空白行が現れれば20行以下でも読み込み中止
-      }, function(error, rows) {
-        if (error !== null) {
-          throw new Error(error);
-        }
-        // TODO:書き込み
-        rows[0].colname = 'new val';
-        rows[0].save();
-      });
-    }
+    // for (let rcnt1 in spreadsheet.worksheets) {
+    //   spreadsheet.worksheets[rcnt1].getRows({
+    //     offset: 1, //何も指定しなければ2行目から読み込むので1を指定すると3行目から読み込む
+    //     limit: 20, //途中で空白行が現れれば20行以下でも読み込み中止
+    //   }, function(error, rows) {
+    //     if (error !== null) {
+    //       throw new Error(error);
+    //     }
+    //     // TODO:書き込み
+    //     rows[0].colname = 'new val';
+    //     rows[0].save();
+    //   });
+    // }
 
     // TODO:debug
     return bot.replyMessage(event.replyToken, {
