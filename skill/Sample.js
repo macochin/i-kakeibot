@@ -24,6 +24,7 @@ class SkillSample {
         }
         spreadsheet = data;
         console.debug("spreadsheet:" + spreadsheet);// TODO:
+        console.debug(Object.getOwnPropertyNames(spreadsheet));// TODO:
       });
     });
 
