@@ -12,6 +12,9 @@ class SkillSample {
 
     var spreadsheet; //スプレッドシート
 
+    console.debug("process.env.GOOGLE_SPREAD_CLIENT_EMAIL:" + process.env.GOOGLE_SPREAD_CLIENT_EMAIL);// TODO:
+    console.debug("process.env.GOOGLE_SPREAD_PRIVATE_KEY:" + process.env.GOOGLE_SPREAD_PRIVATE_KEY);// TODO:
+
     //認証を通しスプレッドシートの情報取得して外部スコープの変数に保存
     book.useServiceAccountAuth(creds, function(error) {
       if (error !== null) {
