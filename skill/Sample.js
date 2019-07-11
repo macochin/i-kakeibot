@@ -5,11 +5,11 @@ const GoogleSpreadsheet = require('google-spreadsheet');
 class SkillSample {
   async run(event, bot) {
     let book = new GoogleSpreadsheet(process.env.SPREDSHEET_ID);
-    // let creds = {
-    //   client_email: process.env.GOOGLE_SPREAD_CLIENT_EMAIL
-    //   , private_key: process.env.GOOGLE_SPREAD_PRIVATE_KEY
-    // };
-    let creds = require('../creds.json');
+    let creds = {
+      client_email: process.env.GOOGLE_SPREAD_CLIENT_EMAIL
+      , private_key: process.env.GOOGLE_SPREAD_PRIVATE_KEY
+    };
+    // let creds = require('../creds.json');
 
     var spreadsheet; //スプレッドシート
 
@@ -23,38 +23,22 @@ class SkillSample {
           throw new Error(error);
         }
         spreadsheet = data;
-
-        // TODO:
-        for (let rcnt1 in spreadsheet.worksheets) {
-          spreadsheet.worksheets[rcnt1].getRows({
-            offset: 1, //何も指定しなければ2行目から読み込むので1を指定すると3行目から読み込む
-            limit: 20, //途中で空白行が現れれば20行以下でも読み込み中止
-          }, function(error, rows) {
-            if (error !== null) {
-              throw new Error(error);
-            }
-            // TODO:書き込み
-            rows[0].colname = 'new val';
-            rows[0].save();
-          });
-        }
-    
       });
     });
 
-    // for (let rcnt1 in spreadsheet.worksheets) {
-    //   spreadsheet.worksheets[rcnt1].getRows({
-    //     offset: 1, //何も指定しなければ2行目から読み込むので1を指定すると3行目から読み込む
-    //     limit: 20, //途中で空白行が現れれば20行以下でも読み込み中止
-    //   }, function(error, rows) {
-    //     if (error !== null) {
-    //       throw new Error(error);
-    //     }
-    //     // TODO:書き込み
-    //     rows[0].colname = 'new val';
-    //     rows[0].save();
-    //   });
-    // }
+    for (let rcnt1 in spreadsheet.worksheets) {
+      spreadsheet.worksheets[rcnt1].getRows({
+        offset: 1, //何も指定しなければ2行目から読み込むので1を指定すると3行目から読み込む
+        limit: 20, //途中で空白行が現れれば20行以下でも読み込み中止
+      }, function(error, rows) {
+        if (error !== null) {
+          throw new Error(error);
+        }
+        // TODO:書き込み
+        rows[0].colname = 'new val';
+        rows[0].save();
+      });
+    }
 
     // TODO:debug
     return bot.replyMessage(event.replyToken, {
