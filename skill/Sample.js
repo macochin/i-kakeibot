@@ -5,10 +5,11 @@ const GoogleSpreadsheet = require('google-spreadsheet');
 class SkillSample {
   async run(event, bot) {
     let book = new GoogleSpreadsheet(process.env.SPREDSHEET_ID);
-    let creds = {
-      client_email: process.env.GOOGLE_SPREAD_CLIENT_EMAIL
-      , private_key: process.env.GOOGLE_SPREAD_PRIVATE_KEY
-    }
+    // let creds = {
+    //   client_email: process.env.GOOGLE_SPREAD_CLIENT_EMAIL
+    //   , private_key: process.env.GOOGLE_SPREAD_PRIVATE_KEY
+    // };
+    let creds = require('../creds.json');
 
     var spreadsheet; //スプレッドシート
 
