@@ -23,6 +23,7 @@ class SkillSample {
           throw new Error(error);
         }
         spreadsheet = data;
+        console.debug("spreadsheet:" + spreadsheet);// TODO:
       });
     });
 
