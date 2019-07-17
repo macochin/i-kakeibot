@@ -23,6 +23,7 @@ class SkillSample {
       }
       book.getInfo(function(error, data) {
         if (error !== null) {
+          console.error("error:" + error);// TODO:
           throw new Error(error);
         }
         spreadsheet = data;
@@ -35,6 +36,7 @@ class SkillSample {
         limit: 20, //途中で空白行が現れれば20行以下でも読み込み中止
       }, function(error, rows) {
         if (error !== null) {
+          console.error("error:" + error);// TODO:
           throw new Error(error);
         }
         // TODO:書き込み
