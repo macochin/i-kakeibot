@@ -8,6 +8,9 @@ class SkillSample {
     let creds = {
       client_email: process.env.GOOGLE_SPREAD_CLIENT_EMAIL
       , private_key: process.env.GOOGLE_SPREAD_PRIVATE_KEY
+      // TODO:
+      , private_key_id:"7ed976e499d9455003598b3308500c0077717f29"
+      , client_id:"110505104562289193348"
     };
     // let creds = require('../creds.json');
 
