@@ -5,7 +5,7 @@ var async = require("async");
 
 class SkillSample {
   async run(event, bot) {
-    let book = new GoogleSpreadsheet(process.env.SPREDSHEET_ID);
+    let doc = new GoogleSpreadsheet(process.env.SPREDSHEET_ID);
     let creds = {
      client_email: process.env.GOOGLE_SPREAD_CLIENT_EMAIL
 //     , private_key: process.env.GOOGLE_SPREAD_PRIVATE_KEY // TODO:うまく読み込めていない。。。
