@@ -25,18 +25,31 @@ class SkillSample {
           });
         },
         function workingWithCells(step) {
+          sheet.getCells({
+            'min-row': 1,
+            'max-row': 5,
+            'return-empty': true
+          }, function(err, cells) {
+            var cell = cells[0];
+            console.log('Cell R'+cell.row+'C'+cell.col+' = '+cell.value);
 
-          sheet.getRows({
-            offset: 1, //何も指定しなければ2行目から読み込むので1を指定すると3行目から読み込む
-            limit: 20, //途中で空白行が現れれば20行以下でも読み込み中止
-          }, function(error, rows) {
-            if (error !== null) {
-              console.error("error:" + error);// TODO:
-              throw new Error(error);
-            }
-            // TODO:書き込み
-            rows[0].colname = 'new val';
-            rows[0].save();
+            // cells have a value, numericValue, and formula
+            cell.value == '1'
+            cell.numericValue == 1;
+            cell.formula == '=ROW()';
+
+            // updating `value` is "smart" and generally handles things for you
+            cell.value = 123;
+            cell.value = '=A1+B2'
+            cell.save(); //async
+
+            // bulk updates make it easy to update many cells at once
+            cells[0].value = 1;
+            cells[1].value = 2;
+            cells[2].formula = '=A1+B1';
+            sheet.bulkUpdateCells(cells); //async
+
+            step();
           });
         }
       ],
