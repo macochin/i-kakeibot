@@ -11,8 +11,9 @@ const line_config = {
     channelSecret: process.env.LINE_CHANNEL_SECRET
 };
 
-module.exports = () => {
-    const memory = new Memory();
+module.exports = (options) => {
+    // const memory = new Memory();
+    options.memory = new Memory();
     const bot = new line.Client(line_config);
 
     router.post('/', line.middleware(line_config), async (req, res, next) => {
@@ -39,7 +40,7 @@ module.exports = () => {
                     });
                 }
 
-                let exec_client = await memory.get(event.source.userId);
+                let exec_client = await options.memory.get(event.source.userId);
                 let skill_name = "";
 
                 if (message_text.startsWith("【支出登録】")) skill_name = "RegistExpence";
@@ -52,7 +53,7 @@ module.exports = () => {
                 if (exec_client == null
                     || (skill_name != "" && exec_client.constructor.name != class_name)) {
                     exec_client = require(`../skill/${skill_name}`);
-                    memory.put(event.source.userId, exec_client);
+                    options.memory.put(event.source.userId, exec_client);
                 }
 
                 events_processed.push(exec_client.run(event, bot));

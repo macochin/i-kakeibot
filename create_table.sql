@@ -1,3 +1,10 @@
+DROP TABLE environment;
+CREATE TABLE environment
+(
+  env_key TEXT NOT NULL,
+  env_value TEXT NOT NULL,
+);
+
 DROP TABLE accountBook;
 CREATE TABLE accountBook
 (
