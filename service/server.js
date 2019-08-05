@@ -11,7 +11,7 @@ const line_config = {
     channelSecret: process.env.LINE_CHANNEL_SECRET
 };
 
-module.exports = (options) => {
+module.exports = () => {
     const memory = new Memory();
     const bot = new line.Client(line_config);
 
