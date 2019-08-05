@@ -11,6 +11,9 @@ const line_config = {
     channelSecret: process.env.LINE_CHANNEL_SECRET
 };
 
+/**
+@param {Object} [options.memory] - Option object for memory to store context.
+*/
 module.exports = (options) => {
     const memory = new Memory();
     options.memory = memory;
