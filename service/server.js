@@ -11,16 +11,11 @@ const line_config = {
     channelSecret: process.env.LINE_CHANNEL_SECRET
 };
 
-/**
-@module i-kakeibot
-@param {Object} [options.memory] - Option object for memory to store context.
- */
 module.exports = (options) => {
     const memory = new Memory();
     const bot = new line.Client(line_config);
 
     router.post('/', line.middleware(line_config), async (req, res, next) => {
-        options.memory = memory;
 
         // 先行してLINE側にステータスコード200でレスポンスする。
         res.sendStatus(200);
@@ -45,7 +40,7 @@ module.exports = (options) => {
                     });
                 }
 
-                let exec_client = await options.memory.get(event.source.userId);
+                let exec_client = await memory.get(event.source.userId);
                 let skill_name = "";
 
                 if (message_text.startsWith("【支出登録】")) skill_name = "RegistExpence";
@@ -58,7 +53,7 @@ module.exports = (options) => {
                 if (exec_client == null
                     || (skill_name != "" && exec_client.constructor.name != class_name)) {
                     exec_client = require(`../skill/${skill_name}`);
-                    options.memory.put(event.source.userId, exec_client);
+                    memory.put(event.source.userId, exec_client);
                 }
 
                 events_processed.push(exec_client.run(event, bot));
