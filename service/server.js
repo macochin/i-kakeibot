@@ -12,8 +12,8 @@ const line_config = {
 };
 
 module.exports = (options) => {
-    // const memory = new Memory();
-    options.memory = new Memory();
+    const memory = new Memory();
+    options.memory = memory;
     const bot = new line.Client(line_config);
 
     router.post('/', line.middleware(line_config), async (req, res, next) => {
