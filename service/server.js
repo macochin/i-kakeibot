@@ -12,7 +12,7 @@ const line_config = {
 };
 
 /**
-@module bot-express
+@module i-kakeibot
 @param {Object} [options.memory] - Option object for memory to store context.
  */
 module.exports = (options) => {
