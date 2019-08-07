@@ -31,11 +31,11 @@ class ServiceSpreadsheet {
 
             let sheetName;
             sheetName = targetDate.getFullYear()
-                        + ("00" + (targetDate.getMonth())).slice(-2)
+                        + ("00" + (targetDate.getMonth()+1)).slice(-2)
                         + "20-";
             targetDate.setMonth(targetDate.getMonth() + 1);
             sheetName += targetDate.getFullYear()
-                        + ("00" + (targetDate.getMonth())).slice(-2)
+                        + ("00" + (targetDate.getMonth()+1)).slice(-2)
                         + "19";
 
             console.debug("sheetName:" + sheetName);// TODO:
