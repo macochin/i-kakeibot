@@ -48,8 +48,7 @@ class ServiceSpreadsheet {
               // TODO:シート作成
               let options = {
                 "title": sheetName
-                , "rowCount": 8
-                , "colCount": 3
+                , "rowCount": 3
                 , "headers": [
                   "日付", "収入", "支出", "概要", "未確定フラグ", "銀行フラグ", "銀行残額", "表示用"
                 ]
