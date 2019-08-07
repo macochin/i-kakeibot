@@ -1,6 +1,6 @@
 "use strict";
 
-const db = require("../service/db");
+const db = require("../service/postgres");
 
 class SkillDispExpenceList {
   constructor() {
