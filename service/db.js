@@ -1,6 +1,7 @@
 "use strict";
 
-const dao = "postgres";// TODO:
+// const dao = "postgres";// TODO:
+const dao = "spreadsheet";
 const db = require("./" + dao);
 
 class DB {

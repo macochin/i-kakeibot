@@ -20,6 +20,31 @@ class ServiceSpreadsheet {
           doc.useServiceAccountAuth(creds, step);
         },
         // TODO:シートチェック
+        function getInfoAndWorksheets(step) {
+          doc.getInfo(function(err, info) {
+            // TODO:シート名作成
+            let targetDate = new Date(`${useDate} 00:00:00`);
+            if (targetDate.getDate() < 20) {
+              targetDate.setMonth(targetDate.getMonth - 1);
+            }
+
+            let sheetName;
+            sheetName = targetDate.getFullYear()
+                        + ("00" + (targetDate.getMonth() + 1)).slice(-2)
+                        + "20-";
+            targetDate.setMonth(targetDate.getMonth() + 1);
+            sheetName += targetDate.getFullYear()
+                        + ("00" + (targetDate.getMonth() + 1)).slice(-2)
+                        + "19";
+
+            info.worksheets.forEach(element => {
+              if (element.title == sheetName) {
+                sheet = element;
+              }
+            });
+            step();
+          });
+        },
         // TODO:無ければ作成(フォーマットコピー)
 
         // TODO:行追加
