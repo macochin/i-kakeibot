@@ -22,7 +22,7 @@ class ServiceSpreadsheet {
         // TODO:シートチェック
         function getInfoAndWorksheets(step) {
           doc.getInfo(function(err, info) {
-            // TODO:シート名作成
+            // シート名作成
             let targetDate = new Date(`${useDate} 00:00:00`);
 
             if (targetDate.getDate() < 20) {
@@ -38,15 +38,24 @@ class ServiceSpreadsheet {
                         + ("00" + (targetDate.getMonth()+1)).slice(-2)
                         + "19";
 
-            console.debug("sheetName:" + sheetName);// TODO:
-
             info.worksheets.forEach(element => {
               if (element.title == sheetName) {
                 sheet = element;
-                console.debug("sheet.title:" + sheet.title);// TODO:
               }
             });
-            console.debug("sheet:" + sheet);// TODO:
+
+            if (sheet == undefined) {
+              // TODO:シート作成
+              options = {
+                "title": sheetName
+                , "rowCount": 8
+                , "colCount": 3
+                , "headers": [
+                  "日付", "収入", "支出", "概要", "未確定フラグ", "銀行フラグ", "銀行残額", "表示用"
+                ]
+              };
+              doc.addWorksheet(options);
+            }
 
             step();
           });
