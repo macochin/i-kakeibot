@@ -49,6 +49,7 @@ class ServiceSpreadsheet {
               let options = {
                 "title": sheetName
                 , "rowCount": 3
+                , "colCount": 8
                 , "headers": [
                   "日付", "収入", "支出", "概要", "未確定フラグ", "銀行フラグ", "銀行残額", "表示用"
                 ]
