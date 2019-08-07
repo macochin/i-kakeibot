@@ -24,19 +24,21 @@ class ServiceSpreadsheet {
           doc.getInfo(function(err, info) {
             // TODO:シート名作成
             let targetDate = new Date(`${useDate} 00:00:00`);
-            console.debug("targetDate:" + targetDate);// TODO:
 
             if (targetDate.getDate() < 20) {
               targetDate.setMonth(targetDate.getMonth - 1);
             }
 
+            console.debug("targetDate.getFullYear():" + targetDate.getFullYear());// TODO:
+            console.debug("targetDate.getMonth:" + ("00" + (targetDate.getMonth())).slice(-2));// TODO:
+
             let sheetName;
             sheetName = targetDate.getFullYear()
-                        + ("00" + (targetDate.getMonth() + 1)).slice(-2)
+                        + ("00" + (targetDate.getMonth())).slice(-2)
                         + "20-";
             targetDate.setMonth(targetDate.getMonth() + 1);
             sheetName += targetDate.getFullYear()
-                        + ("00" + (targetDate.getMonth() + 1)).slice(-2)
+                        + ("00" + (targetDate.getMonth())).slice(-2)
                         + "19";
 
             console.debug("sheetName:" + sheetName);// TODO:
