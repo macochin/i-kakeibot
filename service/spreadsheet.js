@@ -43,9 +43,11 @@ class ServiceSpreadsheet {
             info.worksheets.forEach(element => {
               if (element.title == sheetName) {
                 sheet = element;
-                console.debug("sheet:" + sheet.title);// TODO:
+                console.debug("sheet.title:" + sheet.title);// TODO:
               }
             });
+            console.debug("sheet:" + sheet);// TODO:
+
             step();
           });
         },
