@@ -46,7 +46,7 @@ class ServiceSpreadsheet {
 
             if (sheet == undefined) {
               // TODO:シート作成
-              options = {
+              let options = {
                 "title": sheetName
                 , "rowCount": 8
                 , "colCount": 3
