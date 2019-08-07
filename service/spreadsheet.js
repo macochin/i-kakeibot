@@ -24,6 +24,8 @@ class ServiceSpreadsheet {
           doc.getInfo(function(err, info) {
             // TODO:シート名作成
             let targetDate = new Date(`${useDate} 00:00:00`);
+            console.debug("targetDate:" + targetDate);// TODO:
+
             if (targetDate.getDate() < 20) {
               targetDate.setMonth(targetDate.getMonth - 1);
             }
