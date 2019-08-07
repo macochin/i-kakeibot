@@ -37,9 +37,12 @@ class ServiceSpreadsheet {
                         + ("00" + (targetDate.getMonth() + 1)).slice(-2)
                         + "19";
 
+            console.debug("sheetName:" + sheetName);// TODO:
+
             info.worksheets.forEach(element => {
               if (element.title == sheetName) {
                 sheet = element;
+                console.debug("sheet:" + sheet.title);// TODO:
               }
             });
             step();
