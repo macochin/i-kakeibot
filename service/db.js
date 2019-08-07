@@ -8,8 +8,8 @@ class DB {
     return await db.asyncSelectCategory(sqlParam);
   }
 
-  async asyncInsertExpence(sqlParam) {
-    await db.asyncInsertExpence(sqlParam);
+  async asyncInsertExpence(sqlParam, userId, useDate) {
+    await db.asyncInsertExpence(sqlParam, userId, useDate);
   }
 
   async asyncSelectUseDateYM(sqlParam) {

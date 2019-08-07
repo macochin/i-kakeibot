@@ -7,8 +7,8 @@ class SkillSample {
   async run(event, bot) {
     let doc = new GoogleSpreadsheet(process.env.SPREDSHEET_ID);
     let creds = {
-     client_email: process.env.GOOGLE_SPREAD_CLIENT_EMAIL
-    , private_key: process.env.GOOGLE_SPREAD_PRIVATE_KEY // \nは改行して登録
+      client_email: process.env.GOOGLE_SPREAD_CLIENT_EMAIL
+      , private_key: process.env.GOOGLE_SPREAD_PRIVATE_KEY // \nは改行して登録
     };
 
     var sheet; //スプレッドシート

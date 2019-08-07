@@ -1,10 +1,3 @@
-DROP TABLE environment;
-CREATE TABLE environment
-(
-  env_key TEXT NOT NULL,
-  env_value TEXT NOT NULL,
-);
-
 DROP TABLE accountBook;
 CREATE TABLE accountBook
 (
@@ -18,12 +11,12 @@ CREATE TABLE accountBook
 );
 
 DROP TABLE shoppingList;
-CREATE TABLE shoppingList
-(
-  shopping_id SERIAL NOT NULL,
-  sender_id TEXT NOT NULL,
-  shopping_name TEXT NOT NULL,
-  plan_to_buy_flg BOOLEAN NOT NULL,
-  insert_date TIMESTAMP NOT NULL,
-  update_date TIMESTAMP NOT NULL
-);
+--CREATE TABLE shoppingList
+--(
+--  shopping_id SERIAL NOT NULL,
+--  sender_id TEXT NOT NULL,
+--  shopping_name TEXT NOT NULL,
+--  plan_to_buy_flg BOOLEAN NOT NULL,
+--  insert_date TIMESTAMP NOT NULL,
+--  update_date TIMESTAMP NOT NULL
+--);
