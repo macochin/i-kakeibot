@@ -4,7 +4,7 @@ const GoogleSpreadsheet = require('google-spreadsheet');
 var async = require("async");
 
 class ServiceSpreadsheet {
-  async asyncInsertExpence(sqlParam, userId, useDate) {
+  async asyncInsertExpence(param, userId, useDate) {
     // TODO:スプレッドシートIDはDBから取得するようにする
     let doc = new GoogleSpreadsheet(process.env.SPREDSHEET_ID);
     let creds = {
@@ -45,7 +45,7 @@ class ServiceSpreadsheet {
             });
 
             if (sheet == undefined) {
-              // TODO:シート作成
+              // シート新規作成
               let options = {
                 "title": sheetName
                 , "rowCount": 3
@@ -55,17 +55,17 @@ class ServiceSpreadsheet {
                 ]
               };
               doc.addWorksheet(options);
+              // TODO:デフォルト設定を入力
             }
 
             step();
           });
         },
-        // TODO:無ければ作成(フォーマットコピー)
 
         // TODO:行追加
 
         // let sqlParam = [event.source.userId, this.date.replace(/\//g, '-'), this.money, this.category, db.getNowDate(), db.getNowDate()];
-        // TODO:値登録
+        // TODO:値を入力
       ],
       function(err) {
         if (err) {
