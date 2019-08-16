@@ -18,10 +18,6 @@ class ServiceGas {
   }
 
   authorize(callback, userId) {
-    console.debug("process.env.GOOGLE_CLIENT_ID:" + process.env.GOOGLE_CLIENT_ID);// TODO:
-    console.debug("process.env.GOOGLE_CLIENT_SECRET:" + process.env.GOOGLE_CLIENT_SECRET);// TODO:
-    console.debug("REDIRECT_URL:" + REDIRECT_URL);// TODO:
-
     let oauth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, REDIRECT_URL);
 
