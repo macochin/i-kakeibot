@@ -14,7 +14,7 @@ const TOKEN_PATH = TOKEN_DIR + 'i-kakeibot.json';
 
 class ServiceGas {
   async asyncCreateSheet(userId) {
-    authorize(createSheet, userId);
+    this.authorize(createSheet, userId);
   }
 
   authorize(callback, userId) {
