@@ -1,6 +1,7 @@
 "use strict";
 
 const postgres = require("../service/postgres");
+const gas = require("../service/gas");
 
 class SkillRegistExpence {
   constructor() {
@@ -98,6 +99,9 @@ class SkillRegistExpence {
       let sqlParam = [event.source.userId, useDate, this.money, this.category, postgres.getNowDate(), postgres.getNowDate()];
 
       await postgres.asyncInsertExpence(sqlParam);// TODO:カテゴリ登録のみにする予定
+
+      // TODO:
+      await gas.asyncCreateSheet("001");
 
       let return_message = `以下で登録します。\n${useDate}\n${this.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円\n${this.category}`;
       this.date = null;
