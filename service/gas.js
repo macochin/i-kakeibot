@@ -18,8 +18,7 @@ class ServiceGas {
   }
 
   authorize(callback, userId) {
-    let auth = new googleAuth();
-    let oauth2Client = new auth.OAuth2(
+    let oauth2Client = new google.auth.OAuth2(
       GOOGLE_CLIENT_SECRET.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, REDIRECT_URL);
 
     fs.readFile(TOKEN_PATH, function (err, token) {
