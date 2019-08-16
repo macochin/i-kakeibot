@@ -12,15 +12,19 @@ const TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
   process.env.USERPROFILE) + '/.credentials/';
 const TOKEN_PATH = TOKEN_DIR + 'i-kakeibot.json';
 
-const oauth2Client = new google.auth.OAuth2(
-  process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, REDIRECT_URL);
-
 class ServiceGas {
   async asyncCreateSheet(userId) {
     this.authorize(this.createSheet, userId);
   }
 
   authorize(callback, userId) {
+    console.debug("process.env.GOOGLE_CLIENT_ID:" + process.env.GOOGLE_CLIENT_ID);// TODO:
+    console.debug("process.env.GOOGLE_CLIENT_SECRET:" + process.env.GOOGLE_CLIENT_SECRET);// TODO:
+    console.debug("REDIRECT_URL:" + REDIRECT_URL);// TODO:
+
+    let oauth2Client = new google.auth.OAuth2(
+      process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, REDIRECT_URL);
+
     fs.readFile(TOKEN_PATH, function (err, token) {
       if (err) {
         getNewToken(oauth2Client, callback, userId);
