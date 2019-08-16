@@ -1,7 +1,6 @@
 'use strict';
 
 const fs = require('fs');
-const google = require("googleapis");
 const readline = require("readline");
 const googleAuth = require('google-auth-library');
 
@@ -18,6 +17,7 @@ class ServiceGas {
   }
 
   authorize(callback, userId) {
+    const google = require("googleapis");
     let oauth2Client = new google.auth.OAuth2(
       GOOGLE_CLIENT_SECRET.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, REDIRECT_URL);
 
