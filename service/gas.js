@@ -6,7 +6,8 @@ const readline = require("readline");
 const googleAuth = require('google-auth-library');
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-const REDIRECT_URL = 'urn:ietf:wg:oauth:2.0:oob';
+// const REDIRECT_URL = 'urn:ietf:wg:oauth:2.0:oob';
+const REDIRECT_URL = 'https://i-kakeibot.herokuapp.com/';
 
 const TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
   process.env.USERPROFILE) + '/.credentials/';
