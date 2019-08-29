@@ -14,20 +14,20 @@ const TOKEN_PATH = TOKEN_DIR + 'i-kakeibot.json';
 
 class ServiceGas {
   async asyncCreateSheet(userId) {
-    this.authorize(this.createSheet, userId);
+    this.authorize(userId);
   }
 
-  authorize(callback, userId) {
+  authorize(userId) {
     // TODO:エラーになる。。。
     let oauth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, REDIRECT_URL);
 
     fs.readFile(TOKEN_PATH, function (err, token) {
       if (err) {
-        this.getNewToken(oauth2Client, callback, userId);
+        this.getNewToken(oauth2Client, userId);
       } else {
         oauth2Client.credentials = JSON.parse(token);
-        callback(oauth2Client, userId);
+        this.createSheet(oauth2Client, userId);
       }
     });
   }
@@ -66,7 +66,7 @@ class ServiceGas {
     });
   }
 
-  getNewToken(oauth2Client, callback, userId) {
+  getNewToken(oauth2Client, userId) {
     let authUrl = oauth2Client.generateAuthUrl({
       access_type: 'offline',
       scope: SCOPES
@@ -85,7 +85,7 @@ class ServiceGas {
         }
         oauth2Client.credentials = token;
         this.storeToken(token);
-        callback(oauth2Client, userId);
+        this.createSheet(oauth2Client, userId);
       });
     });
   }
