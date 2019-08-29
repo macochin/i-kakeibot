@@ -5,8 +5,8 @@ const {google} = require('googleapis');
 const readline = require("readline");
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-// const REDIRECT_URL = 'urn:ietf:wg:oauth:2.0:oob';
-const REDIRECT_URL = 'https://i-kakeibot.herokuapp.com/';
+const REDIRECT_URL = 'urn:ietf:wg:oauth:2.0:oob';
+// const REDIRECT_URL = 'https://i-kakeibot.herokuapp.com/';
 
 const TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
   process.env.USERPROFILE) + '/.credentials/';
@@ -38,6 +38,8 @@ class ServiceGas {
     // });
 
     return new Promise((resolve, reject) => {
+      console.debug("authorize:");// TODO:
+
       fs.readFile(TOKEN_PATH, function (err, token) {
         if (err) {
           return resolve();
@@ -49,6 +51,8 @@ class ServiceGas {
   }
 
   createSheet(auth, userId) {
+    console.debug("createSheet:");// TODO:
+
     let scriptId = '1ol9N5RK7MfElClbMdxcHZtazE5pJfresDOck5UWUIC1MlRko_JLYqhJZ';
     let script = google.script('v1');
 
@@ -108,17 +112,19 @@ class ServiceGas {
     // });
 
     return new Promise((resolve, reject) => {
+      console.debug("getNewToken:");// TODO:
+
       let authUrl = oauth2Client.generateAuthUrl({
         access_type: 'offline',
         scope: SCOPES
       });
-  
+
       console.log('Authorize this app by visiting this url: ', authUrl);
       let rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
       });
-  
+
       rl.question('Enter the code from that page here: ', function (code) {
         rl.close();
         oauth2Client.getToken(code, function (err, token) {
@@ -144,6 +150,8 @@ class ServiceGas {
     // console.log('Token stored to ' + TOKEN_PATH);
 
     return new Promise((resolve, reject) => {
+      console.debug("storeToken:");// TODO:
+
       try {
         fs.mkdirSync(TOKEN_DIR);
       } catch (err) {
