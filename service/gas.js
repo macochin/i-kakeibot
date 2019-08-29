@@ -1,10 +1,8 @@
 'use strict';
 
 const fs = require('fs');
-// const google = require("googleapis");
 const {google} = require('googleapis');
 const readline = require("readline");
-const googleAuth = require('google-auth-library');
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 // const REDIRECT_URL = 'urn:ietf:wg:oauth:2.0:oob';
@@ -26,7 +24,7 @@ class ServiceGas {
 
     fs.readFile(TOKEN_PATH, function (err, token) {
       if (err) {
-        getNewToken(oauth2Client, callback, userId);
+        this.getNewToken(oauth2Client, callback, userId);
       } else {
         oauth2Client.credentials = JSON.parse(token);
         callback(oauth2Client, userId);
@@ -86,7 +84,7 @@ class ServiceGas {
           return;
         }
         oauth2Client.credentials = token;
-        storeToken(token);
+        this.storeToken(token);
         callback(oauth2Client, userId);
       });
     });
