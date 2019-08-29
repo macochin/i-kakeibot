@@ -24,10 +24,106 @@ class ServiceGas {
 
     fs.readFile(TOKEN_PATH, function (err, token) {
       if (err) {
-        this.getNewToken(oauth2Client, userId);
+        // this.getNewToken(oauth2Client, userId);
+        let authUrl = oauth2Client.generateAuthUrl({
+          access_type: 'offline',
+          scope: SCOPES
+        });
+        console.log('Authorize this app by visiting this url: ', authUrl);
+        let rl = readline.createInterface({
+          input: process.stdin,
+          output: process.stdout
+        });
+        rl.question('Enter the code from that page here: ', function (code) {
+          rl.close();
+          oauth2Client.getToken(code, function (err, token) {
+            if (err) {
+              console.log('Error while trying to retrieve access token', err);
+              return;
+            }
+            oauth2Client.credentials = token;
+            // this.storeToken(token);
+            // this.createSheet(oauth2Client, userId);
+
+            try {
+              fs.mkdirSync(TOKEN_DIR);
+            } catch (err) {
+              if (err.code != 'EEXIST') {
+                throw err;
+              }
+            }
+            fs.writeFile(TOKEN_PATH, JSON.stringify(token));
+            console.log('Token stored to ' + TOKEN_PATH);
+        
+            let scriptId = '1ol9N5RK7MfElClbMdxcHZtazE5pJfresDOck5UWUIC1MlRko_JLYqhJZ';
+            let script = google.script('v1');
+        
+            script.scripts.run({
+              auth: auth,
+              resource: {
+                function: 'createSpreadsheet'
+              },
+              scriptId: scriptId
+            }, function (err, resp) {
+              if (err) {
+                console.log('The API returned an error: ' + err);
+                return;
+              }
+              if (resp.error) {
+                let error = resp.error.details[0];
+                console.log('Script error message: ' + error.errorMessage);
+                console.log('Script error stacktrace:');
+        
+                if (error.scriptStackTraceElements) {
+                  for (let i = 0; i < error.scriptStackTraceElements.length; i++) {
+                    let trace = error.scriptStackTraceElements[i];
+                    console.log('\t%s: %s', trace.function, trace.lineNumber);
+                  }
+                }
+              } else {
+                let folderSet = resp.response.result;
+                console.log(resp.response.result);
+              }
+        
+            });
+          });
+        });
+    
       } else {
         oauth2Client.credentials = JSON.parse(token);
-        this.createSheet(oauth2Client, userId);
+        // this.createSheet(oauth2Client, userId);
+        let scriptId = '1ol9N5RK7MfElClbMdxcHZtazE5pJfresDOck5UWUIC1MlRko_JLYqhJZ';
+        let script = google.script('v1');
+    
+        script.scripts.run({
+          auth: auth,
+          resource: {
+            function: 'createSpreadsheet'
+          },
+          scriptId: scriptId
+        }, function (err, resp) {
+          if (err) {
+            console.log('The API returned an error: ' + err);
+            return;
+          }
+          if (resp.error) {
+            let error = resp.error.details[0];
+            console.log('Script error message: ' + error.errorMessage);
+            console.log('Script error stacktrace:');
+    
+            if (error.scriptStackTraceElements) {
+              for (let i = 0; i < error.scriptStackTraceElements.length; i++) {
+                let trace = error.scriptStackTraceElements[i];
+                console.log('\t%s: %s', trace.function, trace.lineNumber);
+              }
+            }
+          } else {
+            let folderSet = resp.response.result;
+            console.log(resp.response.result);
+          }
+    
+        });
+    
       }
     });
   }
