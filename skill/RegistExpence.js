@@ -101,7 +101,7 @@ class SkillRegistExpence {
       await postgres.asyncInsertExpence(sqlParam);// TODO:カテゴリ登録のみにする予定
 
       // TODO:
-      await gas.asyncCreateSheet("001");
+      //await gas.asyncCreateSheet("001");
 
       let return_message = `以下で登録します。\n${useDate}\n${this.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円\n${this.category}`;
       this.date = null;
