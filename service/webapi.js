@@ -4,6 +4,8 @@ const express = require('express');
 const crypto = require("crypto");
 const db = require("./postgres");
 
+const myLiffId = process.env.MY_LIFF_ID;
+
 const router = express.Router();
 
 module.exports = () => {
@@ -20,6 +22,10 @@ module.exports = () => {
     let ret = {};
     Object.assign(ret, expnece_list.rows);
     res.json(ret);
+  });
+
+  router.get('/send-id', function(req, res) {
+    res.json({id: myLiffId});
   });
 
   return router;
