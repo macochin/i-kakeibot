@@ -1,7 +1,6 @@
 "use strict";
 
 const postgres = require("../service/postgres");
-const gas = require("../service/gas");
 
 class SkillRegistExpence {
   constructor() {
