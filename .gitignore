@@ -3,3 +3,4 @@ node_modules
 index_old.js
 memo.txt
 .env
+_*
