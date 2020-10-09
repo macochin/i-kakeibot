@@ -31,6 +31,11 @@ class expence {
 
     await sheet.addRow(row);
   }
+
+  // カテゴリ取得
+  async asyncGetCategoryList(userId) {
+    return await spreadsheet.searchRowData(expence_spread_id, utils.getNowYYYYMM(), 'category');
+  }
 }
 
 module.exports = new expence();

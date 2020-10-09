@@ -45,7 +45,6 @@ module.exports = () => {
 
                 if (message_text.startsWith("【支出登録】")) skill_name = "RegistExpence";
 //                if (message_text == "支出一覧表示") skill_name = "DispExpenceList";// TODO:delete
-                if (message_text == "支出一覧表示") skill_name = "Sample";// TODO:debug
 
                 let class_name = `Skill${skill_name}`;
                 if (exec_client == null

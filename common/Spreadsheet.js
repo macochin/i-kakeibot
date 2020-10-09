@@ -60,6 +60,16 @@ class Spreadsheet {
     });
   }
 
+  async searchRowData(sheetId, workSheetName, searchProperty) {
+    let rows = await this.getRows(sheetId, workSheetName);
+
+    let list = new Array();
+    for (let index = 0; index < rows.length; index++) {
+      list.push(rows[index][`${searchProperty}`]);
+    }
+    return Array.from(new Set(list))
+  }
+
   async searchCell(sheetId, workSheetName, targetCell) {
     let sheet = await this.getSheet(sheetId, workSheetName);
     await sheet.loadCells(targetCell);
