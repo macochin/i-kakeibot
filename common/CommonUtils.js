@@ -7,7 +7,7 @@ class CommonUtils {
     return dt;
   }
 
-  getNowFormatYYYYMM() {
+  getNowYYYYMMFormat() {
     let dt = this.getNowDate();
     return dt.getFullYear() + "/" + ("00" + (dt.getMonth()+1)).slice(-2);
   }
@@ -17,12 +17,12 @@ class CommonUtils {
     return dt.getFullYear() + ("00" + (dt.getMonth()+1)).slice(-2);
   }
 
-  getNowYYYYMMDD() {
+  getNowYYYYMMDDFormat() {
     let dt = this.getNowDate();
     return dt.getFullYear() + "/" + ("00" + (dt.getMonth()+1)).slice(-2) + "/" + ("00" + dt.getDate()).slice(-2);
   }
 
-  getYYYYMM(dt) {
+  getYYYYMMFormat(dt) {
     return dt.getFullYear() + "/" + ("00" + (dt.getMonth()+1)).slice(-2);
   }
 }

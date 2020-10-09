@@ -9,11 +9,11 @@ class expence {
   constructor() {
   }
 
-  // TODO:シート検索/作成
+  // シート検索/作成
   async asyncSearchSheet(userId) {
     let sheet = await spreadsheet.getSheet(expence_spread_id, utils.getNowYYYYMM());// TODO:debug
     if (sheet == null) {
-      let header = ["日付", "支出", "概要"];
+      let header = ['date', 'expence', 'category'];
       sheet = await spreadsheet.createSheet(expence_spread_id, utils.getNowYYYYMM(), header);
     }
 
@@ -21,6 +21,18 @@ class expence {
   }
 
   // TODO:対象シートへの追記
+  async asyncInsertExpence(userId, money, category) {
+    let sheet = await this.asyncSearchSheet(userId);
+
+    let row = new Object();
+    row.date = utils.getNowYYYYMMDDFormat();
+    row.expence = money;
+    row.category = category;
+
+    await await sheet.addRow(row);
+
+    return row;
+  }
 
   // TODO:delete
   // async asyncSelectOwner(userId) {
