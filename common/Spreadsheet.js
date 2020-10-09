@@ -19,9 +19,7 @@ class Spreadsheet {
   }
 
   async getSheet(sheetId, workSheetName) {
-    let doc = this.authDoc(sheetId);
-
-    console.debug("doc.sheetsByIndex[0]:" + doc.sheetsByIndex[0]);// TODO:
+    let doc = await this.authDoc(sheetId);
 
     let sheet;
     for (let index = 0; index < doc.sheetsByIndex.length; index++) {
@@ -34,7 +32,7 @@ class Spreadsheet {
   }
 
   async createSheet(sheetId, sheetName, header) {
-    let doc = this.authDoc(sheetId);
+    let doc = await this.authDoc(sheetId);
     let sheet = await doc.addSheet({title: sheetName});
     // // 名称変更
     // await sheet.updateProperties({title: sheetName});
