@@ -65,11 +65,13 @@ class Spreadsheet {
 
     let list = new Array();
     rows.forEach(element => {
-      console.debug("element[`${searchProperty}`]:" + element[`${searchProperty}`]);// TODO:
       list.push(element[`${searchProperty}`]);
     });
 
-    return Array.from(new Set(list))
+    console.debug("list:" + list);// TODO:
+    console.debug("list.length:" + list.length);// TODO:
+    let ret = Array.from(new Set(list))
+    return ret;
   }
 
   async searchCell(sheetId, workSheetName, targetCell) {
