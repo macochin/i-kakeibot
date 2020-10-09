@@ -13,17 +13,14 @@ class Spreadsheet {
 
     await doc.useServiceAccountAuth(creds);
     await doc.loadInfo();
+
+    return doc;
   }
 
   async getSheet(sheetId, workSheetName) {
     let doc = this.authDoc(sheetId);
 
-    console.debug("doc:" + doc);// TODO:
     let sheet;
-    if (doc.sheetsByIndex == undefined) {
-      return null;
-    }
-
     for (let index = 0; index < doc.sheetsByIndex.length; index++) {
       if (doc.sheetsByIndex[index].title == workSheetName) {
         sheet = doc.sheetsByIndex[index];
