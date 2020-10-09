@@ -22,14 +22,15 @@ class Spreadsheet {
     let doc = await this.authDoc(sheetId);
 
     let sheet = null;
-    console.debug("doc.sheetsByIndex:" + doc.sheetsByIndex);// TODO:
+    console.debug("sheet:" + sheet);// TODO:
     for (let index = 0; index < doc.sheetsByIndex.length; index++) {
+      console.debug("doc.sheetsByIndex[index].title:" + doc.sheetsByIndex[index].title);// TODO:
       if (doc.sheetsByIndex[index].title == workSheetName) {
         sheet = doc.sheetsByIndex[index];
+        console.debug("sheet.title:" + sheet.title);// TODO:
       }
     }
 
-    console.debug("sheet:" + sheet);// TODO:
     return sheet;
   }
 
