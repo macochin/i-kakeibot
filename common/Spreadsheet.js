@@ -18,6 +18,7 @@ class Spreadsheet {
   async getSheet(sheetId, workSheetName) {
     let doc = this.authDoc(sheetId);
 
+    console.debug("doc:" + doc);// TODO:
     let sheet;
     if (doc.sheetsByIndex == undefined) {
       return null;
