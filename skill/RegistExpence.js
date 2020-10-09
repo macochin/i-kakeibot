@@ -1,6 +1,7 @@
 "use strict";
 
 const postgres = require("../service/postgres");// TODO:delete
+const expence = require("../service/expence");
 
 class SkillRegistExpence {
   constructor() {
@@ -96,8 +97,9 @@ class SkillRegistExpence {
     if (this.date != null && this.money != null && this.category != null) {
       let useDate = this.date.replace(/\//g, '-');
 
-      let sqlParam = [event.source.userId, useDate, this.money, this.category, postgres.getNowDate(), postgres.getNowDate()];
-      await postgres.asyncInsertExpence(sqlParam);// TODO:delete
+      // let sqlParam = [event.source.userId, useDate, this.money, this.category, postgres.getNowDate(), postgres.getNowDate()];
+      // await postgres.asyncInsertExpence(sqlParam);// TODO:delete
+      await expence.asyncInsertExpence(event.source.userId, money, category, useDate);
 
       let return_message = `以下で登録します。\n${useDate}\n${this.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円\n${this.category}`;
       this.date = null;
