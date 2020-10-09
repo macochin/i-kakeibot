@@ -11,11 +11,11 @@ class Spreadsheet {
       private_key: process.env.GOOGLE_AUTH_PRIVATE_KEY // \nは改行して登録
     };
 
-    console.debug("process.env.GOOGLE_AUTH_EMAIL:" + process.env.GOOGLE_AUTH_EMAIL);// TODO:
-    console.debug("process.env.GOOGLE_AUTH_PRIVATE_KEY:" +process.env.GOOGLE_AUTH_PRIVATE_KEY);// TODO:
-
+    console.debug("doc.useServiceAccountAuth start");// TODO:
     await doc.useServiceAccountAuth(creds);
+    console.debug("doc.useServiceAccountAuth end");// TODO:
     await doc.loadInfo();
+    console.debug("doc.loadInfo end");// TODO:
     console.debug("doc.title:" + doc.title);// TODO:
     return doc;
   }
