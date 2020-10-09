@@ -1,6 +1,6 @@
 "use strict";
 
-const postgres = require("../service/postgres");
+const postgres = require("../service/postgres");// TODO:delete
 
 class SkillRegistExpence {
   constructor() {
@@ -31,7 +31,7 @@ class SkillRegistExpence {
 
       // DBから取得したカテゴリをセット(最近使用したもの順にソート)
       let sqlParam = [event.source.userId];
-      let category_list = await postgres.asyncSelectCategory(sqlParam);
+      let category_list = await postgres.asyncSelectCategory(sqlParam);// TODO:delete
       if (category_list.rows.length == 0) {
         // DBから取得できない場有はデフォルト値をセット
         replyMessage.quickReply.items.push({
@@ -95,12 +95,9 @@ class SkillRegistExpence {
 
     if (this.date != null && this.money != null && this.category != null) {
       let useDate = this.date.replace(/\//g, '-');
+
       let sqlParam = [event.source.userId, useDate, this.money, this.category, postgres.getNowDate(), postgres.getNowDate()];
-
-      await postgres.asyncInsertExpence(sqlParam);// TODO:カテゴリ登録のみにする予定
-
-      // TODO:
-      //await gas.asyncCreateSheet("001");
+      await postgres.asyncInsertExpence(sqlParam);// TODO:delete
 
       let return_message = `以下で登録します。\n${useDate}\n${this.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円\n${this.category}`;
       this.date = null;

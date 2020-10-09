@@ -1,6 +1,8 @@
+// TODO:delete
 "use strict";
 
-const db = require("../service/postgres");
+const db = require("../service/postgres");// TODO:delete
+const utils = require("../common/CommonUtils");
 
 class SkillDispExpenceList {
   constructor() {
@@ -39,7 +41,7 @@ class SkillDispExpenceList {
       };
 
       let sqlParam = [event.source.userId, this.target_ym];
-      let expnece_list = await db.asyncSelectExpenceList(sqlParam);
+      let expnece_list = await db.asyncSelectExpenceList(sqlParam);// TODO:delete
 
       let pre_md = "";
       let count = 1;
@@ -72,7 +74,7 @@ class SkillDispExpenceList {
     if (this.delete_flg && message_text != "") {
       let str = message_text.split(") ");
       let sqlParam = [event.source.userId, str[0]];
-      await db.asyncDeleteExpence(sqlParam);
+      await db.asyncDeleteExpence(sqlParam);// TODO:delete
 
       this.target_ym = null;
       this.delete_flg = false;
@@ -84,13 +86,13 @@ class SkillDispExpenceList {
 
     var regex = /^\d{4}\/\d{1,2}$/;
     if (message_text == "支出一覧表示") {
-      this.target_ym = db.getNowYYYYMM();
+      this.target_ym = utils.getNowFormatYYYYMM();
     } else if (regex.test(message_text)) {
       this.target_ym = message_text;
     }
 
     let sqlParam = [event.source.userId, this.target_ym];
-    let expnece_list = await db.asyncSelectExpenceList(sqlParam);
+    let expnece_list = await db.asyncSelectExpenceList(sqlParam);// TODO:delete
 
     let replyMessage = {
       type: "text",
@@ -136,7 +138,7 @@ class SkillDispExpenceList {
       pre_md = element.usedate_md;
     });
 
-    let useDate_list = await db.asyncSelectUseDateYM(sqlParam);
+    let useDate_list = await db.asyncSelectUseDateYM(sqlParam);// TODO:delete
 
     for (let index = 0; index < useDate_list.rows.length; index++) {
       let element = useDate_list.rows[index];

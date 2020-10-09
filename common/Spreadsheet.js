@@ -4,7 +4,7 @@ const {GoogleSpreadsheet} = require('google-spreadsheet');
 
 class Spreadsheet {
 
-  async auth(sheetId, workSheetName) {
+  async authDoc(sheetId) {
     let doc = new GoogleSpreadsheet(sheetId);
     let creds = {
       client_email: process.env.GOOGLE_AUTH_EMAIL,
@@ -13,6 +13,10 @@ class Spreadsheet {
 
     await doc.useServiceAccountAuth(creds);
     await doc.loadInfo();
+  }
+
+  async getSheet(sheetId, workSheetName) {
+    let doc = this.authDoc(sheetId);
 
     let sheet;
     for (let index = 0; index < doc.sheetsByIndex.length; index++) {
@@ -24,13 +28,23 @@ class Spreadsheet {
     return sheet;
   }
 
+  async createSheet(sheetId, sheetName, header) {
+    let doc = this.authDoc(sheetId);
+    let sheet = await doc.addSheet();
+    // 名称変更
+    await sheet.updateProperties({title: sheetName});
+    // ヘッダ追加
+    await sheet.setHeaderRow(header);
+    return sheet;
+  }
+
   async addRow(sheetId, workSheetName, row) {
-    let sheet = await this.auth(sheetId, workSheetName);
+    let sheet = await this.getSheet(sheetId, workSheetName);
     await sheet.addRow(row);
   }
 
   async updateCell(sheetId, workSheetName, targetCell, value) {
-    let sheet = await this.auth(sheetId, workSheetName);
+    let sheet = await this.getSheet(sheetId, workSheetName);
     await sheet.loadCells(targetCell);
     let cell = sheet.getCellByA1(targetCell);
     cell.value = value;
@@ -46,14 +60,14 @@ class Spreadsheet {
   }
 
   async searchCell(sheetId, workSheetName, targetCell) {
-    let sheet = await this.auth(sheetId, workSheetName);
+    let sheet = await this.getSheet(sheetId, workSheetName);
     await sheet.loadCells(targetCell);
     let cell = sheet.getCellByA1(targetCell);
     return cell.value;
   }
 
   async getRows(sheetId, workSheetName) {
-    let sheet = await this.auth(sheetId, workSheetName);
+    let sheet = await this.getSheet(sheetId, workSheetName);
     let rows = await sheet.getRows();
     return rows;
   }

@@ -2,7 +2,7 @@
 
 class Memory {
   constructor() {
-    let Store = require("./memory-cache");
+    let Store = require("../common/memory-cache");
     this.store = new Store();
   }
 
