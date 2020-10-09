@@ -21,6 +21,7 @@ class SkillRegistExpence {
       this.date = registValue[1];
       this.money = registValue[2];
 
+      // TODO:カテゴリ登録のUI/UXは見直す必要あり
       let replyMessage = {
         type: "text",
         text: "カテゴリは？",
