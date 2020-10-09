@@ -1,4 +1,6 @@
 'use strict';
+// GCPでサービスキーを発行すること
+// Google SperadSheet のAPIを有効化すること
 
 const {GoogleSpreadsheet} = require('google-spreadsheet');
 
@@ -13,12 +15,13 @@ class Spreadsheet {
 
     await doc.useServiceAccountAuth(creds);
     await doc.loadInfo();
-    console.debug("doc.title:" + doc.title);// TODO:
     return doc;
   }
 
   async getSheet(sheetId, workSheetName) {
     let doc = this.authDoc(sheetId);
+
+    console.debug("doc.sheetsByIndex:" + doc.sheetsByIndex);// TODO:
 
     let sheet;
     for (let index = 0; index < doc.sheetsByIndex.length; index++) {
