@@ -99,7 +99,7 @@ class SkillRegistExpence {
 
       // let sqlParam = [event.source.userId, useDate, this.money, this.category, postgres.getNowDate(), postgres.getNowDate()];
       // await postgres.asyncInsertExpence(sqlParam);// TODO:delete
-      await expence.asyncInsertExpence(event.source.userId, money, category, useDate);
+      await expence.asyncInsertExpence(event.source.userId, this.money, this.category, useDate);
 
       let return_message = `以下で登録します。\n${useDate}\n${this.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円\n${this.category}`;
       this.date = null;
