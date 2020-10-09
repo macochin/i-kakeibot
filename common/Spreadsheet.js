@@ -62,13 +62,13 @@ class Spreadsheet {
 
   async searchRowData(sheetId, workSheetName, searchProperty) {
     let rows = await this.getRows(sheetId, workSheetName);
-    console.debug("rows:" + rows);// TODO:
-    console.debug("rows.length:" + rows.length);// TODO:
 
     let list = new Array();
-    for (let index = 0; index < rows.length; index++) {
-      list.push(rows[index][`${searchProperty}`]);
-    }
+    rows.forEach(element => {
+      console.debug("element[`${searchProperty}`]:" + element[`${searchProperty}`]);// TODO:
+      list.push(element[`${searchProperty}`]);
+    });
+
     return Array.from(new Set(list))
   }
 
