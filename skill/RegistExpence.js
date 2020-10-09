@@ -85,7 +85,7 @@ class SkillRegistExpence {
     if (this.date != null && this.money != null && this.category != null) {
       await expence.asyncInsertExpence(event.source.userId, this.money, this.category, this.date);
 
-      let return_message = `以下で登録します。\n${useDate}\n${this.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円\n${this.category}`;
+      let return_message = `以下で登録します。\n${this.date}\n${this.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円\n${this.category}`;
       this.date = null;
       this.money = null;
       this.category = null;
