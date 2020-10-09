@@ -68,9 +68,8 @@ class Spreadsheet {
       list.push(element[`${searchProperty}`]);
     });
 
-    console.debug("list:" + list);// TODO:
-    console.debug("list.length:" + list.length);// TODO:
     let ret = Array.from(new Set(list))
+    console.debug("ret:" + ret);// TODO:
     return ret;
   }
 
