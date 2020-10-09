@@ -19,6 +19,11 @@ class Spreadsheet {
     let doc = this.authDoc(sheetId);
 
     let sheet;
+    console.debug("doc.sheetsByIndex:" + doc.sheetsByIndex);// TODO:
+    if (doc.sheetsByIndex == undefined) {
+      return null;
+    }
+
     for (let index = 0; index < doc.sheetsByIndex.length; index++) {
       if (doc.sheetsByIndex[index].title == workSheetName) {
         sheet = doc.sheetsByIndex[index];

@@ -12,7 +12,7 @@ class expence {
   // TODO:シート検索/作成
   async asyncSearchSheet(userId) {
     let sheet = await spreadsheet.getSheet(expence_spread_id, utils.getNowYYYYMM());// TODO:debug
-    if (sheet == undefined) {
+    if (sheet == null) {
       let header = ["日付", "支出", "概要"];
       sheet = await spreadsheet.createSheet(expence_spread_id, utils.getNowYYYYMM(), header);
     }
