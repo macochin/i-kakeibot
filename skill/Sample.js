@@ -7,8 +7,8 @@ class SkillSample {
   }
 
   async run(event, bot) {
-    expence.asyncSearchSheet(process.env.SENDER_ID);
-    return bot.replyMessage(event.replyToken, "sample成功");
+    let sheet = await expence.asyncSearchSheet(process.env.SENDER_ID);
+    return bot.replyMessage(event.replyToken, "sample成功:" + sheet.title);
   }
 }
 
