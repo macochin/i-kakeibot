@@ -34,7 +34,12 @@ class expence {
 
   // カテゴリ取得
   async asyncGetCategoryList(userId) {
-    return await spreadsheet.searchRowData(expence_spread_id, utils.getNowYYYYMM(), 'category');
+    let sheet = await this.asyncSearchSheet(userId);
+    let list;
+    if (sheet != null) {
+      list = await spreadsheet.searchRowData(expence_spread_id, utils.getNowYYYYMM(), 'category');
+    }
+    return list;
   }
 }
 
