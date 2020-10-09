@@ -21,7 +21,7 @@ class Spreadsheet {
   async getSheet(sheetId, workSheetName) {
     let doc = await this.authDoc(sheetId);
 
-    let sheet;
+    let sheet = null;
     console.debug("doc.sheetsByIndex:" + doc.sheetsByIndex);// TODO:
     for (let index = 0; index < doc.sheetsByIndex.length; index++) {
       if (doc.sheetsByIndex[index].title == workSheetName) {
