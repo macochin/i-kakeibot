@@ -19,7 +19,6 @@ class Spreadsheet {
     let doc = this.authDoc(sheetId);
 
     let sheet;
-    console.debug("doc.sheetsByIndex:" + doc.sheetsByIndex);// TODO:
     if (doc.sheetsByIndex == undefined) {
       return null;
     }
@@ -35,12 +34,11 @@ class Spreadsheet {
 
   async createSheet(sheetId, sheetName, header) {
     let doc = this.authDoc(sheetId);
-    let prop = {'sheetId':sheetId, 'headerValues':header, 'title':sheetName};
-    let sheet = await doc.addSheet(prop);
+    let sheet = await doc.addSheet({title: sheetName});
     // // 名称変更
     // await sheet.updateProperties({title: sheetName});
-    // // ヘッダ追加
-    // await sheet.setHeaderRow(header);
+    // ヘッダ追加
+    await sheet.setHeaderRow(header);
     return sheet;
   }
 
