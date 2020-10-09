@@ -4,6 +4,7 @@
 
 const {GoogleSpreadsheet} = require('google-spreadsheet');
 
+// TODO:methodの整理が必要(認証アリ、シートありき)
 class Spreadsheet {
 
   async authDoc(sheetId) {
