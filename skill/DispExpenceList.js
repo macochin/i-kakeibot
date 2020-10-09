@@ -14,7 +14,7 @@ class SkillDispExpenceList {
       "altText": "支出一覧表示",
       "template": {
         "type": "buttons",
-        "title": "支出一覧表示",
+        "text": "支出一覧表示",
         "actions": [
             {
               "type": "uri",
