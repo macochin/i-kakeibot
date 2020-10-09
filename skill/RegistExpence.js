@@ -64,7 +64,7 @@ class SkillRegistExpence {
       }
 
       // TODO:Quick Replyの数に制限あり？
-      for (let index = 0; index < category_list.rows.length; index++) {
+      for (let index = 0; index < category_list.length; index++) {
         replyMessage.quickReply.items.push({
           "type": "action",
           "action": {
