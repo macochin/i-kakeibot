@@ -29,9 +29,7 @@ class expence {
     row.expence = money;
     row.category = category;
 
-    await await sheet.addRow(row);
-
-    return row;
+    await sheet.addRow(row);
   }
 
   // TODO:delete
