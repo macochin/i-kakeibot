@@ -35,7 +35,7 @@ class SkillRegistExpence {
       // let category_list = await postgres.asyncSelectCategory(sqlParam);// TODO:delete
 
       let category_list = await expence.asyncGetCategoryList(event.source.userId);
-      if (category_list == undefined || category_list.rows.length == 0) {
+      if (category_list == undefined || category_list.length == 0) {
         // DBから取得できない場有はデフォルト値をセット
         replyMessage.quickReply.items.push({
           "type": "action",

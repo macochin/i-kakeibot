@@ -69,7 +69,6 @@ class Spreadsheet {
     });
 
     let ret = Array.from(new Set(list))
-    console.debug("ret:" + ret);// TODO:
     return ret;
   }
 
