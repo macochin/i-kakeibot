@@ -31,9 +31,6 @@ class SkillRegistExpence {
       };
 
       // DBから取得したカテゴリをセット(最近使用したもの順にソート)
-      // let sqlParam = [event.source.userId];
-      // let category_list = await postgres.asyncSelectCategory(sqlParam);// TODO:delete
-
       let category_list = await expence.asyncGetCategoryList(event.source.userId);
       if (category_list == undefined || category_list.length == 0) {
         // DBから取得できない場有はデフォルト値をセット
@@ -69,24 +66,13 @@ class SkillRegistExpence {
           "type": "action",
           "action": {
             "type": "message",
-            "label": `${category_list.rows[index].category}`,
-            "text": `${category_list.rows[index].category}`
+            "label": `${category_list[index]}`,
+            "text": `${category_list[index]}`
           }
         });
 
         if (index > 10) break;
       }
-
-      // category_list.rows.forEach(element => {
-      //   replyMessage.quickReply.items.push({
-      //     "type": "action",
-      //     "action": {
-      //       "type": "message",
-      //       "label": `${element.category}`,
-      //       "text": `${element.category}`
-      //     }
-      //   });
-      // });
 
       // TODO:14
       return bot.replyMessage(event.replyToken, replyMessage);
