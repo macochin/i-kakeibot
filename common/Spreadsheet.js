@@ -35,11 +35,12 @@ class Spreadsheet {
 
   async createSheet(sheetId, sheetName, header) {
     let doc = this.authDoc(sheetId);
-    let sheet = await doc.addSheet();
-    // 名称変更
-    await sheet.updateProperties({title: sheetName});
-    // ヘッダ追加
-    await sheet.setHeaderRow(header);
+    let prop = {'sheetId':sheetId, 'headerValues':header, 'title':sheetName};
+    let sheet = await doc.addSheet(prop);
+    // // 名称変更
+    // await sheet.updateProperties({title: sheetName});
+    // // ヘッダ追加
+    // await sheet.setHeaderRow(header);
     return sheet;
   }
 
