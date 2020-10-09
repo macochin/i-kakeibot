@@ -31,10 +31,10 @@ class Spreadsheet {
     return sheet;
   }
 
-  async createSheet(sheetId, sheetName, header) {
+  async createSheet(sheetId, sheetName, header, rowSize, columnSize) {
     let doc = await this.authDoc(sheetId);
     let sheet = await doc.addSheet({title: sheetName});
-    // ヘッダ追加
+    await sheet.resize({ rowCount: rowSize, columnCount: columnSize });
     await sheet.setHeaderRow(header);
     return sheet;
   }

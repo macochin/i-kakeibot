@@ -1,6 +1,5 @@
 "use strict";
 
-const postgres = require("../service/postgres");// TODO:delete
 const expence = require("../service/expence");
 
 class SkillRegistExpence {

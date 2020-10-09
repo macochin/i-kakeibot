@@ -14,7 +14,7 @@ class expence {
     let sheet = await spreadsheet.getSheet(expence_spread_id, utils.getNowYYYYMM());
     if (sheet == null) {
       let header = ['date', 'expence', 'category'];
-      sheet = await spreadsheet.createSheet(expence_spread_id, utils.getNowYYYYMM(), header);
+      sheet = await spreadsheet.createSheet(expence_spread_id, utils.getNowYYYYMM(), header, 3, 5);
     }
 
     return sheet;
