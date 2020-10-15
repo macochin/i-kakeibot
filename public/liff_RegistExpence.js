@@ -4,9 +4,6 @@ window.onload = function (e) {
     }).then(function (jsonResponse) {
         myLiffId = jsonResponse.id;
         initializeLiff(myLiffId);
-        // }).catch(function(error) {
-        //     document.getElementById("liffAppContent").classList.add('hidden');
-        //     document.getElementById("nodeLiffIdErrorMessage").classList.remove('hidden');
     });
 
     document.getElementById('expenceDate').value = formatDate(new Date());
@@ -36,12 +33,23 @@ window.onload = function (e) {
 function initializeLiff(myLiffId) {
     liff.init({
         liffId: myLiffId
-        // }).then(() => {
-        //         // start to use LIFF's api
-        //         initializeApp();
-    // }).catch((err) => {
-    //     document.getElementById("liffAppContent").classList.add('hidden');
-    //     document.getElementById("liffInitErrorMessage").classList.remove('hidden');
+    }).then(() => {
+        let url = `/webapi/categoryList`;
+        let method = "POST";
+        let obj = {userId: `${liff.getProfile().userId}`};
+        let body = Object.keys(obj).map((key)=>key+"="+encodeURIComponent(obj[key])).join("&");
+        let headers = {
+            'Accept': 'application/json'
+        };
+
+        fetch(url, {method, headers, body}).then(function (reqResponse) {
+            return reqResponse.json();
+        }).then(function (jsonResponse) {
+            // TODO:fetchでデータを取得し、画面を動的に作成
+            jsonResponse.forEach(element => {
+                alert(element.type + ":" + element.text);
+            });
+        });
     });
 }
 
