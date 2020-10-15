@@ -14,7 +14,7 @@ window.onload = function (e) {
 
         message += "日にち:" + $('#expenceDate').val().replace(/-/g, '/');
         message += "\n金額:" + $('#expence').val();
-        message += "\カテゴリ:" + $('#category').val();
+        message += "\nカテゴリ:" + $('#category').val();
 
         liff.sendMessages([{
             type: 'text',
