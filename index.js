@@ -10,6 +10,7 @@ const auth = require("./service/googleOauth2");
 // -----------------------------------------------------------------------------
 // Webサーバー設定
 server.listen(process.env.PORT || 3000);
+server.set("view engine", "ejs");
 server.use(express.static('public'));
 server.use("/webhook", serviceServer());
 server.use(bodyParser.json());
