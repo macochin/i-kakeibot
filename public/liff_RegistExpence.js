@@ -6,14 +6,14 @@ window.onload = function (e) {
         initializeLiff(myLiffId);
     });
 
-    document.getElementById('expenceDate').value = formatDate(new Date());
+    $('#expenceDate').val(formatDate(new Date()));
 
     // メッセージの送信
     document.getElementById('sendmessagebutton').addEventListener('click', function () {
         let message = "【支出登録】\n";
 
-        message += "日にち:" + document.getElementById('expenceDate').value.replace(/-/g, '/') + "\n";
-        message += "金額:" + document.getElementById('expence').value;
+        message += "日にち:" + $('#expenceDate').val().replace(/-/g, '/') + "\n";
+        message += "金額:" + $('#expence').val();
 
         liff.sendMessages([{
             type: 'text',
@@ -48,11 +48,9 @@ function initializeLiff(myLiffId) {
                 return reqResponse.json();
             }).then(function (jsonResponse) {
                 // TODO:fetchでデータを取得し、画面を動的に作成
-                let wordlist = new Array();
                 jsonResponse.forEach(element => {
-                    wordlist.push(element.text);
+                    $("#categorylist").append(`<option value="${element.text}">`);
                 });
-                $("#category").autocomplete({source: wordlist});
             });
         });
     });
