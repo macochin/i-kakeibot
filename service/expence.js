@@ -2,6 +2,7 @@
 
 const spreadsheet = require("../common/Spreadsheet");
 const utils = require("../common/CommonUtils");
+const crypto = require('../common/crypto');
 
 const master_spread_id = process.env.MASTER_SPREAD_ID;
 
@@ -10,7 +11,8 @@ class expence {
   }
 
   async asyncSearchUserSheetId(userId) {
-    let row = await spreadsheet.searchRow(master_spread_id, "マスタ", userId, "userId");
+    let crypt_userId = await crypto.createCipher(req.session.userId);
+    let row = await spreadsheet.searchRow(master_spread_id, "マスタ", crypt_userId, "userId");
     return row.sheetId;
   }
 
