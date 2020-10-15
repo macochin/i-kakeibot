@@ -13,7 +13,7 @@ module.exports = () => {
     res.json({id: myLiffId});
   });
 
-  router.POST('/categoryList', async function(req, res) {
+  router.post('/categoryList', async function(req, res) {
     let userId = req.params.userId;
     console.debug("userId:" + userId);// TODO:
     // DBから取得したカテゴリをセット(最近使用したもの順にソート)
