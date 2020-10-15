@@ -5,6 +5,7 @@ const server = express();
 const bodyParser = require("body-parser");
 const serviceServer = require("./service/server")
 const webapi = require("./service/webapi");
+const auth = require("./service/googleOauth2");
 
 // -----------------------------------------------------------------------------
 // Webサーバー設定
@@ -14,3 +15,4 @@ server.use("/webhook", serviceServer());
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended: false}));
 server.use("/webapi", webapi());
+server.use("/auth", auth());

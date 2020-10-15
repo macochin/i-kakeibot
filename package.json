@@ -13,10 +13,12 @@
     "@line/bot-sdk": "^7.1.0",
     "async": "^3.2.0",
     "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "google-spreadsheet": "^3.0.13",
     "googleapis": "^60.0.1",
-    "memory-cache": "^0.2.0"
+    "memory-cache": "^0.2.0",
+    "querystring": "^0.2.0"
   },
   "devDependencies": {}
 }
