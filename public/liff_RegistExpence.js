@@ -33,11 +33,11 @@ window.onload = function (e) {
 function initializeLiff(myLiffId) {
     liff.init({
         liffId: myLiffId
-    }).then(() => {
-        alert(liff.getProfile().userId);// TODO:
+    }).then((data) => {
+        alert(data.context.userId);// TODO:
         let url = `/webapi/categoryList`;
         let method = "POST";
-        let obj = {userId: `${liff.getProfile().userId}`};
+        let obj = {userId: `${data.context.userId}`};
         let body = Object.keys(obj).map((key)=>key+"="+encodeURIComponent(obj[key])).join("&");
         let headers = {
             'Accept': 'application/json'
