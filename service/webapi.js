@@ -20,8 +20,7 @@ module.exports = () => {
 
     for (let index = 0; index < category_list.length; index++) {
       retJson.push({
-        type:"radio"
-        , text:`${category_list[index]}`
+        text:`${category_list[index]}`
       })
     }
 

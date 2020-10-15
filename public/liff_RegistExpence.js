@@ -48,9 +48,11 @@ function initializeLiff(myLiffId) {
                 return reqResponse.json();
             }).then(function (jsonResponse) {
                 // TODO:fetchでデータを取得し、画面を動的に作成
+                let wordlist = new Array();
                 jsonResponse.forEach(element => {
-                    alert(element.type + ":" + element.text);
+                    wordlist.push(element.text);
                 });
+                $("#category").autocomplete({source: wordlist});
             });
         });
     });

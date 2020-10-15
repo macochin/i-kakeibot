@@ -11,7 +11,6 @@ class expence {
 
   async asyncSearchUserSheetId(userId) {
     let row = await spreadsheet.searchRow(master_spread_id, "マスタ", userId, "userId");
-    console.debug("row.sheetId:" + row.sheetId);// TODO:
     return row.sheetId;
   }
 
