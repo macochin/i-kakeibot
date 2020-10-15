@@ -14,7 +14,6 @@ module.exports = () => {
 
   router.post('/categoryList', async function(req, res) {
     let userId = req.body.userId;
-    console.debug("userId:" + userId);// TODO:
     // DBから取得したカテゴリをセット(最近使用したもの順にソート)
     let category_list = await expence.asyncGetCategoryList(userId);
     let retJson = [];

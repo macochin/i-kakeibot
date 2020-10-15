@@ -35,18 +35,15 @@ function initializeLiff(myLiffId) {
         liffId: myLiffId
     }).then(() => {
         liff.getProfile().then(profile => {
-            alert(profile.userId);// TODO:
             let url = `/webapi/categoryList`;
             let method = "POST";
             let obj = {userId: `${profile.userId}`};
-            // let body = Object.keys(obj).map((key)=>key+"="+encodeURIComponent(obj[key])).join("&");
             let body = JSON.stringify(obj);
             let headers = {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             };
 
-            alert(body.userId);// TODO:
             fetch(url, {method, headers, body}).then(function (reqResponse) {
                 return reqResponse.json();
             }).then(function (jsonResponse) {

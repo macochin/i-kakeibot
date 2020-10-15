@@ -3,18 +3,24 @@
 const spreadsheet = require("../common/Spreadsheet");
 const utils = require("../common/CommonUtils");
 
-const expence_spread_id = process.env.EXPENCE_SPREAD_ID;// TODO:一旦固定でコーディング
+const master_spread_id = process.env.MASTER_SPREAD_ID;
 
 class expence {
   constructor() {
   }
 
+  async asyncSearchUserSheetId(userId) {
+    let sheetId = await spreadsheet.searchRow(master_spread_id, "マスタ", userId);
+    return sheetId;
+  }
+
   // シート検索/作成
   async asyncSearchSheet(userId) {
-    let sheet = await spreadsheet.getSheet(expence_spread_id, utils.getNowYYYYMM());
+    let sheetId = await this.asyncSearchUserSheetId(userId);
+    let sheet = await spreadsheet.getSheet(sheetId, utils.getNowYYYYMM());
     if (sheet == null) {
       let header = ['date', 'expence', 'category'];
-      sheet = await spreadsheet.createSheet(expence_spread_id, utils.getNowYYYYMM(), header, 5, 3);
+      sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 3);
     }
 
     return sheet;
@@ -37,7 +43,8 @@ class expence {
     let sheet = await this.asyncSearchSheet(userId);
     let list;
     if (sheet != null) {
-      list = await spreadsheet.searchRowData(expence_spread_id, utils.getNowYYYYMM(), 'category');
+      let sheetId = await this.asyncSearchUserSheetId(userId);
+      list = await spreadsheet.searchRowData(sheetId, utils.getNowYYYYMM(), 'category');
     }
     return list;
   }
