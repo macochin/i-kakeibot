@@ -18,8 +18,7 @@ class expence {
 
   // シート検索/作成
   async asyncSearchSheet(userId) {
-    let crypt_userId = await crypto.createCipher(req.session.userId);
-    let sheetId = await this.asyncSearchUserSheetId(crypt_userId);
+    let sheetId = await this.asyncSearchUserSheetId(userId);
     let sheet = await spreadsheet.getSheet(sheetId, utils.getNowYYYYMM());
     if (sheet == null) {
       let header = ['date', 'expence', 'category'];
