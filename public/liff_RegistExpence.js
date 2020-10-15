@@ -34,11 +34,11 @@ function initializeLiff(myLiffId) {
     liff.init({
         liffId: myLiffId
     }).then(() => {
-        liff.login().then(() => {
-            alert(liff.getProfile().userId);// TODO:
+        liff.getProfile().then(profile => {
+            alert(profile.userId);// TODO:
             let url = `/webapi/categoryList`;
             let method = "POST";
-            let obj = {userId: `${liff.getProfile().userId}`};
+            let obj = {userId: `${profile.userId}`};
             let body = Object.keys(obj).map((key)=>key+"="+encodeURIComponent(obj[key])).join("&");
             let headers = {
                 'Accept': 'application/json'
@@ -52,7 +52,6 @@ function initializeLiff(myLiffId) {
                     alert(element.type + ":" + element.text);
                 });
             });
-
         });
     });
 }
