@@ -18,10 +18,17 @@ module.exports = () => {
     let category_list = await expence.asyncGetCategoryList(userId);
     let retJson = [];
 
-    for (let index = 0; index < category_list.length; index++) {
-      retJson.push({
-        text:`${category_list[index]}`
-      })
+    if (category_list.length == 0) {
+      retJson.push("ランチ");
+      retJson.push("マンガ");
+      retJson.push("日用品");
+    } else {
+      for (let index = 0; index < category_list.length; index++) {
+        retJson.push({
+          text:`${category_list[index]}`
+        })
+        if (index > 5) break;
+      }
     }
 
     res.json(retJson);

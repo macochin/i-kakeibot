@@ -12,8 +12,9 @@ window.onload = function (e) {
     document.getElementById('sendmessagebutton').addEventListener('click', function () {
         let message = "【支出登録】\n";
 
-        message += "日にち:" + $('#expenceDate').val().replace(/-/g, '/') + "\n";
-        message += "金額:" + $('#expence').val();
+        message += "日にち:" + $('#expenceDate').val().replace(/-/g, '/');
+        message += "\n金額:" + $('#expence').val();
+        message += "\カテゴリ:" + $('#category').val();
 
         liff.sendMessages([{
             type: 'text',
@@ -47,7 +48,7 @@ function initializeLiff(myLiffId) {
             fetch(url, {method, headers, body}).then(function (reqResponse) {
                 return reqResponse.json();
             }).then(function (jsonResponse) {
-                // TODO:fetchでデータを取得し、画面を動的に作成
+                // fetchでデータを取得し、画面を動的に作成
                 jsonResponse.forEach(element => {
                     $("#categorylist").append(`<option value="${element.text}">`);
                 });
