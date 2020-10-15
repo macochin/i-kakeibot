@@ -8,13 +8,12 @@ const myLiffId = process.env.MY_LIFF_ID;
 const router = express.Router();
 
 module.exports = () => {
-
   router.get('/send-id', function(req, res) {
     res.json({id: myLiffId});
   });
 
   router.post('/categoryList', async function(req, res) {
-    let userId = req.params.userId;
+    let userId = req.body.userId;
     console.debug("userId:" + userId);// TODO:
     // DBから取得したカテゴリをセット(最近使用したもの順にソート)
     let category_list = await expence.asyncGetCategoryList(userId);
