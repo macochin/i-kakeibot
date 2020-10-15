@@ -10,8 +10,8 @@ class expence {
   }
 
   async asyncSearchUserSheetId(userId) {
-    let sheetId = await spreadsheet.searchRow(master_spread_id, "マスタ", userId);
-    return sheetId;
+    let row = await spreadsheet.searchRow(master_spread_id, "マスタ", userId, "userId");
+    return row.sheetId;
   }
 
   // シート検索/作成
