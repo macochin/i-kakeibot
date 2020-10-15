@@ -6,29 +6,6 @@ window.onload = function (e) {
         initializeLiff(myLiffId);
     });
 
-    fetch('/views/copy_master_file_url').then(function (reqResponse) {
-        return reqResponse.json();
-    }).then(function (jsonResponse) {
-        $('#copy_master_file_url').attr('href', jsonResponse.url);
-    });
-
-    $('#cilp_this_url').on('click', function() {
-        // コピーする文章の取得
-        let text = location.protocol + '//' + location.hostname + '/views/regist_master';
-        // テキストエリアの作成
-        let $textarea = $('<textarea></textarea>');
-        // テキストエリアに文章を挿入
-        $textarea.text(text);
-        //　テキストエリアを挿入
-        $(this).append($textarea);
-        //　テキストエリアを選択
-        $textarea.select();
-        // コピー
-        document.execCommand('copy');
-        // テキストエリアの削除
-        $textarea.remove();
-    });
-
     $('#sendmessagebutton').on('click', function() {
         let sheetId = $('#sheet_url').val().split('/');
         // 必須チェック
