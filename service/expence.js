@@ -11,7 +11,7 @@ class expence {
   }
 
   async asyncSearchUserSheetId(userId) {
-    let crypt_userId = await crypto.createCipher(req.session.userId);
+    let crypt_userId = await crypto.createCipher(userId);
     let row = await spreadsheet.searchRow(master_spread_id, "マスタ", crypt_userId, "userId");
     return row.sheetId;
   }
