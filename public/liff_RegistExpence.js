@@ -34,23 +34,25 @@ function initializeLiff(myLiffId) {
     liff.init({
         liffId: myLiffId
     }).then(() => {
-        liff.login();
-        alert(liff.getProfile().userId);// TODO:
-        let url = `/webapi/categoryList`;
-        let method = "POST";
-        let obj = {userId: `${liff.getProfile().userId}`};
-        let body = Object.keys(obj).map((key)=>key+"="+encodeURIComponent(obj[key])).join("&");
-        let headers = {
-            'Accept': 'application/json'
-        };
+        liff.login().then(() => {
+            alert(liff.getProfile().userId);// TODO:
+            let url = `/webapi/categoryList`;
+            let method = "POST";
+            let obj = {userId: `${liff.getProfile().userId}`};
+            let body = Object.keys(obj).map((key)=>key+"="+encodeURIComponent(obj[key])).join("&");
+            let headers = {
+                'Accept': 'application/json'
+            };
 
-        fetch(url, {method, headers, body}).then(function (reqResponse) {
-            return reqResponse.json();
-        }).then(function (jsonResponse) {
-            // TODO:fetchでデータを取得し、画面を動的に作成
-            jsonResponse.forEach(element => {
-                alert(element.type + ":" + element.text);
+            fetch(url, {method, headers, body}).then(function (reqResponse) {
+                return reqResponse.json();
+            }).then(function (jsonResponse) {
+                // TODO:fetchでデータを取得し、画面を動的に作成
+                jsonResponse.forEach(element => {
+                    alert(element.type + ":" + element.text);
+                });
             });
+
         });
     });
 }
