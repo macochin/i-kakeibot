@@ -13,8 +13,6 @@ module.exports = () => {
   });
 
   router.post('/categoryList', async function(req, res) {
-    console.debug(":getOwnPropertyNames:" + Object.getOwnPropertyNames(req));// TODO:
-    console.debug(":getOwnPropertyNames:" + Object.getOwnPropertyNames(req.body));// TODO:
     let userId = req.body.userId;
     console.debug("userId:" + userId);// TODO:
     // DBから取得したカテゴリをセット(最近使用したもの順にソート)

@@ -39,11 +39,14 @@ function initializeLiff(myLiffId) {
             let url = `/webapi/categoryList`;
             let method = "POST";
             let obj = {userId: `${profile.userId}`};
-            let body = Object.keys(obj).map((key)=>key+"="+encodeURIComponent(obj[key])).join("&");
+            // let body = Object.keys(obj).map((key)=>key+"="+encodeURIComponent(obj[key])).join("&");
+            let body = JSON.stringify(obj);
             let headers = {
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             };
 
+            alert(body.userId);// TODO:
             fetch(url, {method, headers, body}).then(function (reqResponse) {
                 return reqResponse.json();
             }).then(function (jsonResponse) {
