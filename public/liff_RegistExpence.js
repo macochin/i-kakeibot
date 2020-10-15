@@ -9,7 +9,7 @@ window.onload = function (e) {
     $('#expenceDate').val(formatDate(new Date()));
 
     // メッセージの送信
-    document.getElementById('sendmessagebutton').addEventListener('click', function () {
+    $('#sendmessagebutton').on('click', function() {
         let message = "【支出登録】\n";
 
         message += "日にち:" + $('#expenceDate').val().replace(/-/g, '/');
