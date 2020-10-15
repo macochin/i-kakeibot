@@ -34,6 +34,7 @@ function initializeLiff(myLiffId) {
     liff.init({
         liffId: myLiffId
     }).then(() => {
+        alert(liff.getProfile().userId);// TODO:
         let url = `/webapi/categoryList`;
         let method = "POST";
         let obj = {userId: `${liff.getProfile().userId}`};
