@@ -37,7 +37,7 @@ class expence {
     row.expence = money;
     row.category = category;
 
-    await sheet.addRow(row);
+    sheet.addRow(row);
   }
 
   // カテゴリ取得

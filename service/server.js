@@ -22,6 +22,7 @@ module.exports = () => {
 
         let events_processed = [];
 
+        // TODO:削除予定
         req.body.events.forEach(async (event) => {
             if (process.env.SENDER_ID != undefined && process.env.SENDER_ID != event.source.userId) {
                 return bot.replyMessage(event.replyToken, {
