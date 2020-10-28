@@ -65,7 +65,7 @@ module.exports = () => {
       row.userId = crypt_userId;
       row.sheetId = req.session.sheetId;
 
-      await spreadsheet.addRow(master_spread_id, "マスタ", row);
+      spreadsheet.addRow(master_spread_id, "マスタ", row);
 
       res.render('regist_master_complete');
 

@@ -42,7 +42,7 @@ class Spreadsheet {
 
   async addRow(sheetId, workSheetName, row) {
     let sheet = await this.getSheet(sheetId, workSheetName);
-    await sheet.addRow(row);
+    sheet.addRow(row);
   }
 
   async updateCell(sheetId, workSheetName, targetCell, value) {
