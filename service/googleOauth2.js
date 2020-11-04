@@ -64,13 +64,12 @@ module.exports = () => {
 
       // TODO:既に登録されているか検索し、あれば上書き
       let row = await expence.asyncSearchUserRow(crypt_userId);
+      console.debug("row:" + row);// TODO:
 
       if (row == undefined) {
-        console.debug("call asyncInsertMasterInfo:");// TODO:
         expence.asyncInsertMasterInfo(crypt_userId, req.session.sheetId);
       } else {
         // TODO:上書き
-        console.debug("call asyncUpdateMasterInfo:");// TODO:
         expence.asyncUpdateMasterInfo(crypt_userId, req.session.sheetId);
       }
 
