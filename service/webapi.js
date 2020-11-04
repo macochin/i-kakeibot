@@ -19,9 +19,9 @@ module.exports = () => {
     let retJson = [];
 
     if (category_list.length == 0) {
-      retJson.push("ランチ");
-      retJson.push("マンガ");
-      retJson.push("日用品");
+      retJson.push({text: "ランチ"});
+      retJson.push({text: "マンガ"});
+      retJson.push({text: "日用品"});
     } else {
       for (let index = 0; index < category_list.length; index++) {
         retJson.push({
