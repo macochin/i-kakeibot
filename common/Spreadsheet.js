@@ -61,14 +61,6 @@ class Spreadsheet {
     });
   }
 
-  async searchRowBySheet(sheet, strSearch, searchProperty) {
-    let rows = await sheet.getRows();
-
-    return rows.find(function(searchRow, index){
-      return (searchRow[`${searchProperty}`] === strSearch);
-    });
-  }
-
   async searchRowData(sheetId, workSheetName, searchProperty) {
     let rows = await this.getRows(sheetId, workSheetName);
 

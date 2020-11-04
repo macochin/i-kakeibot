@@ -58,11 +58,9 @@ class expence {
 
   async asyncUpdateMasterInfo(userId, sheetId) {
     let crypt_userId = await crypto.createCipher(userId);
-
-    let sheet = await this.asyncSearchSheet(userId);
-    let row = await spreadsheet.searchRowBySheet(sheet, crypt_userId, "userId");
+    let row = await spreadsheet.searchRow(master_spread_id, "マスタ", crypt_userId, "userId");
     row.sheetId = sheetId;
-    await sheet.saveUpdatedCells();
+    await row.save();
   }
 
   // カテゴリ取得
