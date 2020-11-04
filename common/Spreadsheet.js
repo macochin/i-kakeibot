@@ -45,9 +45,7 @@ class Spreadsheet {
     });
   }
 
-  async searchRowData(sheetId, workSheetName, searchProperty) {
-    let rows = await this.getRows(sheetId, workSheetName);
-
+  async searchRowData(rows, searchProperty) {
     let list = new Array();
     rows.forEach(element => {
       list.push(element[`${searchProperty}`]);

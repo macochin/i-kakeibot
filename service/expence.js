@@ -70,7 +70,8 @@ class expence {
     let list;
     if (sheet != null) {
       let sheetId = await this.asyncSearchUserSheetId(userId);
-      list = await spreadsheet.searchRowData(sheetId, utils.getNowYYYYMM(), 'category');
+      let rows = await spreadsheet.getRows(sheetId, utils.getNowYYYYMM());
+      list = await spreadsheet.searchRowData(rows, 'category');
     }
     return list;
   }
