@@ -5,14 +5,12 @@ const router = express.Router();
 
 const {google} = require('googleapis');
 const qs = require('querystring');
-const crypto = require('../common/crypto');
 const expence = require('../service/expence');
 
 const client_id = process.env.GOOGLE_OAUTH_CLIENT_ID;
 const client_secret = process.env.GOOGLE_OAUTH_CLIENT_SECRET
 const auth_email = process.env.GOOGLE_AUTH_EMAIL
 const regist_master_liff_id = process.env.REGIST_MASTER_LIFF_ID;
-const master_spread_id = process.env.MASTER_SPREAD_ID;
 
 const redirect_uri = process.env.GOOGLE_OAUTH_REDIRECT_URL;
 const response_type = 'code';
@@ -60,19 +58,16 @@ module.exports = () => {
       });
 
       // マスタファイルへの登録処理
-      // TODO:既に登録されているか検索し、あれば上書き
+      // 既に登録されているか検索し、あれば上書き
       let row = await expence.asyncSearchUserRow(req.session.userId);
 
       if (row == undefined) {
         expence.asyncInsertMasterInfo(req.session.userId, req.session.sheetId);
       } else {
-        // TODO:上書き
         expence.asyncUpdateMasterInfo(req.session.userId, req.session.sheetId);
       }
 
-
       res.render('regist_master_complete');
-
     });
   });
 

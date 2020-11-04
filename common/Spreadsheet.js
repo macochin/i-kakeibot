@@ -1,4 +1,5 @@
 'use strict';
+const { timingSafeEqual } = require('crypto');
 // GCPでサービスキーを発行すること
 // Google SperadSheet のAPIを有効化すること
 
@@ -19,9 +20,7 @@ class Spreadsheet {
     return doc;
   }
 
-  async getSheet(sheetId, workSheetName) {
-    let doc = await this.authDoc(sheetId);
-
+  async getSheet(doc, workSheetName) {
     let sheet = null;
     for (let index = 0; index < doc.sheetsByIndex.length; index++) {
       if (doc.sheetsByIndex[index].title == workSheetName) {
@@ -41,12 +40,14 @@ class Spreadsheet {
   }
 
   async addRow(sheetId, workSheetName, row) {
-    let sheet = await this.getSheet(sheetId, workSheetName);
+    let doc = await this.authDoc(sheetId);
+    let sheet = await this.getSheet(doc, workSheetName);
     sheet.addRow(row);
   }
 
   async updateCell(sheetId, workSheetName, targetCell, value) {
-    let sheet = await this.getSheet(sheetId, workSheetName);
+    let doc = await this.authDoc(sheetId);
+    let sheet = await this.getSheet(doc, workSheetName);
     await sheet.loadCells(targetCell);
     let cell = sheet.getCellByA1(targetCell);
     cell.value = value;
@@ -74,14 +75,16 @@ class Spreadsheet {
   }
 
   async searchCell(sheetId, workSheetName, targetCell) {
-    let sheet = await this.getSheet(sheetId, workSheetName);
+    let doc = await this.authDoc(sheetId);
+    let sheet = await this.getSheet(doc, workSheetName);
     await sheet.loadCells(targetCell);
     let cell = sheet.getCellByA1(targetCell);
     return cell.value;
   }
 
   async getRows(sheetId, workSheetName) {
-    let sheet = await this.getSheet(sheetId, workSheetName);
+    let doc = await this.authDoc(sheetId);
+    let sheet = await this.getSheet(doc, workSheetName);
     let rows = await sheet.getRows();
     return rows;
   }

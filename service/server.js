@@ -24,13 +24,6 @@ module.exports = () => {
 
         // TODO:削除予定
         req.body.events.forEach(async (event) => {
-            if (process.env.SENDER_ID != undefined && process.env.SENDER_ID != event.source.userId) {
-                return bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: "個人専用botとなっておりますので、申し訳ありませんがアクセスできません。"
-                });
-            }
-
             if (event.type == "message" && event.message.type == "text") {
                 let message_text = event.message.text;
 

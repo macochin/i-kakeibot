@@ -25,7 +25,8 @@ class expence {
   // シート検索/作成
   async asyncSearchSheet(userId) {
     let sheetId = await this.asyncSearchUserSheetId(userId);
-    let sheet = await spreadsheet.getSheet(sheetId, utils.getNowYYYYMM());
+    let doc = await spreadsheet.authDoc(sheetId);
+    let sheet = await spreadsheet.getSheet(doc, utils.getNowYYYYMM());
     if (sheet == null) {
       let header = ['date', 'expence', 'category'];
       sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 3);
