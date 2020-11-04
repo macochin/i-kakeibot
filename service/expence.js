@@ -46,6 +46,21 @@ class expence {
     sheet.addRow(row);
   }
 
+  async asyncInsertMasterInfo(crypt_userId, sheetId) {
+    let row = new Object();
+    row.userId = crypt_userId;
+    row.sheetId = sheetId;
+
+    spreadsheet.addRow(master_spread_id, "マスタ", row);
+  }
+
+  async asyncUpdateMasterInfo(crypt_userId, sheetId) {
+    let sheet = await this.asyncSearchSheet(userId);
+    let row = await spreadsheet.searchRow(sheet, crypt_userId, "userId");
+    row.sheetId = sheetId;
+    sheet.saveUpdatedCells();
+  }
+
   // カテゴリ取得
   async asyncGetCategoryList(userId) {
     let sheet = await this.asyncSearchSheet(userId);

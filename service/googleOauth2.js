@@ -6,7 +6,6 @@ const router = express.Router();
 const {google} = require('googleapis');
 const qs = require('querystring');
 const crypto = require('../common/crypto');
-const spreadsheet = require("../common/Spreadsheet");// TODO:削除予定
 const expence = require('../service/expence');
 
 const client_id = process.env.GOOGLE_OAUTH_CLIENT_ID;
@@ -67,13 +66,12 @@ module.exports = () => {
       let row = await expence.asyncSearchUserRow(crypt_userId);
 
       if (row == undefined) {
-        row = new Object();
-        row.userId = crypt_userId;
-        row.sheetId = req.session.sheetId;
+        expence.asyncInsertMasterInfo(crypt_userId, req.session.sheetId);
+      } else {
+        // TODO:上書き
+        expence.asyncUpdateMasterInfo(crypt_userId, req.session.sheetId);
       }
 
-      // TODO:スプレッドシート直書きをやめる
-      spreadsheet.addRow(master_spread_id, "マスタ", row);
 
       res.render('regist_master_complete');
 
