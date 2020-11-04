@@ -16,6 +16,12 @@ class expence {
     return row.sheetId;
   }
 
+  async asyncSearchUserRow(userId) {
+    let crypt_userId = await crypto.createCipher(userId);
+    let row = await spreadsheet.searchRow(master_spread_id, "マスタ", crypt_userId, "userId");
+    return row;
+  }
+
   // シート検索/作成
   async asyncSearchSheet(userId) {
     let sheetId = await this.asyncSearchUserSheetId(userId);

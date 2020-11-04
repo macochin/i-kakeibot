@@ -6,7 +6,8 @@ const router = express.Router();
 const {google} = require('googleapis');
 const qs = require('querystring');
 const crypto = require('../common/crypto');
-const spreadsheet = require("../common/Spreadsheet");
+const spreadsheet = require("../common/Spreadsheet");// TODO:削除予定
+const expence = require('../service/expence');
 
 const client_id = process.env.GOOGLE_OAUTH_CLIENT_ID;
 const client_secret = process.env.GOOGLE_OAUTH_CLIENT_SECRET
@@ -61,10 +62,17 @@ module.exports = () => {
 
       // マスタファイルへの登録処理
       let crypt_userId = await crypto.createCipher(req.session.userId);
-      let row = new Object();
-      row.userId = crypt_userId;
-      row.sheetId = req.session.sheetId;
 
+      // TODO:既に登録されているか検索し、あれば上書き
+      let row = await expence.asyncSearchUserRow(crypt_userId);
+
+      if (row == undefined) {
+        row = new Object();
+        row.userId = crypt_userId;
+        row.sheetId = req.session.sheetId;
+      }
+
+      // TODO:スプレッドシート直書きをやめる
       spreadsheet.addRow(master_spread_id, "マスタ", row);
 
       res.render('regist_master_complete');
