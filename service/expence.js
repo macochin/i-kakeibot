@@ -62,7 +62,7 @@ class expence {
     let sheet = await this.asyncSearchSheet(userId);
     let row = await spreadsheet.searchRowBySheet(sheet, crypt_userId, "userId");
     row.sheetId = sheetId;
-    sheet.saveUpdatedCells();
+    await sheet.saveUpdatedCells();
   }
 
   // カテゴリ取得
