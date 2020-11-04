@@ -38,9 +38,8 @@ class Spreadsheet {
     return rows;
   }
 
-  async searchRow(sheetId, workSheetName, strSearch, searchProperty) {
-    let rows = await this.getRows(sheetId, workSheetName);
-
+  // 以降の処理は、getSheet,getRows,(authDoc)が既に呼ばれている前提
+  async searchRow(rows, strSearch, searchProperty) {
     return rows.find(function(searchRow, index){
       return (searchRow[`${searchProperty}`] === strSearch);
     });
