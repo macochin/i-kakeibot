@@ -32,7 +32,7 @@ class Spreadsheet {
     return sheet;
   }
 
-  async getRows(sheet, sheetId, workSheetName) {
+  async getRows(sheetId, workSheetName) {
     let sheet = await this.getSheet(sheetId, workSheetName);
     let rows = await sheet.getRows();
     return rows;
