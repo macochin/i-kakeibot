@@ -20,7 +20,8 @@ class Spreadsheet {
     return doc;
   }
 
-  async getSheet(doc, workSheetName) {
+  async getSheet(sheetId, workSheetName) {
+    let doc = await this.authDoc(sheetId);
     let sheet = null;
     for (let index = 0; index < doc.sheetsByIndex.length; index++) {
       if (doc.sheetsByIndex[index].title == workSheetName) {
@@ -31,27 +32,10 @@ class Spreadsheet {
     return sheet;
   }
 
-  async createSheet(sheetId, sheetName, header, rowSize, columnSize) {
-    let doc = await this.authDoc(sheetId);
-    let sheet = await doc.addSheet({title: sheetName});
-    await sheet.resize({ rowCount: rowSize, columnCount: columnSize });
-    await sheet.setHeaderRow(header);
-    return sheet;
-  }
-
-  async addRow(sheetId, workSheetName, row) {
-    let doc = await this.authDoc(sheetId);
-    let sheet = await this.getSheet(doc, workSheetName);
-    sheet.addRow(row);
-  }
-
-  async updateCell(sheetId, workSheetName, targetCell, value) {
-    let doc = await this.authDoc(sheetId);
-    let sheet = await this.getSheet(doc, workSheetName);
-    await sheet.loadCells(targetCell);
-    let cell = sheet.getCellByA1(targetCell);
-    cell.value = value;
-    await sheet.saveUpdatedCells();
+  async getRows(sheet, sheetId, workSheetName) {
+    let sheet = await this.getSheet(sheetId, workSheetName);
+    let rows = await sheet.getRows();
+    return rows;
   }
 
   async searchRow(sheetId, workSheetName, strSearch, searchProperty) {
@@ -74,19 +58,32 @@ class Spreadsheet {
     return ret;
   }
 
-  async searchCell(sheetId, workSheetName, targetCell) {
+  async createSheet(sheetId, sheetName, header, rowSize, columnSize) {
     let doc = await this.authDoc(sheetId);
-    let sheet = await this.getSheet(doc, workSheetName);
+    let sheet = await doc.addSheet({title: sheetName});
+    await sheet.resize({ rowCount: rowSize, columnCount: columnSize });
+    await sheet.setHeaderRow(header);
+    return sheet;
+  }
+
+  async addRow(sheetId, workSheetName, row) {
+    let sheet = await this.getSheet(sheetId, workSheetName);
+    sheet.addRow(row);
+  }
+
+  async updateCell(sheetId, workSheetName, targetCell, value) {
+    let sheet = await this.getSheet(sheetId, workSheetName);
+    await sheet.loadCells(targetCell);
+    let cell = sheet.getCellByA1(targetCell);
+    cell.value = value;
+    await sheet.saveUpdatedCells();
+  }
+
+  async searchCell(sheetId, workSheetName, targetCell) {
+    let sheet = await this.getSheet(sheetId, workSheetName);
     await sheet.loadCells(targetCell);
     let cell = sheet.getCellByA1(targetCell);
     return cell.value;
-  }
-
-  async getRows(sheetId, workSheetName) {
-    let doc = await this.authDoc(sheetId);
-    let sheet = await this.getSheet(doc, workSheetName);
-    let rows = await sheet.getRows();
-    return rows;
   }
 
   async maxRowSize(sheetId, workSheetName) {
