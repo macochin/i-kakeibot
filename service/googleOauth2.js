@@ -66,9 +66,11 @@ module.exports = () => {
       let row = await expence.asyncSearchUserRow(crypt_userId);
 
       if (row == undefined) {
+        console.debug("call asyncInsertMasterInfo:");// TODO:
         expence.asyncInsertMasterInfo(crypt_userId, req.session.sheetId);
       } else {
         // TODO:上書き
+        console.debug("call asyncUpdateMasterInfo:");// TODO:
         expence.asyncUpdateMasterInfo(crypt_userId, req.session.sheetId);
       }
 
