@@ -60,11 +60,8 @@ module.exports = () => {
       });
 
       // マスタファイルへの登録処理
-      let crypt_userId = await crypto.createCipher(req.session.userId);
-
       // TODO:既に登録されているか検索し、あれば上書き
-      let row = await expence.asyncSearchUserRow(crypt_userId);
-      console.debug("row:" + row);// TODO:
+      let row = await expence.asyncSearchUserRow(req.session.userId);
 
       if (row == undefined) {
         expence.asyncInsertMasterInfo(crypt_userId, req.session.sheetId);
