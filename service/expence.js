@@ -56,7 +56,7 @@ class expence {
 
   async asyncUpdateMasterInfo(crypt_userId, sheetId) {
     let sheet = await this.asyncSearchSheet(userId);
-    let row = await spreadsheet.searchRow(sheet, crypt_userId, "userId");
+    let row = await spreadsheet.searchRowBySheet(sheet, crypt_userId, "userId");
     row.sheetId = sheetId;
     sheet.saveUpdatedCells();
   }
