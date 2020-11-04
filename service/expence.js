@@ -46,7 +46,9 @@ class expence {
     sheet.addRow(row);
   }
 
-  async asyncInsertMasterInfo(crypt_userId, sheetId) {
+  async asyncInsertMasterInfo(userId, sheetId) {
+    let crypt_userId = await crypto.createCipher(userId);
+
     let row = new Object();
     row.userId = crypt_userId;
     row.sheetId = sheetId;
@@ -54,7 +56,9 @@ class expence {
     spreadsheet.addRow(master_spread_id, "マスタ", row);
   }
 
-  async asyncUpdateMasterInfo(crypt_userId, sheetId) {
+  async asyncUpdateMasterInfo(userId, sheetId) {
+    let crypt_userId = await crypto.createCipher(userId);
+
     let sheet = await this.asyncSearchSheet(userId);
     let row = await spreadsheet.searchRowBySheet(sheet, crypt_userId, "userId");
     row.sheetId = sheetId;

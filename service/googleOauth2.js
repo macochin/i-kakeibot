@@ -64,10 +64,10 @@ module.exports = () => {
       let row = await expence.asyncSearchUserRow(req.session.userId);
 
       if (row == undefined) {
-        expence.asyncInsertMasterInfo(crypt_userId, req.session.sheetId);
+        expence.asyncInsertMasterInfo(req.session.userId, req.session.sheetId);
       } else {
         // TODO:上書き
-        expence.asyncUpdateMasterInfo(crypt_userId, req.session.sheetId);
+        expence.asyncUpdateMasterInfo(req.session.userId, req.session.sheetId);
       }
 
 
