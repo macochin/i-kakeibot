@@ -73,17 +73,17 @@ class Spreadsheet {
     return ret;
   }
 
-  async updateCell(sheet, targetCell, value) {
+  async searchCell(sheet, targetCell) {
+    await sheet.loadCells(targetCell);
+    let cell = sheet.getCellByA1(targetCell);
+    return cell;
+  }
+
+  async updateCellValue(sheet, targetCell, value) {
     await sheet.loadCells(targetCell);
     let cell = sheet.getCellByA1(targetCell);
     cell.value = value;
     sheet.saveUpdatedCells();
-  }
-
-  async searchCell(sheet, targetCell) {
-    await sheet.loadCells(targetCell);
-    let cell = sheet.getCellByA1(targetCell);
-    return cell.value;
   }
 }
 
