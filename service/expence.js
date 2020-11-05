@@ -20,6 +20,7 @@ class expence {
       let header = ['日付', '支出', '概要', '⇐※この行は変更しないでください'];
       sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 4);
       sheet.updateDimensionProperties("COLUMNS", {"pixelSize":200}, {"startIndex":3, "endIndex":3});
+      sheet.saveUpdatedCells();
 
       let cell_other = await spreadsheet.searchCell(sheet, "D1");
       cell_other.textFormat ={
