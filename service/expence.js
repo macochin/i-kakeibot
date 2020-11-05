@@ -59,9 +59,12 @@ class expence {
     row[key_category] = category;
 
     await sheet.addRow(row);
+    console.debug("numberFormat start:");// TODO:
     let rows = await spreadsheet.getRows(sheet.sheetId, utils.getNowYYYYMM());
 
+    console.debug("`B${rows.length}`:" + `B${rows.length}`);// TODO:
     let cell_expence = await spreadsheet.searchCell(sheet.sheetId, `B${rows.length}`);
+    console.debug("cell_expence:" + cell_expence);// TODO:
     cell_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
   }
 
