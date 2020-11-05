@@ -32,10 +32,28 @@ class Spreadsheet {
     return sheet;
   }
 
+  async createSheet(sheetId, sheetName, header, rowSize, columnSize) {
+    let doc = await this.authDoc(sheetId);
+    let sheet = await doc.addSheet({title: sheetName});
+    await sheet.resize({ rowCount: rowSize, columnCount: columnSize });
+    await sheet.setHeaderRow(header);
+    return sheet;
+  }
+
   async getRows(sheetId, workSheetName) {
     let sheet = await this.getSheet(sheetId, workSheetName);
     let rows = await sheet.getRows();
     return rows;
+  }
+
+  async addRow(sheetId, workSheetName, row) {
+    let sheet = await this.getSheet(sheetId, workSheetName);
+    sheet.addRow(row);
+  }
+
+  async maxRowSize(sheetId, workSheetName) {
+    let rows = await this.getRows(sheetId, workSheetName);
+    return rows.length;
   }
 
   // 以降の処理は、getSheet,getRows,(authDoc)が既に呼ばれている前提
@@ -55,37 +73,17 @@ class Spreadsheet {
     return ret;
   }
 
-  async createSheet(sheetId, sheetName, header, rowSize, columnSize) {
-    let doc = await this.authDoc(sheetId);
-    let sheet = await doc.addSheet({title: sheetName});
-    await sheet.resize({ rowCount: rowSize, columnCount: columnSize });
-    await sheet.setHeaderRow(header);
-    return sheet;
-  }
-
-  async addRow(sheetId, workSheetName, row) {
-    let sheet = await this.getSheet(sheetId, workSheetName);
-    sheet.addRow(row);
-  }
-
-  async updateCell(sheetId, workSheetName, targetCell, value) {
-    let sheet = await this.getSheet(sheetId, workSheetName);
+  async updateCell(sheet, targetCell, value) {
     await sheet.loadCells(targetCell);
     let cell = sheet.getCellByA1(targetCell);
     cell.value = value;
     await sheet.saveUpdatedCells();
   }
 
-  async searchCell(sheetId, workSheetName, targetCell) {
-    let sheet = await this.getSheet(sheetId, workSheetName);
+  async searchCell(sheet, targetCell) {
     await sheet.loadCells(targetCell);
     let cell = sheet.getCellByA1(targetCell);
     return cell.value;
-  }
-
-  async maxRowSize(sheetId, workSheetName) {
-    let rows = await this.getRows(sheetId, workSheetName);
-    return rows.length;
   }
 }
 

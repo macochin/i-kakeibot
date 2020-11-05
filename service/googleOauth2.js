@@ -5,7 +5,7 @@ const router = express.Router();
 
 const {google} = require('googleapis');
 const qs = require('querystring');
-const expence = require('../service/expence');
+const userInfo = require('../service/userInfo');
 
 const client_id = process.env.GOOGLE_OAUTH_CLIENT_ID;
 const client_secret = process.env.GOOGLE_OAUTH_CLIENT_SECRET
@@ -59,12 +59,12 @@ module.exports = () => {
 
       // マスタファイルへの登録処理
       // 既に登録されているか検索し、あれば上書き
-      let row = await expence.asyncSearchUserRow(req.session.userId);
+      let row = await userInfo.asyncSearchUserRow(req.session.userId);
 
       if (row == undefined) {
-        expence.asyncInsertMasterInfo(req.session.userId, req.session.sheetId);
+        userInfo.asyncInsertMasterInfo(req.session.userId, req.session.sheetId);
       } else {
-        expence.asyncUpdateMasterInfo(req.session.userId, req.session.sheetId);
+        userInfo.asyncUpdateMasterInfo(req.session.userId, req.session.sheetId);
       }
 
       res.render('regist_master_complete');
