@@ -77,7 +77,7 @@ class Spreadsheet {
     await sheet.loadCells(targetCell);
     let cell = sheet.getCellByA1(targetCell);
     cell.value = value;
-    await sheet.saveUpdatedCells();
+    sheet.saveUpdatedCells();
   }
 
   async searchCell(sheet, targetCell) {

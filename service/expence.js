@@ -19,6 +19,17 @@ class expence {
     if (sheet == null) {
       let header = ['日付', '支出', '概要', '⇐※この行は変更しないでください'];
       sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 4);
+
+      let cell_date = await spreadsheet.searchCell(sheet, "A1");
+      cell_date.backgroundColor = "gray";
+
+      let cell_expence = await spreadsheet.searchCell(sheet, "A1");
+      cell_expence.backgroundColor = "gray";
+
+      let cell_category = await spreadsheet.searchCell(sheet, "A1");
+      cell_category.backgroundColor = "gray";
+
+      sheet.saveUpdatedCells();
     }
 
     return sheet;
