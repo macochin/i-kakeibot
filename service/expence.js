@@ -23,10 +23,10 @@ class expence {
       let cell_date = await spreadsheet.searchCell(sheet, "A1");
       cell_date.backgroundColor = "gray";
 
-      let cell_expence = await spreadsheet.searchCell(sheet, "A1");
+      let cell_expence = await spreadsheet.searchCell(sheet, "B1");
       cell_expence.backgroundColor = "gray";
 
-      let cell_category = await spreadsheet.searchCell(sheet, "A1");
+      let cell_category = await spreadsheet.searchCell(sheet, "C1");
       cell_category.backgroundColor = "gray";
 
       sheet.saveUpdatedCells();
