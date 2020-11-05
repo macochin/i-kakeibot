@@ -59,7 +59,7 @@ class expence {
     row[key_category] = category;
 
     await sheet.addRow(row);
-    console.debug("numberFormat start:");// TODO:
+    console.debug("numberFormat start:" + sheet.sheetId);// TODO:
     let rows = await spreadsheet.getRows(sheet.sheetId, utils.getNowYYYYMM());
 
     console.debug("`B${rows.length}`:" + `B${rows.length}`);// TODO:
