@@ -20,9 +20,9 @@ class expence {
       let header = ['日付', '支出', '概要', '⇐※この行は変更しないでください'];
       sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 4);
 
-      let cell_other = await spreadsheet.searchCell(sheet, "D1");
-      cell_other.textFormat = {"foregroundColor": "#FF0000", "bold": true};
-      sheet.saveUpdatedCells();
+      // let cell_other = await spreadsheet.searchCell(sheet, "D1");
+      // cell_other.textFormat = {"foregroundColor": "#FF0000", "bold": true};
+      // sheet.saveUpdatedCells();
     }
 
     return sheet;
