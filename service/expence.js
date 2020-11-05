@@ -22,13 +22,13 @@ class expence {
       // sheet.updateDimensionProperties("COLUMNS", {"pixelSize":300}, {"startIndex":3, "endIndex":3});
 
       let cell_date = await spreadsheet.searchCell(sheet, "A1");
-      cell_date.backgroundColor = {"red": 0.8, "green": 0.8, "blue": 0.8};
+      cell_date.backgroundColor = {"red": 0.7, "green": 0.8, "blue": 0.6};
 
       let cell_expence = await spreadsheet.searchCell(sheet, "B1");
-      cell_expence.backgroundColor = {"red": 0.8, "green": 0.8, "blue": 0.8};
+      cell_expence.backgroundColor = {"red": 0.7, "green": 0.8, "blue": 0.6};
 
       let cell_category = await spreadsheet.searchCell(sheet, "C1");
-      cell_category.backgroundColor = {"red": 0.8, "green": 0.8, "blue": 0.8};
+      cell_category.backgroundColor = {"red": 0.7, "green": 0.8, "blue": 0.6};
 
       let cell_other = await spreadsheet.searchCell(sheet, "D1");
       cell_other.textFormat = {
