@@ -14,7 +14,7 @@ class expence {
     let sheet = await spreadsheet.getSheet(sheetId, utils.getNowYYYYMM());
     if (sheet == null) {
       let header = ['date', 'expence', 'category', '⇐ ※この行は変更しないでください'];
-      sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 3);
+      sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 4);
 
       let row = new Object();
       row.date = "日付";
