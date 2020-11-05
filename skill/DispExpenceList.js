@@ -1,13 +1,13 @@
 "use strict";
 
-const expence = require("../service/expence");
+const userInfo = require("../service/userInfo");
 
 class SkillDispExpenceList {
   constructor() {
   }
 
   async run(event, bot) {
-    let sheetId = await expence.asyncSearchUserSheetId(event.source.userId);
+    let sheetId = await userInfo.asyncSearchUserSheetId(event.source.userId);
     // TODO:スプレッドシートのURLを返す(テンプレートorFlex)
     let spread_url = "https://docs.google.com/spreadsheets/d/" + sheetId;
     let replyMessage = {
