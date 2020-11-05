@@ -37,7 +37,7 @@ class expence {
     let sheet = await this.asyncSearchSheet(userId);
     let list;
     if (sheet != null) {
-      let sheetId = await this.asyncSearchUserSheetId(userId);
+      let sheetId = await userInfo.asyncSearchUserSheetId(userId);
       let rows = await spreadsheet.getRows(sheetId, utils.getNowYYYYMM());
       list = await spreadsheet.searchRowData(rows, 'category');
     }
