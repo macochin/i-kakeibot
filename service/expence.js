@@ -60,11 +60,11 @@ class expence {
 
     // sheet.addRow(row);
     await sheet.addRow(row);
-    console.debug("numberFormat start:" + sheetId);// TODO:シートIDがダメ
-    let rows = await spreadsheet.getRows(sheetId, utils.getNowYYYYMM());
+    // let rows = await spreadsheet.getRows(sheetId, utils.getNowYYYYMM());
 
-    console.debug("`B${rows.length}`:" + `B${rows.length}`);// TODO:
-    let cell_expence = await spreadsheet.searchCell(sheet.sheetId, `B${rows.length}`);
+    let index = (await sheet.getRows()).length + 1;
+    console.debug("`B${rows.length}`:" + `B${index}`);// TODO:
+    let cell_expence = await spreadsheet.searchCell(sheet, `B${index}`);
     console.debug("cell_expence:" + cell_expence);// TODO:
     cell_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
   }
