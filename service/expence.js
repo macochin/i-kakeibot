@@ -13,8 +13,7 @@ class expence {
   }
 
   // シート検索/作成
-  async asyncSearchSheet(userId) {
-    let sheetId = await userInfo.asyncSearchUserSheetId(userId);
+  async asyncSearchSheet(sheetId) {
     let sheet = await spreadsheet.getSheet(sheetId, utils.getNowYYYYMM());
     if (sheet == null) {
       let header = ['日付', '支出', '概要', '⇐※この行は変更しないでください'];
@@ -51,16 +50,18 @@ class expence {
 
   // 対象シートへの追記
   async asyncInsertExpence(userId, money, category, useDate) {
-    let sheet = await this.asyncSearchSheet(userId);
+    let sheetId = await userInfo.asyncSearchUserSheetId(userId);
+    let sheet = await this.asyncSearchSheet(sheetId);
 
     let row = new Object();
     row[key_date] = useDate;
     row[key_expence] = money;
     row[key_category] = category;
 
+    // sheet.addRow(row);
     await sheet.addRow(row);
-    console.debug("numberFormat start:" + sheet.sheetId);// TODO:
-    let rows = await spreadsheet.getRows(sheet.sheetId, utils.getNowYYYYMM());
+    console.debug("numberFormat start:" + sheetId);// TODO:シートIDがダメ
+    let rows = await spreadsheet.getRows(sheetId, utils.getNowYYYYMM());
 
     console.debug("`B${rows.length}`:" + `B${rows.length}`);// TODO:
     let cell_expence = await spreadsheet.searchCell(sheet.sheetId, `B${rows.length}`);
@@ -70,7 +71,8 @@ class expence {
 
   // カテゴリ取得
   async asyncGetCategoryList(userId) {
-    let sheet = await this.asyncSearchSheet(userId);
+    let sheetId = await userInfo.asyncSearchUserSheetId(userId);
+    let sheet = await this.asyncSearchSheet(sheetId);
     let list;
     if (sheet != null) {
       let sheetId = await userInfo.asyncSearchUserSheetId(userId);
