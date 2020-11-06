@@ -8,6 +8,11 @@ const key_date = "日付";
 const key_expence = "支出";
 const key_category = "概要";
 
+const column_date = "A";
+const column_expence = "C";
+const column_category = "B";
+const column_other = "D";
+
 class expence {
   constructor() {
   }
@@ -16,29 +21,28 @@ class expence {
   async asyncSearchSheet(sheetId) {
     let sheet = await spreadsheet.getSheet(sheetId, utils.getNowYYYYMM());
     if (sheet == null) {
-      let header = ['日付', '支出', '概要', '⇐※この行は変更しないでください'];
+      let header = ['日付', '概要', '支出', '⇐※変更禁止!!'];
       sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 4);
-      // sheet.updateDimensionProperties("COLUMNS", {"pixelSize":300}, {"startIndex":3, "endIndex":3});
 
-      let cell_date = await spreadsheet.searchCell(sheet, "A1");
+      let cell_date = await spreadsheet.searchCell(sheet, `${column_date}1`);
       cell_date.backgroundColor = {"red": 0.2, "green": 0.4, "blue": 0.1};
       cell_date.textFormat = {
         "foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0}, "bold": true
       };
 
-      let cell_expence = await spreadsheet.searchCell(sheet, "B1");
-      cell_expence.backgroundColor = {"red": 0.2, "green": 0.4, "blue": 0.1};
-      cell_expence.textFormat = {
-        "foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0}, "bold": true
-      };
-
-      let cell_category = await spreadsheet.searchCell(sheet, "C1");
+      let cell_category = await spreadsheet.searchCell(sheet, `${column_category}1`);
       cell_category.backgroundColor = {"red": 0.2, "green": 0.4, "blue": 0.1};
       cell_category.textFormat = {
         "foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0}, "bold": true
       };
 
-      let cell_other = await spreadsheet.searchCell(sheet, "D1");
+      let cell_expence = await spreadsheet.searchCell(sheet, `${column_expence}1`);
+      cell_expence.backgroundColor = {"red": 0.2, "green": 0.4, "blue": 0.1};
+      cell_expence.textFormat = {
+        "foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0}, "bold": true
+      };
+
+      let cell_other = await spreadsheet.searchCell(sheet, `${column_other}1`);
       cell_other.textFormat = {
         "foregroundColor": {"red": 1.0, "green": 0.0, "blue": 0.0}, "bold": true
       };
@@ -62,7 +66,7 @@ class expence {
 
     let index = (await sheet.getRows()).length + 1;
 
-    let cell_expence = await spreadsheet.searchCell(sheet, `B${index}`);
+    let cell_expence = await spreadsheet.searchCell(sheet, `${column_expence}${index}`);
     cell_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
 
     sheet.saveUpdatedCells();
