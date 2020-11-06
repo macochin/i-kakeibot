@@ -58,15 +58,14 @@ class expence {
     row[key_expence] = money;
     row[key_category] = category;
 
-    // sheet.addRow(row);
     await sheet.addRow(row);
-    // let rows = await spreadsheet.getRows(sheetId, utils.getNowYYYYMM());
 
     let index = (await sheet.getRows()).length + 1;
-    console.debug("`B${rows.length}`:" + `B${index}`);// TODO:
+
     let cell_expence = await spreadsheet.searchCell(sheet, `B${index}`);
-    console.debug("cell_expence:" + cell_expence);// TODO:
     cell_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
+
+    sheet.saveUpdatedCells();
   }
 
   // カテゴリ取得
