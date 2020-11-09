@@ -4,9 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" />
     <title>支出登録</title>
 </head>
+<body>
+    <div class="col-md-6 mb-4 pb-5">
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <!--Header-->
+                <div class="text-center cyan-text">
+                    <h3>支出登録<!-- <i class="fas fa-file-upload cyan-text"></i>--></h3>
+                    <hr class="my-4">
+                </div>
+
+                <!--Body-->
+                <div class="md-form">
+                    <!-- <i class="fas fa-file-upload prefix grey-text"></i> -->
+                    <input type="date" id="expenceDate" name="expenceDate" class="form-control" value="">
+                    <label for="expenceDate">日にち</label>
+                </div>
+                <div class="md-form">
+                    <!-- <i class="fas fa-file-upload prefix grey-text"></i> -->
+                    <input type="tel" id="expence" name="expence" class="form-control" value="">
+                    <label for="expence">金額</label>
+                </div>
+                <div class="md-form">
+                    <!-- <i class="fas fa-file-upload prefix grey-text"></i> -->
+                    <input type="text" id="category" name="category" class="form-control" value="">
+                    <label for="category">カテゴリ</label>
+                </div>
+                <div style="text-align: right;">
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-info" id="sendmessagebutton">登録</button>
+                </div>
+            </div>
+
+            <!--Footer-->
+<!--
+            <div class="modal-footer">
+            </div>
+ -->
+        </div>
+    </div>
+<!-- 
 <body>
     <div>
         <table>
@@ -37,13 +84,14 @@
             <div class="col"></div>
             <div class="col"><button id="sendmessagebutton" name="sendmessagebutton" class="btn btn-outline-primary">登録</button></div>
         </div>
-    </div>
+    </div> -->
 
     <!-- LIFF SDK の読み込み -->
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
     <script src="liff_RegistExpence.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>
