@@ -85,6 +85,7 @@ class expence {
   // カテゴリ取得
   async asyncGetCategoryList(userId) {
     let sheetId = await userInfo.asyncSearchUserSheetId(userId);
+    console.debug("sheetId:" + sheetId);// TODO:
     let sheet = await this.asyncSearchSheet(sheetId);
     let list;
     if (sheet != null) {

@@ -37,6 +37,8 @@ class userInfo {
         row.sheetId = ret.rows[0].sheetId;
       }
     }
+    console.debug("row.userId:" + row.userId);// TODO:
+    console.debug("row.sheetId:" + row.sheetId);// TODO:
     return row;
   }
 
