@@ -33,6 +33,7 @@ class userInfo {
       let sqlParam = [crypt_userId];
       let ret = await pg.asyncSelect(sql_select_userInfo, sqlParam);
       if (ret.rows.length == 1) {
+        row = new Object();
         row.userId = ret.rows[0].userId;
         row.sheetId = ret.rows[0].sheetId;
       }
