@@ -10,7 +10,11 @@ window.onload = function (e) {
 
     // メッセージの送信
     $('#sendmessagebutton').on('click', function() {
-        // TODO:入力チェック
+        // TODO:
+        if ($('#expenceDate').val() == "" || $('#expence').val() == "" || $('#category').val() == "") {
+            alert("補足以外は必須です");
+            return;
+        }
 
         let message = "【支出登録】\n";
 
