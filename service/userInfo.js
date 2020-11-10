@@ -24,7 +24,7 @@ class userInfo {
   async asyncSearchUserRow(userId) {
     let crypt_userId = await crypto.createCipher(userId);
 
-    let row;
+    let row = new Object();
     if (resource == resource_spreadsheet) {
       let rows = await spreadsheet.getRows(master_spread_id, "マスタ");
       row = await spreadsheet.searchRow(rows, crypt_userId, "userId");
@@ -33,7 +33,6 @@ class userInfo {
       let sqlParam = [crypt_userId];
       let ret = await pg.asyncSelect(sql_select_userInfo, sqlParam);
       if (ret.rows.length == 1) {
-        row = new Object();
         row.userId = ret.rows[0].userId;
         row.sheetId = ret.rows[0].sheetId;
       }
@@ -55,7 +54,6 @@ class userInfo {
 
       spreadsheet.addRow(master_spread_id, "マスタ", row);
     } else if (resource == resource_postgres) {
-      // TODO:
       let sqlParam = [crypt_userId, sheetId];
       await pg.asyncUpdate(sql_insert_userInfo, sqlParam);
     }
@@ -69,7 +67,6 @@ class userInfo {
       row.sheetId = sheetId;
       await row.save();
     } else if (resource == resource_postgres) {
-      // TODO:
       let sqlParam = [sheetId, crypt_userId];
       await pg.asyncUpdate(sql_update_sheetId, sqlParam);
     }
