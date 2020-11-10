@@ -12,8 +12,7 @@ window.onload = function (e) {
     $('#sendmessagebutton').on('click', function() {
         // TODO:
         if ($('#expenceDate').val() == "" || $('#expence').val() == "" || $('#category').val() == "") {
-            // alert("補足以外は必須です");
-            $('.toast').toast('show');
+            alert("補足以外は必須です");
             return;
         }
 
