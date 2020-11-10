@@ -32,7 +32,8 @@ class userInfo {
       // TODO:
       let sqlParam = [crypt_userId];
       let ret = await pg.asyncSelect(sql_select_userInfo, sqlParam);
-      console.debug("Object.getOwnPropertyNames(ret):" + Object.getOwnPropertyNames(ret));// TODO:
+      console.debug("Object.getOwnPropertyNames(ret.rows):" + Object.getOwnPropertyNames(ret.rows));// TODO:
+      console.debug("Object.getOwnPropertyNames(ret.rows):" + Object.getOwnPropertyNames(ret.rows[0]));// TODO:
       if (ret.rows.length == 1) {
         row.userId = ret.rows[0].userId;
         row.sheetId = ret.rows[0].sheetId;
