@@ -25,7 +25,7 @@ class expence {
     let sheet = await spreadsheet.getSheet(sheetId, utils.getNowYYYYMM());
     if (sheet == null) {
       let header = [key_date, key_category, key_expence, key_other, key_caution];
-      sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 4);
+      sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 5);
 
       let cell_date = await spreadsheet.searchCell(sheet, `${column_date}1`);
       cell_date.backgroundColor = {"red": 0.2, "green": 0.4, "blue": 0.1};
