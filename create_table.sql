@@ -1,6 +1,7 @@
-DROP TABLE userInfo;
-CREATE TABLE userInfo
+-- postgresではキャメルケースはやめた方が良い
+DROP TABLE user_info;
+CREATE TABLE user_info
 (
-  userId TEXT NOT NULL,
-  sheetId TEXT NOT NULL
+  user_id TEXT NOT NULL,
+  sheet_id TEXT NOT NULL
 );
