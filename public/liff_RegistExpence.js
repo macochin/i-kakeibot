@@ -10,11 +10,14 @@ window.onload = function (e) {
 
     // メッセージの送信
     $('#sendmessagebutton').on('click', function() {
+        // TODO:入力チェック
+
         let message = "【支出登録】\n";
 
         message += "日にち:" + $('#expenceDate').val().replace(/-/g, '/');
         message += "\n金額:" + $('#expence').val();
-        message += "\nカテゴリ:" + $('#category').val();
+        message += "\n買ったもの:" + $('#category').val();
+        message += "\n補足:" + $('#other').val();
 
         liff.sendMessages([{
             type: 'text',

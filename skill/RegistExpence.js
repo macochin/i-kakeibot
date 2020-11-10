@@ -7,6 +7,7 @@ class SkillRegistExpence {
     this.date = null;
     this.money = null;
     this.category = null;
+    this.other = null;
   }
 
   async run(event, bot) {
@@ -20,8 +21,9 @@ class SkillRegistExpence {
     this.date = registValue[1];
     this.money = registValue[2];
     this.category = registValue[3];
+    this.other = registValue[4];
 
-    expence.asyncInsertExpence(event.source.userId, this.money, this.category, this.date);
+    expence.asyncInsertExpence(event.source.userId, this.money, this.category, this.date, this.other);
 
     let return_message = `以下で登録します。\n${this.date}\n${this.money.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円\n${this.category}`;
     this.date = null;

@@ -6,12 +6,15 @@ const userInfo = require("../service/userInfo");
 
 const key_date = "日付";
 const key_expence = "支出";
-const key_category = "概要";
+const key_category = "買ったもの";
+const key_other = "補足";
+const key_caution = "⇐※変更禁止!!";
 
 const column_date = "A";
 const column_expence = "C";
 const column_category = "B";
 const column_other = "D";
+const column_caution = "E";
 
 class expence {
   constructor() {
@@ -21,7 +24,7 @@ class expence {
   async asyncSearchSheet(sheetId) {
     let sheet = await spreadsheet.getSheet(sheetId, utils.getNowYYYYMM());
     if (sheet == null) {
-      let header = ['日付', '概要', '支出', '⇐※変更禁止!!'];
+      let header = [key_date, key_category, key_expence, key_other, key_caution];
       sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 4);
 
       let cell_date = await spreadsheet.searchCell(sheet, `${column_date}1`);
@@ -43,7 +46,13 @@ class expence {
       };
 
       let cell_other = await spreadsheet.searchCell(sheet, `${column_other}1`);
+      cell_other.backgroundColor = {"red": 0.2, "green": 0.4, "blue": 0.1};
       cell_other.textFormat = {
+        "foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0}, "bold": true
+      };
+
+      let cell_caution = await spreadsheet.searchCell(sheet, `${column_caution}1`);
+      cell_caution.textFormat = {
         "foregroundColor": {"red": 1.0, "green": 0.0, "blue": 0.0}, "bold": true
       };
       sheet.saveUpdatedCells();
@@ -53,7 +62,7 @@ class expence {
   }
 
   // 対象シートへの追記
-  async asyncInsertExpence(userId, money, category, useDate) {
+  async asyncInsertExpence(userId, money, category, useDate, other) {
     let sheetId = await userInfo.asyncSearchUserSheetId(userId);
     let sheet = await this.asyncSearchSheet(sheetId);
 
@@ -61,6 +70,7 @@ class expence {
     row[key_date] = useDate;
     row[key_expence] = money;
     row[key_category] = category;
+    row[key_other] = other;
 
     await sheet.addRow(row);
 
