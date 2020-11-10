@@ -11,7 +11,7 @@ const resource_spreadsheet = "spread";
 const resource_postgres = "postgres";
 
 const sql_select_userInfo = "select userId, sheetId from userInfo where userId = $1";
-const sql_insert_userInfo = "insert into userInfo (userId, sheetId) VALUES ($1, $2, $3)";
+const sql_insert_userInfo = "insert into userInfo (userId, sheetId) VALUES ($1, $2)";
 const sql_update_sheetId = "update userInfo set sheetId = $1 where userId = $2";
 
 class userInfo {
