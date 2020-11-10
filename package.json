@@ -20,6 +20,7 @@
     "google-spreadsheet": "^3.0.13",
     "googleapis": "^60.0.1",
     "memory-cache": "^0.2.0",
+    "pg": "^8.4.2",
     "querystring": "^0.2.0"
   },
   "devDependencies": {}
