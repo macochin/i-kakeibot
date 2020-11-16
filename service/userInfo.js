@@ -11,9 +11,9 @@ const resource_spreadsheet = "spread";
 const resource_postgres = "postgres";
 
 // TODO:スネークケースへ修正
-const sql_select_userInfo = "select user_id, sheet_id from userInfo where user_id = $1";
-const sql_insert_userInfo = "insert into userInfo (user_id, sheet_id) VALUES ($1, $2)";
-const sql_update_sheetId = "update userInfo set sheet_id = $1 where user_id = $2";
+const sql_select_userInfo = "select user_id, sheet_id from user_info where user_id = $1";
+const sql_insert_userInfo = "insert into user_info (user_id, sheet_id) VALUES ($1, $2)";
+const sql_update_sheetId = "update user_info set sheet_id = $1 where user_id = $2";
 
 class userInfo {
   constructor() {

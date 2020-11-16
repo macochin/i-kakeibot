@@ -60,7 +60,6 @@ module.exports = () => {
       // マスタファイルへの登録処理
       // 既に登録されているか検索し、あれば上書き
       let row = await userInfo.asyncSearchUserRow(req.session.userId);
-      console.debug("row:" + row);// TODO:
       if (row == undefined) {
         userInfo.asyncInsertMasterInfo(req.session.userId, req.session.sheetId);
       } else {
