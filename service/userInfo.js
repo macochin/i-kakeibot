@@ -10,9 +10,10 @@ var resource = process.env.RESOURCE_USER_INFO;
 const resource_spreadsheet = "spread";
 const resource_postgres = "postgres";
 
-const sql_select_userInfo = "select user_id, sheet_id from user_info where user_id = $1";
-const sql_insert_userInfo = "insert into user_info (user_id, sheet_id) VALUES ($1, $2)";
-const sql_update_sheetId = "update user_info set sheet_id = $1 where user_id = $2";
+// TODO:スネークケースへ修正
+const sql_select_userInfo = "select user_id, sheet_id from userInfo where user_id = $1";
+const sql_insert_userInfo = "insert into userInfo (user_id, sheet_id) VALUES ($1, $2)";
+const sql_update_sheetId = "update userInfo set sheet_id = $1 where user_id = $2";
 
 class userInfo {
   constructor() {
@@ -32,6 +33,7 @@ class userInfo {
       let sqlParam = [crypt_userId];
       let ret = await pg.asyncSelect(sql_select_userInfo, sqlParam);
       if (ret.rows.length == 1) {
+        // TODO:スネークケースへ修正
         row.userId = ret.rows[0].user_id;
         row.sheetId = ret.rows[0].sheet_id;
       }
@@ -70,7 +72,7 @@ class userInfo {
       await pg.asyncUpdate(sql_update_sheetId, sqlParam);
     }
   }
-// TODO:
+
 }
 
 module.exports = new userInfo();
