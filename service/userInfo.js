@@ -10,7 +10,6 @@ var resource = process.env.RESOURCE_USER_INFO;
 const resource_spreadsheet = "spread";
 const resource_postgres = "postgres";
 
-// TODO:スネークケースへ修正
 const sql_select_userInfo = "select user_id, sheet_id from user_info where user_id = $1";
 const sql_insert_userInfo = "insert into user_info (user_id, sheet_id) VALUES ($1, $2)";
 const sql_update_sheetId = "update user_info set sheet_id = $1 where user_id = $2";
@@ -33,7 +32,6 @@ class userInfo {
       let sqlParam = [crypt_userId];
       let ret = await pg.asyncSelect(sql_select_userInfo, sqlParam);
       if (ret.rows.length == 1) {
-        // TODO:スネークケースへ修正
         row = new Object();
         row.userId = ret.rows[0].user_id;
         row.sheetId = ret.rows[0].sheet_id;
