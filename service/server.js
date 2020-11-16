@@ -56,7 +56,9 @@ module.exports = () => {
             (response) => {
                 console.log(`${response.length} event(s) processed.`);
             }
-        );
+        ).catch(async function(error) {
+            memory.del(error.message);
+        });
     });
 
     return router;
