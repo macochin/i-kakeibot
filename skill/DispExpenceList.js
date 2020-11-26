@@ -15,7 +15,10 @@ class SkillDispExpenceList {
 
       // TODO:シート登録チェック
       if(sheetId == undefined || sheetId == null) {
-        return bot.replyMessage(event.replyToken, "スプレッドシートがまだ登録されていません");
+        return bot.replyMessage(event.replyToken, {
+          type: "text",
+          text: "スプレッドシートがまだ登録されていません"
+        });
       }
 
       // TODO:スプレッドシートのURLを返す(テンプレートorFlex)
