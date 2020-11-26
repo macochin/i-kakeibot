@@ -24,9 +24,7 @@ class userInfo {
   async asyncSearchUserRow(userId) {
     let crypt_userId = await crypto.createCipher(userId);
 
-    let row = new Object();
-    row.userId = null;
-    row.sheetId = null;
+    let row;
     if (resource == resource_spreadsheet) {
       let rows = await spreadsheet.getRows(master_spread_id, "マスタ");
       row = await spreadsheet.searchRow(rows, crypt_userId, "userId");
@@ -34,6 +32,7 @@ class userInfo {
       let sqlParam = [crypt_userId];
       let ret = await pg.asyncSelect(sql_select_userInfo, sqlParam);
       if (ret.rows.length == 1) {
+        row = new Object();
         row.userId = ret.rows[0].user_id;
         row.sheetId = ret.rows[0].sheet_id;
       }
@@ -43,7 +42,11 @@ class userInfo {
 
   async asyncSearchUserSheetId(userId) {
     let row = await this.asyncSearchUserRow(userId);
-    return row.sheetId;
+    if (row.hasOwnProperty('sheetId')) {
+      return row.sheetId;
+    } else {
+      return null;
+    }
   }
 
   async asyncInsertMasterInfo(userId, sheetId) {
