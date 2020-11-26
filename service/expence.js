@@ -84,9 +84,13 @@ class expence {
 
   // カテゴリ取得
   async asyncGetCategoryList(userId) {
+    let list = new Array();
     let sheetId = await userInfo.asyncSearchUserSheetId(userId);
+    if(sheetId == undefined) {
+      return list;
+    }
+
     let sheet = await this.asyncSearchSheet(sheetId);
-    let list;
     if (sheet != null) {
       let sheetId = await userInfo.asyncSearchUserSheetId(userId);
       let rows = await spreadsheet.getRows(sheetId, utils.getNowYYYYMM());
