@@ -4,6 +4,22 @@
 1. サーバー準備
 2. デプロイ
 3. 環境変数の設定
+    - CRYPTO_KEY
+      - 暗号化キー(※任意の文字列で可)
+      - ユーザIDなど、暗号化してスプレッドシートに記述したい際に使用するキー
+    - GOOGLE_AUTH_EMAIL
+    - GOOGLE_AUTH_PRIVATE_KEY
+    - GOOGLE_OAUTH_CLIENT_ID
+    - GOOGLE_OAUTH_CLIENT_SECRET
+    - GOOGLE_OAUTH_REDIRECT_URL
+    - LINE_ACCESS_TOKEN
+    - LINE_CHANNEL_SECRET
+    - REGIST_EXPENCE_LIFF_ID
+    - REGIST_MASTER_LIFF_ID
+    - MASTER_SPREAD_ID
+    - RESOURCE_USER_INFO
+    - DATABASE_URL
+      - heroku postgresのURL(※サービスから自動登録される)
 4. LINEの設定
 5. GCPの設定
 ### [(参考)LIFF×スプレッドシートのススメ](https://speakerdeck.com/macochin/21-ltji-ri)

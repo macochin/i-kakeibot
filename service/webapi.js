@@ -3,7 +3,7 @@
 const express = require('express');
 const expence = require("../service/expence");
 
-const myLiffId = process.env.MY_LIFF_ID;
+const myLiffId = process.env.REGIST_EXPENCE_LIFF_ID;
 
 const router = express.Router();
 
