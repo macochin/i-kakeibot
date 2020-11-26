@@ -20,6 +20,13 @@ class SkillRegistExpence {
       this.userId = event.source.userId;
       let message_text = event.message.text;
 
+      let sheetId = await userInfo.asyncSearchUserSheetId(event.source.userId);
+
+      // TODO:シート登録チェック
+      if(sheetId == undefined) {
+        return bot.replyMessage(event.replyToken, "スプレッドシートがまだ登録されていません");
+      }
+
       let registValue = [];
       let str = message_text.split("\n");
       str.forEach(element => {

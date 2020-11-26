@@ -12,6 +12,12 @@ class SkillDispExpenceList {
       this.userId = event.source.userId;
 
       let sheetId = await userInfo.asyncSearchUserSheetId(event.source.userId);
+
+      // TODO:シート登録チェック
+      if(sheetId == undefined) {
+        return bot.replyMessage(event.replyToken, "スプレッドシートがまだ登録されていません");
+      }
+
       // TODO:スプレッドシートのURLを返す(テンプレートorFlex)
       let spread_url = "https://docs.google.com/spreadsheets/d/" + sheetId;
       let replyMessage = {
