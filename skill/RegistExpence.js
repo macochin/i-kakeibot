@@ -1,6 +1,7 @@
 "use strict";
 
 const expence = require("../service/expence");
+const userInfo = require("../service/userInfo");
 
 class SkillRegistExpence {
   constructor() {
