@@ -42,7 +42,7 @@ class userInfo {
 
   async asyncSearchUserSheetId(userId) {
     let row = await this.asyncSearchUserRow(userId);
-    if (row == null || row == undefined || row.hasOwnProperty('sheetId')) {
+    if (row == null || row == undefined || !row.hasOwnProperty('sheetId')) {
       return undefined;
     } else {
       return row.sheetId;
