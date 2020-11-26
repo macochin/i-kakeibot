@@ -86,7 +86,7 @@ class expence {
   async asyncGetCategoryList(userId) {
     let list = new Array();
     let sheetId = await userInfo.asyncSearchUserSheetId(userId);
-    if(sheetId == undefined) {
+    if(sheetId == undefined || sheetId == null) {
       return list;
     }
 

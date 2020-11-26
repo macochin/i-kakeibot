@@ -14,7 +14,7 @@ class SkillDispExpenceList {
       let sheetId = await userInfo.asyncSearchUserSheetId(event.source.userId);
 
       // TODO:シート登録チェック
-      if(sheetId == undefined) {
+      if(sheetId == undefined || sheetId == null) {
         return bot.replyMessage(event.replyToken, "スプレッドシートがまだ登録されていません");
       }
 
