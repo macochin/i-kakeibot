@@ -13,7 +13,7 @@ class SkillDispExpenceList {
 
       let sheetId = await userInfo.asyncSearchUserSheetId(event.source.userId);
 
-      // TODO:シート登録チェック
+      // シート登録チェック
       if(sheetId == undefined || sheetId == null) {
         return bot.replyMessage(event.replyToken, {
           type: "text",
