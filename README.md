@@ -1,13 +1,13 @@
 # 家計bot(※readme作成中)
-### 前提
-- 下記についての知識がある前提で、以降を記述(※詳細な設定方法等については省略)
-  - heroku
-  - LINE API
-    - LINE Messaging API、LINE Login、LIFF
-  - Google Cloud Platform(以降、GCP)
 ### 概要
 - ※TODO
 ### 環境構築の流れ
+- 前提
+  - 下記についての知識がある前提で、以降を記述(※詳細な設定方法等については省略)
+    - heroku
+    - LINE API
+      - LINE Messaging API、LINE Login、LIFF
+    - Google Cloud Platform(以降、GCP)
 1. サーバー準備
     - 基本的には何でもよし  
       (※以降、herokuを使用する前提で記述)
