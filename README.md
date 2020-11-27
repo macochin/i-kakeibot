@@ -3,7 +3,7 @@
 - 下記についての知識がある前提で、以降を記述(※詳細な設定方法等については省略)
   - heroku
   - LINE API
-    - Message、Login、LIFF
+    - LINE Messaging API、LINE Login、LIFF
   - Google Cloud Platform(以降、GCP)
 ### 概要
 - ※TODO
@@ -16,21 +16,41 @@
     - cloneしたソースをコミット/プル
     - DBを使用する場合は、heroku postgresをインストール
 3. LINEの設定
-    - LINE Message作成
+    - LINE Messaging API作成
     - LINE Login作成
     - LIFF設定
-      - ※TODO
+      - LINE Loginにアクセスし、下記二つのLIFFを設定
+        - シート登録
+          - サイズ：Full
+          - エンドポイント：https://xxx/views/regist_master
+          - Scope：chat_message.write, openid, profile
+        - 収支登録
+          - サイズ：Full
+          - エンドポイント：https://xxx/liff_RegistExpence.html
+          - Scope：chat_message.write, profile
     - リッチメニュー作成
-      - ※TODO
+      - リッチメニュー設定画面にアクセス
+      - テンプレート小(3分割)を選択
+      - 「other/メニューデザイン3.png」をアップロード
+      - 各メニューへ以下を登録
+        - メニューA：支出登録のLIFF URLをリンク設定
+        - メニューB：「支出一覧表示」をテキスト設定
+        - メニューC：シート登録のLIFF URLをリンク設定
 4. GCPの設定
     - APIの有効化
       - 「APIとサービス」のライブラリにて、下記を有効化
         - Google Drive API
         - Google Sheets API
     - サービスアカウントの取得
-      - ※TODO
+      - GCPの「APIとサービス」の「認証情報」にて、「サービスアカウント」を選択し、作成
+      - 作成後、JSON形式で鍵を作成し、ダウンロード(環境変数の設定で使用)
     - OAuth2.0クライアントIDの設定
-      - ※TODO
+      - GCPの「APIとサービス」の「認証情報」にて、「OAuth2.0クライアントID」を選択し、作成
+        - アプリ種類：ウェブアプリケーション
+        - 承認済みのリダイレクトURI：https://xxx/auth/oauth2callback
+      - OAuth同意画面にて各種情報を登録
+        - 承認済みドメイン：サーバーのドメイン
+        - スコープ：Google Drive API(Google ドライブのすべてのファイルの表示、編集、作成、削除)
 5. 環境変数の設定
     - LINE_ACCESS_TOKEN
       - 登録したLINE Messageのアクセストークン
@@ -52,7 +72,7 @@
       - GCPのOAuth2.0クライアントIDの「クライアントID」を設定
     - GOOGLE_OAUTH_CLIENT_SECRET
       - ユーザが登録したスプレッドシートへ書き込み権限を付与するためのOAUTH認証で使用
-      - GCPのOAuth2.0クライアントIDの「クライアント シークレット」を設定
+      - GCPのOAuth2.0クライアントIDの「クライアントシークレット」を設定
     - GOOGLE_OAUTH_REDIRECT_URL
       - ユーザが登録したスプレッドシートへ書き込み権限を付与するためのOAUTH認証で使用
       - GCPのOAuth2.0クライアントIDの「承認済みのリダイレクトURI」を設定
