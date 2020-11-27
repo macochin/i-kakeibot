@@ -6,17 +6,31 @@
     - Message、Login、LIFF
   - Google Cloud Platform(以降、GCP)
 ### 概要
-- ※作成中
+- ※TODO
 ### 環境構築の流れ
 1. サーバー準備
     - 基本的には何でもよし  
       (※以降、herokuを使用する前提で記述)
 2. デプロイ
-- ※作成中
+    - herokuに新規アプリ作成
+    - cloneしたソースをコミット/プル
+    - DBを使用する場合は、heroku postgresをインストール
 3. LINEの設定
-- ※作成中
+    - LINE Message作成
+    - LINE Login作成
+    - LIFF設定
+      - ※TODO
+    - リッチメニュー作成
+      - ※TODO
 4. GCPの設定
-- ※作成中
+    - APIの有効化
+      - 「APIとサービス」のライブラリにて、下記を有効化
+        - Google Drive API
+        - Google Sheets API
+    - サービスアカウントの取得
+      - ※TODO
+    - OAuth2.0クライアントIDの設定
+      - ※TODO
 5. 環境変数の設定
     - LINE_ACCESS_TOKEN
       - 登録したLINE Messageのアクセストークン
@@ -27,10 +41,21 @@
     - REGIST_MASTER_LIFF_ID
       - スプレッドシート登録画面のLIFF ID
     - GOOGLE_AUTH_EMAIL
+      - ユーザが登録したスプレッドシートへ書き込みするためのアカウント
+      - GCPのサービスアカウントの「client_email」を設定
     - GOOGLE_AUTH_PRIVATE_KEY
+      - ユーザが登録したスプレッドシートへ書き込みする際の認証情報
+      - GCPのサービスアカウントの「private_key」を設定
+      - 環境変数に設定する際は「\n」を改行に変換
     - GOOGLE_OAUTH_CLIENT_ID
+      - ユーザが登録したスプレッドシートへ書き込み権限を付与するためのOAUTH認証で使用
+      - GCPのOAuth2.0クライアントIDの「クライアントID」を設定
     - GOOGLE_OAUTH_CLIENT_SECRET
+      - ユーザが登録したスプレッドシートへ書き込み権限を付与するためのOAUTH認証で使用
+      - GCPのOAuth2.0クライアントIDの「クライアント シークレット」を設定
     - GOOGLE_OAUTH_REDIRECT_URL
+      - ユーザが登録したスプレッドシートへ書き込み権限を付与するためのOAUTH認証で使用
+      - GCPのOAuth2.0クライアントIDの「承認済みのリダイレクトURI」を設定
     - CRYPTO_KEY
       - 暗号化キー(※任意の文字列で可)
       - ユーザIDなど、暗号化してスプレッドシートに記述したい際に使用するキー
