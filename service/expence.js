@@ -63,8 +63,22 @@ class expence {
       };
 
       // TODO:F列
+      let cell_sum_category = await spreadsheet.searchCell(sheet, `${column_sum_category}1`);
+      cell_sum_category.backgroundColor = {"red": 0.1, "green": 0.1, "blue": 0.4};
+      cell_sum_category.textFormat = {
+        "foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0}, "bold": true
+      };
+
       // TODO:G列
+      let cell_sum_expence = await spreadsheet.searchCell(sheet, `${column_sum_expence}1`);
+      cell_sum_expence.backgroundColor = {"red": 0.1, "green": 0.1, "blue": 0.4};
+      cell_sum_expence.textFormat = {
+        "foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0}, "bold": true
+      };
+
       // TODO:H列
+      let cell_sum_expence_graph = await spreadsheet.searchCell(sheet, `${column_sum_expence_graph}1`);
+      cell_sum_expence_graph.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
 
       sheet.saveUpdatedCells();
     }
@@ -90,9 +104,7 @@ class expence {
     let cell_expence = await spreadsheet.searchCell(sheet, `${column_expence}${index}`);
     cell_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
 
-    // TODO:集計関数上書き(F1固定)
     await spreadsheet.updateCellFormula(sheet, 'F1', '=query(A:C,"select B,sum(C) where B is not null group by B",1)');
-    // TODO:合計金額追加(H1固定)
     await spreadsheet.updateCellFormula(sheet, 'H1', '=SUM(G:G)');
     // TODO:項目数確認(F列-1)
     // TODO:最終行のindex取得
