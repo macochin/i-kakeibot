@@ -62,7 +62,7 @@ class expence {
         "foregroundColor": {"red": 1.0, "green": 0.0, "blue": 0.0}, "bold": true
       };
 
-      // TODO:F列
+      // F列
       let cell_sum_category = await spreadsheet.searchCell(sheet, `${column_sum_category}1`);
       cell_sum_category.backgroundColor = {"red": 0.1, "green": 0.1, "blue": 0.4};
       cell_sum_category.textFormat = {
@@ -75,8 +75,9 @@ class expence {
       cell_sum_expence.textFormat = {
         "foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0}, "bold": true
       };
+      cell_sum_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
 
-      // TODO:H列
+      // H列
       let cell_sum_expence_graph = await spreadsheet.searchCell(sheet, `${column_sum_expence_graph}1`);
       cell_sum_expence_graph.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
 
