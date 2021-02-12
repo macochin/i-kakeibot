@@ -79,6 +79,15 @@ class expence {
     let cell_expence = await spreadsheet.searchCell(sheet, `${column_expence}${index}`);
     cell_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
 
+    // TODO:集計関数上書き(F1固定)
+    await spreadsheet.updateCellFormula(sheet, 'F1', '=query(A:C,"select B,sum(C) where B is not null group by B",1)');
+    // TODO:合計金額追加(H1固定)
+    await spreadsheet.updateCellFormula(sheet, 'H1', '=SUM(G:G)');
+    // TODO:項目数確認(F列-1)
+    // TODO:最終行のindex取得
+    // TODO:最終行にグラフが無ければ追加(G列) =SPARKLINE(G2, {"charttype","bar";"max",MAX(G:G)})
+    // TODO:セルフォーマット変更(FG列ヘッダ、G列数値フォーマット)
+
     sheet.saveUpdatedCells();
   }
 

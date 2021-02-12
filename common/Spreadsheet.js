@@ -85,6 +85,13 @@ class Spreadsheet {
     cell.value = value;
     sheet.saveUpdatedCells();
   }
+
+  async updateCellFormula(sheet, targetCell, value) {
+    await sheet.loadCells(targetCell);
+    let cell = sheet.getCellByA1(targetCell);
+    cell.formula = value;
+    sheet.saveUpdatedCells();
+  }
 }
 
 module.exports = new Spreadsheet();
