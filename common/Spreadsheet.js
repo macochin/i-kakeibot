@@ -1,5 +1,5 @@
 'use strict';
-const { timingSafeEqual } = require('crypto');
+// const { timingSafeEqual } = require('crypto');
 // GCPでサービスキーを発行すること
 // Google SperadSheet のAPIを有効化すること
 

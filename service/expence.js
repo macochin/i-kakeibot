@@ -9,12 +9,18 @@ const key_expence = "支出";
 const key_category = "買ったもの";
 const key_other = "補足";
 const key_caution = "⇐※変更禁止!!";
+const key_sum_category = "";
+const key_sum_expence = "";
+const key_sum_expence_graph = "";
 
 const column_date = "A";
 const column_expence = "C";
 const column_category = "B";
 const column_other = "D";
 const column_caution = "E";
+const column_sum_category = "F";
+const column_sum_expence = "G";
+const column_sum_expence_graph = "H";
 
 class expence {
   constructor() {
@@ -24,7 +30,7 @@ class expence {
   async asyncSearchSheet(sheetId) {
     let sheet = await spreadsheet.getSheet(sheetId, utils.getNowYYYYMM());
     if (sheet == null) {
-      let header = [key_date, key_category, key_expence, key_other, key_caution];
+      let header = [key_date, key_category, key_expence, key_other, key_caution, key_sum_category, key_sum_expence, key_sum_expence_graph];
       sheet = await spreadsheet.createSheet(sheetId, utils.getNowYYYYMM(), header, 5, 5);
 
       let cell_date = await spreadsheet.searchCell(sheet, `${column_date}1`);
@@ -55,6 +61,11 @@ class expence {
       cell_caution.textFormat = {
         "foregroundColor": {"red": 1.0, "green": 0.0, "blue": 0.0}, "bold": true
       };
+
+      // TODO:F列
+      // TODO:G列
+      // TODO:H列
+
       sheet.saveUpdatedCells();
     }
 
@@ -86,7 +97,7 @@ class expence {
     // TODO:項目数確認(F列-1)
     // TODO:最終行のindex取得
     // TODO:最終行にグラフが無ければ追加(G列) =SPARKLINE(G2, {"charttype","bar";"max",MAX(G:G)})
-    // TODO:セルフォーマット変更(FG列ヘッダ、G列数値フォーマット)
+    // TODO:セルフォーマット変更(G列数値フォーマット)
 
     sheet.saveUpdatedCells();
   }
