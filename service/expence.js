@@ -107,7 +107,7 @@ class expence {
     // TODO:ヘッダの重複対応が必要
     await spreadsheet.updateCellFormula(sheet, 'F1', `=query(A:C,"select B,sum(C) where B is not null group by B label B 'sum買ったもの'",1)`);
     await spreadsheet.updateCellFormula(sheet, 'H1', '=SUM(G:G)');
-    for (let i = 2; index < index; i++) {
+    for (let i = 2; i < index; i++) {
       let cell_sum_expence = await spreadsheet.searchCell(sheet, `${column_sum_expence}${i}`);
       console.debug(`cell_sum_expence${i}:` + cell_sum_expence);// TODO:
 
