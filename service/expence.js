@@ -9,8 +9,8 @@ const key_expence = "支出";
 const key_category = "買ったもの";
 const key_other = "補足";
 const key_caution = "⇐※変更禁止!!";
-const key_sum_category = "sum 買ったもの";
-const key_sum_expence = "sum 支出";
+const key_sum_category = "";
+const key_sum_expence = "";
 const key_sum_expence_graph = "";
 
 const column_date = "A";
