@@ -108,9 +108,9 @@ class expence {
     await spreadsheet.updateCellFormula(sheet, 'H1', '=SUM(G:G)');
     for (let i = 2; i <= index; i++) {
       let cell_sum_expence = await spreadsheet.searchCell(sheet, `${column_sum_expence}${i}`);
-      console.debug(`cell_sum_expence${i}:` + cell_sum_expence[key_sum_expence]);// TODO:
+      console.debug(`cell_sum_expence${i}:` + cell_sum_expence.value);// TODO:
 
-      if (cell_sum_expence[key_sum_expence] == null || cell_sum_expence[key_sum_expence] == undefined || cell_sum_expence[key_sum_expence] == '') {
+      if (cell_sum_expence.value == null || cell_sum_expence.value == undefined || cell_sum_expence.value == '') {
         continue;
       }
       // セルフォーマット変更(G列数値フォーマット)
