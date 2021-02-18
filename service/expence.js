@@ -9,8 +9,8 @@ const key_expence = "支出";
 const key_category = "買ったもの";
 const key_other = "補足";
 const key_caution = "⇐※変更禁止!!";
-const key_sum_category = "";
-const key_sum_expence = "";
+const key_sum_category = "sum 買ったもの";
+const key_sum_expence = "sum 支出";
 const key_sum_expence_graph = "";
 
 const column_date = "A";
@@ -104,16 +104,16 @@ class expence {
     let cell_expence = await spreadsheet.searchCell(sheet, `${column_expence}${index}`);
     cell_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
 
-    await spreadsheet.updateCellFormula(sheet, 'F1', `=query(A:C,"select B,sum(C) where B is not null group by B label B 'sum買ったもの'",1)`);
+    await spreadsheet.updateCellFormula(sheet, 'F1', `=query(A:C,"select B,sum(C) where B is not null group by B label B 'sum 買ったもの'",1)`);
     await spreadsheet.updateCellFormula(sheet, 'H1', '=SUM(G:G)');
     for (let i = 2; i <= index; i++) {
       let cell_sum_expence = await spreadsheet.searchCell(sheet, `${column_sum_expence}${i}`);
-      console.debug(`cell_sum_expence${i}:` + cell_sum_expence);// TODO:
+      console.debug(`cell_sum_expence${i}:` + cell_sum_expence[key_sum_expence]);// TODO:
 
-      if (cell_sum_expence == null || cell_sum_expence == undefined || cell_sum_expence == '') {
+      if (cell_sum_expence[key_sum_expence] == null || cell_sum_expence[key_sum_expence] == undefined || cell_sum_expence[key_sum_expence] == '') {
         continue;
       }
-      // TODO:セルフォーマット変更(G列数値フォーマット)
+      // セルフォーマット変更(G列数値フォーマット)
       cell_sum_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
       // グラフが無ければ追加(G列) =SPARKLINE(G2, {"charttype","bar";"max",MAX(G:G)})
       await spreadsheet.updateCellFormula(sheet, `${column_sum_expence_graph}${i}`, `=SPARKLINE(${column_sum_expence}${i}, {"charttype","bar";"max",MAX(G:G)})`);
