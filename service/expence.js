@@ -69,13 +69,12 @@ class expence {
         "foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0}, "bold": true
       };
 
-      // TODO:G列
+      // G列
       let cell_sum_expence = await spreadsheet.searchCell(sheet, `${column_sum_expence}1`);
       cell_sum_expence.backgroundColor = {"red": 0.1, "green": 0.1, "blue": 0.4};
       cell_sum_expence.textFormat = {
         "foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0}, "bold": true
       };
-      cell_sum_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
 
       // H列
       let cell_sum_expence_graph = await spreadsheet.searchCell(sheet, `${column_sum_expence_graph}1`);
@@ -107,10 +106,18 @@ class expence {
 
     await spreadsheet.updateCellFormula(sheet, 'F1', '=query(A:C,"select B,sum(C) where B is not null group by B",1)');
     await spreadsheet.updateCellFormula(sheet, 'H1', '=SUM(G:G)');
-    // TODO:項目数確認(F列-1)
-    // TODO:最終行のindex取得
-    // TODO:最終行にグラフが無ければ追加(G列) =SPARKLINE(G2, {"charttype","bar";"max",MAX(G:G)})
-    // TODO:セルフォーマット変更(G列数値フォーマット)
+    for (let i = 2; index < index; i++) {
+      let cell_sum_expence = await spreadsheet.searchCell(sheet, `${column_sum_expence}${i}`);
+      console.debug(`cell_sum_expence${i}:` + cell_sum_expence);// TODO:
+
+      if (cell_sum_expence == null || cell_sum_expence == undefined || cell_sum_expence == '') {
+        continue;
+      }
+      // TODO:セルフォーマット変更(G列数値フォーマット)
+      cell_sum_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
+      // TODO:グラフが無ければ追加(G列) =SPARKLINE(G2, {"charttype","bar";"max",MAX(G:G)})
+      await spreadsheet.updateCellFormula(sheet, `${column_sum_expence_graph}${i}`, `=SPARKLINE(${column_sum_expence_graph}${i}, {"charttype","bar";"max",MAX(G:G)})`);
+    }
 
     sheet.saveUpdatedCells();
   }
