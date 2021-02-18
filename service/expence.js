@@ -104,7 +104,6 @@ class expence {
     let cell_expence = await spreadsheet.searchCell(sheet, `${column_expence}${index}`);
     cell_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
 
-    // TODO:ヘッダの重複対応が必要
     await spreadsheet.updateCellFormula(sheet, 'F1', `=query(A:C,"select B,sum(C) where B is not null group by B label B 'sum買ったもの'",1)`);
     await spreadsheet.updateCellFormula(sheet, 'H1', '=SUM(G:G)');
     for (let i = 2; i < index; i++) {
@@ -117,7 +116,7 @@ class expence {
       // TODO:セルフォーマット変更(G列数値フォーマット)
       cell_sum_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
       // TODO:グラフが無ければ追加(G列) =SPARKLINE(G2, {"charttype","bar";"max",MAX(G:G)})
-      await spreadsheet.updateCellFormula(sheet, `${column_sum_expence_graph}${i}`, `=SPARKLINE(${column_sum_expence_graph}${i}, {"charttype","bar";"max",MAX(G:G)})`);
+      await spreadsheet.updateCellFormula(sheet, `${column_sum_expence_graph}${i}`, `=SPARKLINE(${column_sum_expence}${i}, {"charttype","bar";"max",MAX(G:G)})`);
     }
 
     sheet.saveUpdatedCells();
