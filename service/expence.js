@@ -104,7 +104,8 @@ class expence {
     let cell_expence = await spreadsheet.searchCell(sheet, `${column_expence}${index}`);
     cell_expence.numberFormat = {"type": "NUMBER", "pattern": "#,###"};
 
-    await spreadsheet.updateCellFormula(sheet, 'F1', '=query(A:C,"select B,sum(C) where B is not null group by B",1)');
+    // TODO:ヘッダの重複対応が必要
+    await spreadsheet.updateCellFormula(sheet, 'F1', `=query(A:C,"select B,sum(C) where B is not null group by B label B 'sum買ったもの'",1)`);
     await spreadsheet.updateCellFormula(sheet, 'H1', '=SUM(G:G)');
     for (let i = 2; index < index; i++) {
       let cell_sum_expence = await spreadsheet.searchCell(sheet, `${column_sum_expence}${i}`);
