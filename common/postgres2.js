@@ -1,6 +1,7 @@
 'use strict';
 
-const Pool = require('pg');
+// const pg = require('pg');
+const { Pool } = require('pg');
 const conString = process.env.DATABASE_URL;
 const pg = new Pool({
   connectionString: process.env.DATABASE_URL,
