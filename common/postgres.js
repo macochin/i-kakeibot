@@ -1,23 +1,33 @@
 'use strict';
 
-const pg = require('pg');
+// const pg = require('pg');
+const { Pool } = require('pg');
 const conString = process.env.DATABASE_URL;
+const pg = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  // ssl: true
+  ssl: { rejectUnauthorized: false }
+});
 
 class Postgres {
   async select(sql, param) {
-    let client = new pg.Client(conString);
-    client.connect();
+    // let client = new pg.Client(conString);
+    // client.connect();
+    let client = await pg.connect()
     let result = await this.querySelect(client, sql, param);
-    client.end();
+    // client.end();
+    client.release();
 
     return result;
   }
 
   async asyncSelect(sql, param) {
-    let client = new pg.Client(conString);
-    client.connect();
+    // let client = new pg.Client(conString);
+    // client.connect();
+    let client = await pg.connect()
     let list = await this.querySelect(client, sql, param);
-    client.end();
+    // client.end();
+    client.release();
     return list;
   }
 
@@ -38,10 +48,12 @@ class Postgres {
   }
 
   async asyncUpdate(sql, param) {
-    let client = new pg.Client(conString);
-    client.connect();
+    // let client = new pg.Client(conString);
+    // client.connect();
+    let client = await pg.connect()
     await this.queryUpdate(client, sql, param);
-    client.end();
+    // client.end();
+    client.release();
   }
 
   queryUpdate(client, sql, param) {

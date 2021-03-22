@@ -2,7 +2,7 @@
 
 const spreadsheet = require("../common/Spreadsheet");
 const crypto = require('../common/crypto');
-const pg = require("../common/postgres2");
+const pg = require("../common/postgres");
 
 const master_spread_id = process.env.MASTER_SPREAD_ID;
 
