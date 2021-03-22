@@ -1,7 +1,7 @@
 'use strict';
 
 const pg = require('pg');
-const conString = process.env.DATABASE_URL + "?ssl=true";
+const conString = process.env.DATABASE_URL;
 
 class Postgres {
   async select(sql, param) {
